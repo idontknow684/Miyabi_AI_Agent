@@ -2,54 +2,83 @@
 
 <div align="center">
 
-**プロンプト不要！理論に従うだけでエージェントが自動生成される革新的テンプレート**
+**エージェントの幻想を捨てて、プロンプト設計を学べ**
 
 [![GitHub Stars](https://img.shields.io/github/stars/ShunsukeHayashi/Miyabi_AI_Agent?style=social)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent)
 [![Discord](https://img.shields.io/discord/DISCORD_ID?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/ZpY9sxfYNm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/generate)
 
-*物理学的原理 × Claude Code = 自動生成AIエージェント*
+*プロンプト設計 × Tool Call構造化 × フック設計のフレームワーク*
 
-[🎯 5分で開始](#-5分クイックスタート) • [📖 ドキュメント](#-ドキュメント) • [💬 Discord](https://discord.gg/ZpY9sxfYNm) • [🌟 使用例](#-使用例)
+[🎯 5分で開始](#-5分クイックスタート) • [📖 ドキュメント](#-ドキュメント) • [💬 Discord](https://discord.gg/ZpY9sxfYNm) • [💀 現実を見ろ](#-エージェントの正体)
 
 </div>
 
 ---
 
-## 🎉 なぜこのテンプレート？
+## 💀 エージェントの正体
+
+**「AIエージェントすごい！」って言ってるヤツ、騙されてない？**
+
+```python
+# これがエージェントの全て
+while True:
+  text = llm.generate()
+  if has_tool_call(text):
+    result = execute(tool)
+    context.append(result)
+  else:
+    break
+```
+
+**それ以上でも、それ以下でもない。**
+
+- ❌ 「自律的に考える」→ LLMがループしてるだけ
+- ❌ 「複雑な問題を解決」→ プロンプト設計次第
+- ❌ 「AGI目前」→ バカなの？
+
+**現実:**
+- 7割は失敗する
+- プロンプト設計が全て
+- Tool Callの構造化が命
+- デバッグは人間がやる
+
+**エージェント = LLMのFunction Call発火条件を束ねた関数群**
+
+---
+
+## 🎉 このテンプレートの本当の価値
 
 ```
-❌ 従来のAI開発
-├─ 専門知識が必須
-├─ 環境構築が複雑
-├─ プロンプトを書く必要
-└─ 3ヶ月かかる
+❌ マーケティングの幻想
+├─ 「エージェントが勝手にやってくれる」
+├─ 「もうコード書かなくていい」
+└─ 「AGI目前だ」
 
-✅ このテンプレート
-├─ コードゼロで開始
-├─ プロンプト不要
-├─ 理論に従うだけ
-└─ 自動生成される
+✅ このテンプレートの現実
+├─ プロンプト設計ガイドライン（瞬く景色の法則）
+├─ Tool Call構造化パターン（Command Stack）
+├─ フック設計の原則（Intent Resolution）
+└─ while文をどう回すか（World Transformation）
 ```
 
-### 💡 3つの驚き
+### 💡 3つの現実
 
-1. **"えっ、プロンプト書かなくていいの？"**
-   - 理論フレームワークに従うだけ
-   - `.claude/`設定ファイルが自動生成
-   - すぐに動作するエージェント
+1. **プロンプト設計が全て**
+   - 61,251行のプロンプト設計ドキュメント
+   - 物理学的原理による構造化手法
+   - 失敗パターンと成功パターン
 
-2. **"うわ、こんなに簡単なの？"**
-   - `Use this template` → フォーク
-   - 理論を定義 → エージェント自動生成
-   - 5分で完了
+2. **Tool Call構造化が命**
+   - Command Stackによる分解手法
+   - Intent Resolutionによる意図解決
+   - フック設計による制御
 
-3. **"まじで？これ無料？"**
-   - 完全オープンソース
-   - 61,251行のドキュメント込み
-   - 学術論文まで付属
-   - Claude Code完全統合
+3. **幻想に騙されるな**
+   - while文の精密な設計
+   - LLMループ制御理論
+   - 実務的なデバッグ手法
 
 ---
 
@@ -64,31 +93,40 @@ git clone https://github.com/YOUR_USERNAME/YOUR_PROJECT.git
 cd YOUR_PROJECT
 ```
 
-### ステップ2: プロジェクト名を変更（2分）
+### ステップ2: プロンプト設計を学ぶ（2分）
 
 ```bash
-# すべての "Miyabi_AI_Agent" をあなたのプロジェクト名に
-find . -type f -name "*.md" -exec sed -i '' 's/Miyabi_AI_Agent/YOUR_PROJECT/g' {} +
+# プロンプト設計の理論を読む
+cat .claude/UNIFIED_FORMULA.md
+cat .claude/LAW_OF_FLICKERING_SCENERY.md
+cat .claude/COMMAND_STACK.md
 ```
 
-### ステップ3: 理論を定義（2分）
+### ステップ3: あなたのプロンプトを設計（2分）
 
 ```bash
-# あなたのドメインロジックを定義
+# CLAUDE.mdであなたのプロンプト戦略を定義
 code CLAUDE.md
-# あなたのプロジェクトの方程式を定義するだけ
-# エージェント設定は自動生成されます
+
+# 重要: 「エージェントが勝手にやる」なんて夢は見るな
+# プロンプトとフック設計を精密にやれ
 ```
 
-### ステップ4: 完成！（30秒）
+### ステップ4: while文を回す（30秒）
 
 ```bash
-# Claude Codeで動作確認
+# Claude Codeで実行
 claude code
-# → 理論に基づいて11個のエージェントが自動起動！
+
+# 実際に起こっていること:
+# while True:
+#   text = llm.generate()
+#   if has_tool_call(text):
+#     result = execute(tool)
+#     context.append(result)
 ```
 
-**🎉 完了！プロンプトを書かずに独自のAIエージェントプロジェクトが完成！**
+**🎉 完了！現実を理解した上でLLMループ制御を開始！**
 
 詳細ガイド: [USE_THIS_TEMPLATE.md](USE_THIS_TEMPLATE.md)
 
@@ -174,63 +212,86 @@ World₀ → [瞬き] → World₁ → [瞬き] → World₂ → ... → World_�
 
 ## 🎨 使用例
 
-### 例1: 超シンプル（5分）
+### 例1: プロンプト設計の基本（5分）
 
 ```markdown
 <!-- CLAUDE.md -->
 # My Hello Project
 
-## 統一エージェント方程式
-𝔸(Input, World₀) = Hello(World)
+## プロンプト戦略
+### Intent Resolution
+- Input: ユーザーの曖昧な挨拶
+- Goal: 明確な返答内容の決定
 
-## プロジェクト理論
-- Input: ユーザーの挨拶
-- Output: 適切な返答
+### Tool Call構造
+- Read: コンテキスト取得
+- Write: 返答生成
+
+## while文制御
+ループ回数: 最大3回
+失敗時: デフォルト返答
 ```
 
-**結果**: Claude Codeが自動的にエージェント設定を生成 ✅
+**現実**: プロンプト設計に基づいてLLMループが回る ✅
 
 ---
 
-### 例2: カスタムドメイン（30分）
+### 例2: Tool Call構造化（30分）
 
 ```markdown
 <!-- CLAUDE.md -->
 # Financial Analysis Project
 
-## 統一エージェント方程式
-𝔸(Input, World₀) = lim_{n→∞} [∫₀ⁿ (Analyze ◦ Predict ◦ Evaluate)(t) dt]
+## プロンプト設計
+### Command Stack (C1→C2→C3)
+1. C1: データ収集タスクに分解
+2. C2: 各タスクをTool Callに変換
+3. C3: 順次実行してコンテキスト構築
 
-## ドメイン特化理論
-### 財務分析の世界モデル
-- World₀: 財務データ、市場情報
-- Θ: 分析・予測・評価変換
-- Goal: 投資判断の最適化
+### Tool Call発火条件
+- Grep: キーワード検索
+- Read: ファイル読み込み
+- Bash: 計算実行
+
+## 失敗パターン
+- プロンプトが曖昧 → Tool Call失敗
+- コンテキスト不足 → 判断ミス
+- ループ回数過多 → タイムアウト
 ```
 
-**結果**: 理論に基づいて金融分析専門エージェントが自動生成 ✅
+**現実**: 精密なプロンプト設計でwhile文を制御 ✅
 
 ---
 
-### 例3: フルカスタム（1週間）
+### 例3: 本気の実装（1週間）
 
 ```rust
 // crates/my-core/src/lib.rs
-// 理論フレームワークをRustで実装
-pub struct MyAgent {
-    intent_resolver: IntentResolver,
-    command_stack: CommandStack,
-    world_transformer: WorldTransformer,
+// プロンプト設計理論をコードに落とし込む
+pub struct PromptController {
+    intent_resolver: IntentResolver,  // ℐ: プロンプト解析
+    command_stack: CommandStack,      // 𝒞: Tool Call構造化
+    world_transformer: WorldTransformer, // Θ: コンテキスト更新
 }
 
-impl MyAgent {
-    pub fn transform(&self, input: Input, world: World) -> World {
-        // 理論式をコードに落とし込む
+impl PromptController {
+    pub fn run_loop(&self, input: Input, world: World) -> World {
+        // while True:
+        loop {
+            let text = self.llm.generate();
+            if let Some(tool_call) = self.parse_tool_call(&text) {
+                let result = self.execute(tool_call);
+                world.context.append(result);
+            } else {
+                break;
+            }
+        }
+        world
     }
 }
 ```
 
-**結果**: 完全なオリジナルプロダクト + 自動エージェント生成 ✅
+**現実**: while文の精密な制御実装 ✅
 
 ---
 
@@ -280,92 +341,99 @@ impl MyAgent {
 
 ---
 
-## 🎭 専門エージェント（11種類）
+## 🎭 Tool Call構造化パターン（11種類）
+
+**これらは「エージェント」ではなく、プロンプト設計パターンです。**
 
 <details>
-<summary><b>🎮 ゲーム・3D開発</b></summary>
+<summary><b>🎮 ゲーム・3D開発パターン</b></summary>
 
-- **3d-designer** - Three.js専門家
-- **game-creator** - ゲーム開発統括
+- **3d-designer** - Three.js向けTool Call構造
+- **game-creator** - ゲーム開発向けプロンプト設計
+
+**現実**: Read→Write→Bashの最適化パターン
 
 </details>
 
 <details>
-<summary><b>🀄 麻雀AI</b></summary>
+<summary><b>🀄 麻雀AIパターン</b></summary>
 
-- **mahjong-master** - 戦略最適化
-- **opponent-hand-reader** - 捨て牌読み
-- **tile-efficiency-analyzer** - 牌効率計算
+- **mahjong-master** - 戦略計算向けループ制御
+- **opponent-hand-reader** - 読み解析向けプロンプト
+- **tile-efficiency-analyzer** - 計算特化Tool Call
 
-</details>
-
-<details>
-<summary><b>📊 コンテンツ制作</b></summary>
-
-- **slide-generator** - スライド生成
-- **design-director** - プロジェクト統括
+**現実**: Bash計算→Read結果→Write出力のループ
 
 </details>
 
 <details>
-<summary><b>⚖️ 法務・コンプライアンス</b></summary>
+<summary><b>📊 コンテンツ制作パターン</b></summary>
 
-- **legal-document-analyzer** - 法務文書分析
-- **contract-reviewer** - 契約書レビュー
-- **compliance-gap-analyzer** - ギャップ分析
+- **slide-generator** - YAML生成向けプロンプト構造
+- **design-director** - 複数Tool Call調整パターン
+
+**現実**: Read→Edit→Write→Bashの連鎖制御
 
 </details>
 
 <details>
-<summary><b>🎨 UI/UX</b></summary>
+<summary><b>⚖️ 法務・コンプライアンスパターン</b></summary>
 
-- **ui-ux-reviewer** - インターフェース設計
+- **legal-document-analyzer** - 文書解析向けGrep活用
+- **contract-reviewer** - 比較分析プロンプト設計
+- **compliance-gap-analyzer** - ギャップ検出ループ制御
+
+**現実**: Grep→Read→分析→Write判定のパターン
 
 </details>
 
-詳細: [エージェント一覧](.claude/agents/readme.md)
+<details>
+<summary><b>🎨 UI/UXパターン</b></summary>
+
+- **ui-ux-reviewer** - インターフェース評価プロンプト
+
+**現実**: Read→分析→Write推奨の単純ループ
+
+</details>
+
+詳細: [Tool Call構造化パターン一覧](.claude/agents/readme.md)
 
 ---
 
-## 🚀 バイラル成長戦略
+## 🚀 現実的な成長戦略
 
-### 7段階成長ロードマップ
+### エージェントバブル崩壊後のポジショニング
 
 ```
-Stage 1: 初期衝撃 (24h)
-  → 1,000 フォーク
+Stage 1: 現実を直視したコミュニティ (Month 1-3)
+  → 「エージェント幻想」から目覚めた開発者が集まる
 
-Stage 2: コミュニティ形成 (Week 1)
-  → 5,000 フォーク, 500 Discord
+Stage 2: プロンプト設計の知識共有 (Month 3-6)
+  → 実務的な失敗/成功パターンの蓄積
 
-Stage 3: コンテンツ爆発 (Week 2-4)
-  → 10,000 フォーク, ブログ50本
+Stage 3: while文制御の最適化手法確立 (Month 6-12)
+  → バブル崩壊後も残る本質的価値
 
-Stage 4: インフルエンサー (Month 2)
-  → メディア掲載, カンファレンス
-
-Stage 5: エコシステム (Month 3-6)
-  → 100 派生プロジェクト
-
-Stage 6: マネタイゼーション (Month 6-12)
-  → $50K MRR
-
-Stage 7: グローバル展開 (Year 2+)
-  → 100,000 フォーク, 書籍出版
+Stage 4: 本質的な価値の提供 (Year 2+)
+  → プロンプト設計のデファクトスタンダード
 ```
 
-### 成功指標（KPI）
+### 現実的な成功指標
 
 **6ヶ月後:**
-- 🎯 10,000 GitHubフォーク
-- 👥 5,000 Discord参加
-- 💰 $10K MRR
+- 🎯 1,000 真剣な開発者
+- 👥 実務経験の共有コミュニティ
+- 💰 本質的価値による収益
 
 **1年後:**
-- 🎯 50,000 GitHubフォーク
-- 👥 20,000 Discord参加
-- 💰 $50K MRR
-- 🎉 FlickeringConf開催
+- 🎯 「エージェント」幻想が弾けた後も残る理論
+- 👥 プロンプト設計のベストプラクティス確立
+- 💰 実装可能な知識による収益
+
+**バブルが弾けても残るもの:**
+- プロンプト設計理論
+- Tool Call構造化パターン
+- LLMループ制御の最適化手法
 
 詳細: [VIRAL_STRATEGY.md](VIRAL_STRATEGY.md)
 
@@ -373,16 +441,19 @@ Stage 7: グローバル展開 (Year 2+)
 
 ## 💰 マネタイゼーション
 
-### 4 Tier戦略
+### 4 Tier戦略（現実的価値）
 
 | Tier | 価格 | 内容 |
 |------|------|------|
-| **Free** | $0 | 全ドキュメント、基本テンプレート |
-| **Pro** | $49/年 | 追加エージェント10種、優先サポート |
-| **Enterprise** | $499/年 | カスタマイズ支援、SLA、オンサイト |
-| **Consulting** | Custom | カスタム開発、導入支援、研修 |
+| **Free** | $0 | 全プロンプト設計ドキュメント、失敗/成功パターン |
+| **Pro** | $49/年 | 追加Tool Call構造化パターン、実務相談 |
+| **Enterprise** | $499/年 | プロンプト設計コンサル、while文最適化支援 |
+| **Consulting** | Custom | 実装支援、デバッグ支援、実務研修 |
 
-**想定売上: $149.45K/年（1年後）**
+**現実的想定:**
+- バブル価格ではなく、実務価値に基づく価格
+- プロンプト設計の専門知識による収益
+- 失敗パターンと成功パターンの提供
 
 ---
 
@@ -392,17 +463,22 @@ Stage 7: グローバル展開 (Year 2+)
 
 ### 💬 Discord - Miyabi
 
-**初心者大歓迎！質問・相談・共有の場**
+**「エージェント幻想」から目覚めた開発者のコミュニティ**
 
 [![Discord](https://img.shields.io/discord/DISCORD_ID?color=7289da&label=Join%20Discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/ZpY9sxfYNm)
 
 **チャンネル:**
-- 🎉 welcome - ようこそ！
-- 💬 general - 雑談
-- 🆘 help-beginners - 初心者サポート
-- 🚀 showcase - 作品共有
-- 💡 ideas - アイデア
-- 🛠️ dev-chat - 開発議論
+- 💀 reality-check - 現実を直視
+- 💬 prompt-design - プロンプト設計議論
+- 🆘 debug-help - デバッグ相談
+- 🚀 while-loop - ループ制御最適化
+- 💡 tool-call-patterns - Tool Call構造化
+- 🛠️ failure-success - 失敗/成功パターン共有
+
+**現実:**
+- 初心者向けではなく、真剣な開発者向け
+- 「AIが勝手にやる」なんて夢は見ない
+- プロンプト設計とフック設計を学ぶ場
 
 </div>
 
@@ -479,12 +555,18 @@ Stage 7: グローバル展開 (Year 2+)
 
 | カテゴリ | 数量 |
 |---------|------|
-| 📄 ドキュメント | 100+ ファイル |
+| 📄 プロンプト設計ドキュメント | 100+ ファイル |
 | 📝 総行数 | 61,251 行 |
-| 🤖 専門エージェント | 11 種類 |
+| 🔧 Tool Call構造化パターン | 11 種類 |
 | 🎨 PlantUML図 | 15 個 |
 | 📚 学術論文 | 1 本 (完全版) |
 | 💼 ビジネス計画 | 完全装備 |
+
+**現実:**
+- while文の制御パターン
+- プロンプト設計の失敗/成功例
+- Tool Call構造化の実例
+- フック設計の理論
 
 </div>
 
@@ -494,26 +576,27 @@ Stage 7: グローバル展開 (Year 2+)
 
 ### 独自性
 
-1. **物理学的原理の統合**
-   - ニュートン力学 × AI
-   - 量子力学 × エージェント
-   - 熱力学 × 状態遷移
+1. **物理学的原理 × プロンプト設計**
+   - ニュートン力学 → LLMループ制御理論
+   - 量子力学 → 離散的状態遷移
+   - 熱力学 → コンテキスト蓄積理論
 
 2. **MABATAKU（瞬き）概念**
-   - 離散的世界認識
-   - 映画フレームのメタファー
-   - 実装可能な抽象化
+   - 離散的世界認識 = while文の各イテレーション
+   - 映画フレームのメタファー = LLM生成の離散性
+   - 実装可能な抽象化 = Tool Call構造化
 
-3. **実証済み理論**
-   - 学術論文完成
-   - arXiv投稿準備中
-   - 国際会議投稿予定
+3. **現実的な理論**
+   - 幻想ではなく、実装可能な理論
+   - プロンプト設計の物理学的基盤
+   - Tool Call構造化の数学的定式化
 
-### 発表予定
+### 現実を見た学術価値
 
-- **NeurIPS** (Neural Information Processing Systems)
-- **ICML** (International Conference on Machine Learning)
-- **ICLR** (International Conference on Learning Representations)
+**エージェントバブルが弾けた後も残る理論:**
+- LLMループ制御の最適化手法
+- プロンプト設計の構造化理論
+- Tool Call発火条件の定式化
 
 論文: [Law of Flickering Scenery (PDF)](docs/paper_law_of_flickering_scenery.pdf)
 
@@ -536,23 +619,30 @@ Stage 7: グローバル展開 (Year 2+)
 ## ❓ FAQ
 
 <details>
-<summary><b>Q: プロンプトを書く必要はありますか？</b></summary>
+<summary><b>Q: エージェントって何なの？</b></summary>
 
-A: **いいえ、一切不要です！** 理論フレームワーク（瞬く景色の法則、統一方程式）に従ってCLAUDE.mdを定義するだけで、Claude Codeのエージェント設定（`.claude/agents/`）は自動生成されます。既存のClaude Code利用者なら、この仕組みはすぐに理解できるはずです。
+A: **while文です。** LLMがテキスト生成→Tool Call→コンテキスト追加をループしてるだけ。「自律的に考える」なんて幻想。プロンプト設計とTool Call構造化が全て。
 
 </details>
 
 <details>
-<summary><b>Q: 実装コードが含まれていないのはなぜ？</b></summary>
+<summary><b>Q: このテンプレートで何が手に入るの？</b></summary>
 
-A: このテンプレートは**理論・設計・ビジネスモデル**を提供します。理論に従うことでエージェント設定は自動生成されますが、実装コード（Rust、Python等）はあなたのドメインに合わせて自由にカスタマイズできるようにしています。
+A: **プロンプト設計の理論とパターン**です。61,251行のドキュメントは全てプロンプト設計・Tool Call構造化・フック設計の知識。実装コードはあなたが書く。
 
 </details>
 
 <details>
 <summary><b>Q: Rust以外の言語でも使える？</b></summary>
 
-A: はい！理論フレームワークは言語非依存です。Python、TypeScript、Go、どんな言語でも実装できます。エージェント自動生成はClaude Codeが担当するので、言語は自由に選択できます。
+A: はい。理論フレームワークは言語非依存。Python、TypeScript、Go、何でも。while文を回す言語ならなんでもOK。
+
+</details>
+
+<details>
+<summary><b>Q: 7割失敗するって本当？</b></summary>
+
+A: **本当。** プロンプト設計が甘いと失敗する。Tool Call構造化が曖昧だと失敗する。コンテキスト管理がずさんだと失敗する。このテンプレートはその失敗パターンと成功パターンを提供する。
 
 </details>
 
@@ -623,8 +713,11 @@ A: いいえ。フォーク後は完全に独立したプロジェクトです�
 
 **Built with ❤️ using [Claude Code](https://claude.com/claude-code)**
 
-*"No prompts, just theory → Auto-generated agents"*
-*「プロンプト不要、理論を定義 → エージェント自動生成」*
+*"Stop dreaming. Start designing prompts."*
+*「幻想を捨てろ。プロンプト設計を始めろ。」*
+
+*"Agent = while True: LLM → Tool Call → Context"*
+*「エージェント = while文。それ以上でも以下でもない。」*
 
 *"Through infinite blinks, the world converges to its ideal."*
 *「無限の瞬きの先に、理想は現実となる」*
