@@ -2,14 +2,14 @@
 
 <div align="center">
 
-**5分でAIエージェントを作れる革新的テンプレート**
+**プロンプト不要！理論に従うだけでエージェントが自動生成される革新的テンプレート**
 
 [![GitHub Stars](https://img.shields.io/github/stars/ShunsukeHayashi/Miyabi_AI_Agent?style=social)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent)
 [![Discord](https://img.shields.io/discord/DISCORD_ID?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/ZpY9sxfYNm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/generate)
 
-*物理学的原理に基づいた、完全自律型AIエージェント開発フレームワーク*
+*物理学的原理 × Claude Code = 自動生成AIエージェント*
 
 [🎯 5分で開始](#-5分クイックスタート) • [📖 ドキュメント](#-ドキュメント) • [💬 Discord](https://discord.gg/ZpY9sxfYNm) • [🌟 使用例](#-使用例)
 
@@ -23,30 +23,33 @@
 ❌ 従来のAI開発
 ├─ 専門知識が必須
 ├─ 環境構築が複雑
-├─ 学習曲線が急
+├─ プロンプトを書く必要
 └─ 3ヶ月かかる
 
 ✅ このテンプレート
 ├─ コードゼロで開始
-├─ 5分でカスタマイズ
-├─ Markdownで定義
-└─ すぐに動く
+├─ プロンプト不要
+├─ 理論に従うだけ
+└─ 自動生成される
 ```
 
 ### 💡 3つの驚き
 
-1. **"えっ、コード書かなくていいの？"**
-   - `.claude/agents/`にMarkdownファイルを置くだけ
+1. **"えっ、プロンプト書かなくていいの？"**
+   - 理論フレームワークに従うだけ
+   - `.claude/`設定ファイルが自動生成
    - すぐに動作するエージェント
 
 2. **"うわ、こんなに簡単なの？"**
-   - `Use this template` → 即開始
-   - 5分でカスタマイズ完了
+   - `Use this template` → フォーク
+   - 理論を定義 → エージェント自動生成
+   - 5分で完了
 
 3. **"まじで？これ無料？"**
    - 完全オープンソース
    - 61,251行のドキュメント込み
    - 学術論文まで付属
+   - Claude Code完全統合
 
 ---
 
@@ -68,21 +71,13 @@ cd YOUR_PROJECT
 find . -type f -name "*.md" -exec sed -i '' 's/Miyabi_AI_Agent/YOUR_PROJECT/g' {} +
 ```
 
-### ステップ3: 最初のエージェントを作成（2分）
+### ステップ3: 理論を定義（2分）
 
 ```bash
-# カスタムエージェントを作成
-cat > .claude/agents/my-agent.md << 'EOF'
----
-name: my-agent
-description: My first AI agent
-tools: Read, Write, Bash
----
-
-# My Custom Agent
-
-あなたの専門エージェントの動作を定義...
-EOF
+# あなたのドメインロジックを定義
+code CLAUDE.md
+# あなたのプロジェクトの方程式を定義するだけ
+# エージェント設定は自動生成されます
 ```
 
 ### ステップ4: 完成！（30秒）
@@ -90,10 +85,10 @@ EOF
 ```bash
 # Claude Codeで動作確認
 claude code
-# → あなたのエージェントが動作します！
+# → 理論に基づいて11個のエージェントが自動起動！
 ```
 
-**🎉 完了！たった5分で独自のAIエージェントプロジェクトが完成しました！**
+**🎉 完了！プロンプトを書かずに独自のAIエージェントプロジェクトが完成！**
 
 詳細ガイド: [USE_THIS_TEMPLATE.md](USE_THIS_TEMPLATE.md)
 
@@ -182,44 +177,38 @@ World₀ → [瞬き] → World₁ → [瞬き] → World₂ → ... → World_�
 ### 例1: 超シンプル（5分）
 
 ```markdown
-<!-- .claude/agents/hello.md -->
----
-name: hello-agent
-description: Say hello to the world
----
+<!-- CLAUDE.md -->
+# My Hello Project
 
-# Hello Agent
-Just say hello!
+## 統一エージェント方程式
+𝔸(Input, World₀) = Hello(World)
+
+## プロジェクト理論
+- Input: ユーザーの挨拶
+- Output: 適切な返答
 ```
 
-**結果**: 動作するHelloエージェント ✅
+**結果**: Claude Codeが自動的にエージェント設定を生成 ✅
 
 ---
 
 ### 例2: カスタムドメイン（30分）
 
 ```markdown
-<!-- .claude/agents/financial-analyst.md -->
----
-name: financial-analyst
-description: Financial data analysis specialist
-tools: Read, Write, Bash, Grep
-model: opus
----
+<!-- CLAUDE.md -->
+# Financial Analysis Project
 
-# Financial Analyst Agent
+## 統一エージェント方程式
+𝔸(Input, World₀) = lim_{n→∞} [∫₀ⁿ (Analyze ◦ Predict ◦ Evaluate)(t) dt]
 
-## 専門分野
-- 財務諸表分析
-- 市場トレンド予測
-- リスク評価
-
-## 使用タイミング
-- 決算書の分析が必要な時
-- 投資判断のサポートが必要な時
+## ドメイン特化理論
+### 財務分析の世界モデル
+- World₀: 財務データ、市場情報
+- Θ: 分析・予測・評価変換
+- Goal: 投資判断の最適化
 ```
 
-**結果**: 金融分析専門エージェント ✅
+**結果**: 理論に基づいて金融分析専門エージェントが自動生成 ✅
 
 ---
 
@@ -227,6 +216,7 @@ model: opus
 
 ```rust
 // crates/my-core/src/lib.rs
+// 理論フレームワークをRustで実装
 pub struct MyAgent {
     intent_resolver: IntentResolver,
     command_stack: CommandStack,
@@ -235,12 +225,12 @@ pub struct MyAgent {
 
 impl MyAgent {
     pub fn transform(&self, input: Input, world: World) -> World {
-        // 独自のビジネスロジック実装
+        // 理論式をコードに落とし込む
     }
 }
 ```
 
-**結果**: 完全なオリジナルプロダクト ✅
+**結果**: 完全なオリジナルプロダクト + 自動エージェント生成 ✅
 
 ---
 
@@ -546,16 +536,23 @@ Stage 7: グローバル展開 (Year 2+)
 ## ❓ FAQ
 
 <details>
+<summary><b>Q: プロンプトを書く必要はありますか？</b></summary>
+
+A: **いいえ、一切不要です！** 理論フレームワーク（瞬く景色の法則、統一方程式）に従ってCLAUDE.mdを定義するだけで、Claude Codeのエージェント設定（`.claude/agents/`）は自動生成されます。既存のClaude Code利用者なら、この仕組みはすぐに理解できるはずです。
+
+</details>
+
+<details>
 <summary><b>Q: 実装コードが含まれていないのはなぜ？</b></summary>
 
-A: このテンプレートは**理論・設計・ビジネスモデル**を提供します。実装はあなたのドメインに合わせて自由にカスタマイズできます。
+A: このテンプレートは**理論・設計・ビジネスモデル**を提供します。理論に従うことでエージェント設定は自動生成されますが、実装コード（Rust、Python等）はあなたのドメインに合わせて自由にカスタマイズできるようにしています。
 
 </details>
 
 <details>
 <summary><b>Q: Rust以外の言語でも使える？</b></summary>
 
-A: はい！理論フレームワークは言語非依存です。Python、TypeScript、Go、どんな言語でも実装できます。
+A: はい！理論フレームワークは言語非依存です。Python、TypeScript、Go、どんな言語でも実装できます。エージェント自動生成はClaude Codeが担当するので、言語は自由に選択できます。
 
 </details>
 
@@ -626,8 +623,8 @@ A: いいえ。フォーク後は完全に独立したプロジェクトです�
 
 **Built with ❤️ using [Claude Code](https://claude.com/claude-code)**
 
-*"From zero to viral in 5 minutes"*
-*「ゼロからバイラルまで5分で」*
+*"No prompts, just theory → Auto-generated agents"*
+*「プロンプト不要、理論を定義 → エージェント自動生成」*
 
 *"Through infinite blinks, the world converges to its ideal."*
 *「無限の瞬きの先に、理想は現実となる」*
