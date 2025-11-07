@@ -1,0 +1,226 @@
+@startuml MCP Usage Flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+
+title MCP Server Usage Flow in Claude Code
+
+actor User
+participant "Claude Agent" as Agent
+participant "MCP Client" as MCP
+participant "Server Registry" as Registry
+participant "Transport Layer" as Transport
+participant "MCP Server\n(e.g., GitHub)" as Server
+database "OAuth Provider" as OAuth
+
+== Installation & Configuration ==
+
+User -> Agent: claude mcp add --transport http github <url>
+Agent -> Registry: Register server
+Registry -> Registry: Load configuration
+note right
+    Config Sources (priority):
+    1. Enterprise (managed-mcp.json)
+    2. Project (.mcp.json)
+    3. User (~/.claude/settings.json)
+    4. Local (session-specific)
+end note
+
+alt Requires OAuth
+    Registry -> OAuth: Initiate OAuth flow
+    OAuth --> User: Open browser for auth
+    User -> OAuth: Grant permissions
+    OAuth --> Registry: Return access token
+    Registry -> Registry: Store token securely
+end
+
+Registry --> Agent: Server registered
+
+== Resource Discovery ==
+
+User -> Agent: "What resources are available?"
+Agent -> MCP: List available resources
+MCP -> Registry: Get all configured servers
+
+loop For each server
+    Registry -> Transport: Connect to server
+    Transport -> Server: Request resource list
+    Server --> Transport: Return resources
+    Transport --> Registry: Resources cataloged
+end
+
+Registry --> MCP: All resources
+MCP --> Agent: Resource list
+Agent --> User: Display available resources
+
+== Resource Access via @mention ==
+
+User -> Agent: "@github:issue://123 を分析して"
+Agent -> MCP: Parse resource reference
+MCP -> Registry: Resolve @github server
+
+Registry -> Transport: Request resource
+note right
+    Format:
+    @server:protocol://resource/path
+
+    Examples:
+    @github:issue://123
+    @notion:page://abc-def
+    @postgres:schema://users
+end note
+
+Transport -> Server: Fetch issue://123
+Server --> Transport: Issue data
+Transport --> Registry: Resource content
+Registry --> MCP: Resource data
+MCP --> Agent: Attach as context
+
+Agent -> Agent: Process with resource context
+Agent --> User: Analysis with full context
+
+== Prompt Execution (Slash Commands) ==
+
+User -> Agent: "/mcp__github__create_issue 'Bug found' high"
+Agent -> MCP: Parse prompt command
+MCP -> Registry: Find github server
+
+Registry -> Transport: Execute prompt
+note right
+    Prompt format:
+    /mcp__servername__promptname args
+
+    Examples:
+    /mcp__github__create_issue
+    /mcp__linear__pr_review 456
+    /mcp__jira__update_ticket
+end note
+
+Transport -> Server: Execute create_issue
+Server -> Server: Create issue via API
+Server --> Transport: Issue created (#789)
+Transport --> Registry: Result
+Registry --> MCP: Prompt result
+MCP --> Agent: Inject result
+Agent --> User: "Issue #789 created successfully"
+
+== Tool Execution with MCP ==
+
+User -> Agent: "Sentryで過去24時間のエラーを調べて"
+Agent -> MCP: Identify required MCP tool
+MCP -> Registry: Get sentry server
+
+alt Permission Required
+    Agent -> User: Request permission
+    note right
+        Permission levels:
+        - acceptAll: Auto-approve all
+        - acceptEdits: Approve file changes
+        - ask: Prompt for each tool
+    end note
+    User --> Agent: Grant permission
+end
+
+Registry -> Transport: Execute sentry tool
+Transport -> Server: Query errors (last 24h)
+Server -> Server: Analyze error logs
+Server --> Transport: Error statistics
+Transport --> Registry: Results
+Registry --> MCP: Error data
+MCP --> Agent: Tool output
+
+Agent -> Agent: Analyze error patterns
+Agent --> User: Error report with insights
+
+== Multi-Server Workflow ==
+
+User -> Agent: "JIRAのENG-123を実装してGitHubにPRを作成"
+
+group JIRA Integration
+    Agent -> MCP: Access @jira:issue://ENG-123
+    MCP -> Registry: Connect to JIRA
+    Registry -> Transport: Fetch issue
+    Transport -> Server: Get issue details
+    Server --> Transport: Issue spec
+    Transport --> Agent: Issue context
+end
+
+group Code Implementation
+    Agent -> Agent: Generate code based on spec
+    Agent -> Agent: Create files and changes
+end
+
+group GitHub Integration
+    Agent -> MCP: Use github tool
+    MCP -> Registry: Connect to GitHub
+    Registry -> Transport: Create PR
+    Transport -> Server: POST /pulls
+    Server --> Transport: PR created (#456)
+    Transport --> Agent: PR URL
+end
+
+Agent --> User: "実装完了！PR #456を作成しました"
+
+== Error Handling ==
+
+User -> Agent: Request using unavailable MCP server
+Agent -> MCP: Attempt to use server
+MCP -> Registry: Server lookup
+
+alt Server Not Configured
+    Registry --> MCP: Server not found
+    MCP --> Agent: Error
+    Agent --> User: "Server not configured. Run: claude mcp add..."
+end
+
+alt Authentication Failed
+    Registry -> Transport: Connect
+    Transport -> Server: Authenticate
+    Server --> Transport: 401 Unauthorized
+    Transport --> Registry: Auth error
+    Registry --> MCP: Auth failed
+    MCP --> Agent: Auth error
+    Agent --> User: "Authentication required. Run: /mcp"
+end
+
+alt Rate Limit Exceeded
+    Transport -> Server: Request
+    Server --> Transport: 429 Too Many Requests
+    Transport --> Registry: Rate limited
+    Registry --> MCP: Rate limit
+    MCP --> Agent: Rate limit error
+    Agent --> User: "Rate limit exceeded. Please try again later."
+end
+
+== Enterprise Policy Enforcement ==
+
+User -> Agent: Attempt to use restricted server
+Agent -> MCP: Check server access
+MCP -> Registry: Validate against policy
+
+Registry -> Registry: Check allowedMcpServers
+Registry -> Registry: Check deniedMcpServers
+
+alt Server Denied
+    Registry --> MCP: Access denied
+    MCP --> Agent: Policy violation
+    Agent --> User: "This server is not allowed by organization policy"
+else Server Allowed
+    Registry --> MCP: Access granted
+    MCP -> Transport: Proceed with request
+    Transport -> Server: Execute
+    Server --> User: Success
+end
+
+note bottom
+    **MCP Integration Benefits:**
+
+    1. **Unified Access**: Single interface for 100+ services
+    2. **Context Preservation**: Resources maintain full context
+    3. **OAuth Security**: Secure token management
+    4. **Enterprise Control**: Centralized policy enforcement
+    5. **Extensibility**: Easy to add new servers
+    6. **Consistency**: Standardized protocol across services
+end note
+
+@enduml

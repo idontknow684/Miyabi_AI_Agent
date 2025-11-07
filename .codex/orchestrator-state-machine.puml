@@ -1,0 +1,98 @@
+@startuml Orchestrator State Machine
+
+skinparam backgroundColor #FEFEFE
+skinparam state {
+  BackgroundColor LightYellow
+  BorderColor Black
+  BackgroundColor<<Final>> LightGreen
+  BackgroundColor<<Error>> LightCoral
+}
+
+title Orchestrator State Machine
+
+[*] --> Analyzing : process(UserRequest)
+
+state Analyzing {
+  [*] --> ParseIntent
+  ParseIntent --> AssessComplexity
+  AssessComplexity --> IdentifyCapabilities
+  IdentifyCapabilities --> [*]
+}
+note right of Analyzing : θ₁ Understand
+
+Analyzing --> Decomposing : RequestAnalysis
+
+state Decomposing {
+  [*] --> BreakIntoSubtasks
+  BreakIntoSubtasks --> DetermineDependencies
+  DetermineDependencies --> PrioritizeTasks
+  PrioritizeTasks --> [*]
+}
+note right of Decomposing : θ₂ Generate
+
+Decomposing --> Delegating : Vec<Task>
+
+state Delegating {
+  [*] --> SelectSubagents
+  SelectSubagents --> MatchCapabilities
+  MatchCapabilities --> CreateAssignments
+  CreateAssignments --> [*]
+}
+note right of Delegating : θ₃ Allocate
+
+Delegating --> WaitingForResults : TaskAssignments
+
+state WaitingForResults {
+  [*] --> LaunchSubagents
+  LaunchSubagents --> MonitorExecution
+  MonitorExecution --> CollectResults
+  CollectResults --> [*]
+
+  MonitorExecution --> HandleFailure : task failed
+  HandleFailure --> CollectResults : continue
+}
+note right of WaitingForResults : θ₄ Execute
+
+WaitingForResults --> Synthesizing : Vec<SubagentResult>
+
+state Synthesizing {
+  [*] --> CombineOutputs
+  CombineOutputs --> ResolveConflicts
+  ResolveConflicts --> GenerateAnswer
+  GenerateAnswer --> [*]
+}
+note right of Synthesizing : θ₅ Integrate
+
+Synthesizing --> Complete<<Final>> : FinalAnswer
+Synthesizing --> Failed<<Error>> : synthesis error
+
+state Complete<<Final>> {
+  [*] --> ReturnAnswer
+  ReturnAnswer --> UpdateMetrics
+  UpdateMetrics --> [*]
+}
+
+state Failed<<Error>> {
+  [*] --> LogError
+  LogError --> NotifyUser
+  NotifyUser --> [*]
+}
+
+Complete --> [*]
+Failed --> [*]
+
+note bottom of Complete
+  **Success Path**
+  - Final answer generated
+  - All metrics collected
+  - Ready for next request
+end note
+
+note bottom of Failed
+  **Failure Path**
+  - Error logged
+  - User notified
+  - Graceful degradation
+end note
+
+@enduml

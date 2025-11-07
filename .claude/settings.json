@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "tool-call": {
+      "*": {
+        "command": ".claude/hooks/voicevox-narration.sh tool-call ${CLAUDE_TOOL_NAME}",
+        "enabled": true,
+        "timeout": 3000,
+        "failureMode": "ignore"
+      }
+    },
+    "user-prompt-submit": {
+      "command": ".claude/hooks/voicevox-narration.sh user-prompt-submit",
+      "enabled": true,
+      "timeout": 2000,
+      "failureMode": "ignore"
+    }
+  }
+}

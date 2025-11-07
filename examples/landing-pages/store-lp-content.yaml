@@ -1,0 +1,937 @@
+# 店舗集客ランディングページ コンテンツ構造
+# Store Customer Acquisition Landing Page Content Structure
+# Version: 1.0.0
+# Target: Japanese market, Various store types (excluding adult entertainment)
+
+page_meta:
+  title: "店舗集客の悩みを解決 | 新規顧客を自動で獲得する集客システム"
+  description: "飲食店、美容室、クリニック、小売店など、あらゆる店舗の集客課題を解決。月間100名以上の新規顧客獲得を実現する、プロの集客システムをご提供します。"
+  keywords: "店舗集客, 新規顧客獲得, 集客システム, デジタルマーケティング, 地域集客"
+  og_image_url: "/images/og-image.jpg"
+
+# ========================================
+# 1. Hero Section (ファーストビュー)
+# ========================================
+hero_section:
+  eyebrow: "月間100名以上の新規顧客獲得を実現"
+
+  headline:
+    main: "「お客様が来ない」"
+    sub: "その悩み、今日で終わりにしませんか?"
+
+  value_proposition: |
+    集客の専門家が、あなたの店舗に最適な
+    新規顧客獲得システムを構築します。
+    初月から効果を実感できる、実績No.1の集客サービス。
+
+  primary_cta:
+    text: "無料相談を予約する"
+    button_style: "primary_large"
+    link: "#contact-form"
+
+  secondary_cta:
+    text: "導入事例を見る"
+    button_style: "secondary_large"
+    link: "#case-studies"
+
+  trust_badges:
+    - text: "導入店舗数 3,200店以上"
+      icon: "store"
+    - text: "顧客満足度 97.2%"
+      icon: "star"
+    - text: "平均ROI 420%"
+      icon: "chart-up"
+
+  hero_image:
+    type: "illustration_or_photo"
+    description: "繁盛している店舗のイメージ、または笑顔の店舗オーナー"
+    alt_text: "新規顧客で賑わう店舗"
+
+# ========================================
+# 2. Problem Statement (課題提示)
+# ========================================
+problem_section:
+  section_label: "多くの店舗オーナーが抱える悩み"
+
+  headline: "こんなお悩み、ありませんか?"
+
+  sub_headline: |
+    真面目に営業しているのに、なぜかお客様が増えない...
+    そんな悩みを抱えている店舗オーナー様は少なくありません。
+
+  pain_points:
+    - icon: "users-slash"
+      title: "新規顧客が全く来ない"
+      description: "チラシを配っても、SNSを更新しても、新しいお客様が全然来店してくれない。このままでは経営が厳しい..."
+
+    - icon: "coins"
+      title: "広告費ばかりかかる"
+      description: "Web広告やフリーペーパーに何十万も使ったのに、効果が見えない。本当にこのやり方で合っているのか不安..."
+
+    - icon: "clock"
+      title: "集客に時間を取られすぎる"
+      description: "SNS投稿、ブログ更新、キャンペーン企画...本業に集中したいのに、集客作業に追われて疲弊している..."
+
+    - icon: "question-circle"
+      title: "何をすればいいか分からない"
+      description: "集客の情報はたくさんあるけど、自分の店に何が合うのか分からない。専門知識もないし、どこから手をつければ..."
+
+    - icon: "chart-down"
+      title: "リピーターが定着しない"
+      description: "一度は来てくれるけど、リピートしてくれない。顧客管理の方法も分からず、せっかくの見込み客を逃している..."
+
+  empathy_statement: |
+    実は、これらの悩みは「正しい集客の仕組み」がないことが原因です。
+    個人の努力や根性では、もう限界なのです。
+
+# ========================================
+# 3. Solution Overview (ソリューション提示)
+# ========================================
+solution_section:
+  section_label: "解決策"
+
+  headline: "必要なのは「自動で回る集客システム」"
+
+  sub_headline: |
+    もう、闇雲に広告を出したり、SNSを更新し続ける必要はありません。
+    私たちが提供するのは、あなたの店舗に合わせた「集客の自動化システム」です。
+
+  solution_overview:
+    description: |
+      3,200店舗以上の導入実績から生まれた、
+      **データドリブンな集客システム**を、
+      あなたの店舗に完全カスタマイズして構築します。
+
+      一度仕組みを作れば、あとは自動的に新規顧客が集まり、
+      リピーターが増え続ける。それが私たちの提供する価値です。
+
+  system_image:
+    type: "diagram_or_illustration"
+    description: "集客システムの全体像を示す図解"
+    alt_text: "自動集客システムの仕組み"
+
+  key_differentiators:
+    headline: "他の集客サービスとの違い"
+
+    points:
+      - title: "丸投げOK"
+        description: "専任の集客コンサルタントが、戦略設計から実行まで全て代行。あなたは本業に集中できます。"
+
+      - title: "業種特化の知見"
+        description: "飲食、美容、医療、小売など、各業種の成功パターンを熟知。あなたの業種に最適な施策をご提案。"
+
+      - title: "成果保証付き"
+        description: "3ヶ月で成果が出なければ全額返金。私たちは結果にコミットします。"
+
+# ========================================
+# 4. Benefits Section (ベネフィット)
+# ========================================
+benefits_section:
+  section_label: "導入メリット"
+
+  headline: "このシステムがもたらす5つの変化"
+
+  sub_headline: "実際の導入店舗が実感している、ビジネスへのインパクト"
+
+  benefits:
+    - icon: "rocket"
+      title: "新規顧客が月間100名以上増加"
+      description: |
+        Googleマップ最適化、SNS広告、LINE配信など、
+        複数のチャネルを組み合わせた集客で、
+        **安定的に新規顧客を獲得**できます。
+        平均的な導入店舗で、月間100〜150名の新規顧客が来店。
+      result_metric: "平均+127名/月"
+
+    - icon: "piggy-bank"
+      title: "広告費を70%削減しながら効果UP"
+      description: |
+        無駄な広告費を徹底的に排除し、
+        **費用対効果の高い施策だけに集中投資**。
+        データ分析により、1円単位で最適化します。
+        結果、広告費は下がっても集客数は増える。
+      result_metric: "広告費 -70% / 集客数 +250%"
+
+    - icon: "repeat"
+      title: "リピート率が平均2.3倍に向上"
+      description: |
+        来店後の自動フォローアップ、ポイントプログラム、
+        パーソナライズされたオファーなど、
+        **顧客との長期的な関係構築**を自動化。
+        一度来たお客様が、何度も戻ってきてくれます。
+      result_metric: "リピート率 +230%"
+
+    - icon: "clock"
+      title: "集客作業時間を週20時間削減"
+      description: |
+        SNS投稿、広告運用、顧客対応など、
+        全ての集客業務を**自動化・システム化**。
+        あなたは本業のサービス品質向上に集中でき、
+        さらなる顧客満足度アップにつながります。
+      result_metric: "作業時間 -20時間/週"
+
+    - icon: "trending-up"
+      title: "売上が平均42%増加"
+      description: |
+        新規顧客増加 + リピート率向上 + 客単価アップ。
+        3つの要素が同時に改善されることで、
+        **店舗全体の売上が大きく成長**します。
+        導入3ヶ月後の平均売上増加率は42%。
+      result_metric: "売上 +42%"
+
+# ========================================
+# 5. How It Works (導入プロセス)
+# ========================================
+how_it_works_section:
+  section_label: "導入の流れ"
+
+  headline: "たった4ステップで、集客システムが完成"
+
+  sub_headline: |
+    初回相談から実際の集客開始まで、最短2週間。
+    専任コンサルタントが伴走するので、初めてでも安心です。
+
+  steps:
+    - step_number: "01"
+      title: "無料診断・ヒアリング"
+      duration: "60分 / オンラインまたは訪問"
+      description: |
+        まずは現状の課題を徹底的にヒアリング。
+        あなたの店舗の強み、ターゲット顧客、競合状況などを分析し、
+        **最適な集客戦略の方向性**をご提案します。
+      icon: "clipboard-check"
+      details:
+        - "現状の集客状況の分析"
+        - "競合調査とポジショニング"
+        - "ターゲット顧客の明確化"
+        - "概算ROIシミュレーション"
+
+    - step_number: "02"
+      title: "カスタム戦略設計"
+      duration: "1週間"
+      description: |
+        ヒアリング内容をもとに、専任チームが
+        **あなたの店舗専用の集客システム**を設計。
+        使用するチャネル、クリエイティブ、配信スケジュール、
+        KPI設定まで、詳細な戦略書を作成します。
+      icon: "drafting-compass"
+      details:
+        - "集客チャネルの選定(Google/SNS/LINE等)"
+        - "クリエイティブ制作(画像・動画・テキスト)"
+        - "配信スケジュールの策定"
+        - "KPI・目標設定"
+
+    - step_number: "03"
+      title: "システム構築・実装"
+      duration: "1週間"
+      description: |
+        戦略に基づいて、実際の集客システムを構築。
+        Googleビジネスプロフィール最適化、SNS広告設定、
+        LINE公式アカウント構築、予約システム連携など、
+        **全ての設定を私たちが代行**します。
+      icon: "tools"
+      details:
+        - "Googleマップ・MEO対策"
+        - "SNS広告アカウント設定"
+        - "LINE公式アカウント構築"
+        - "予約・決済システム連携"
+
+    - step_number: "04"
+      title: "運用開始・継続改善"
+      duration: "継続サポート"
+      description: |
+        システム稼働後も、専任コンサルタントが
+        **データを分析し、継続的に改善**。
+        月1回のレポート提出と改善提案で、
+        集客効果を最大化し続けます。
+      icon: "chart-line"
+      details:
+        - "週次データモニタリング"
+        - "月次レポート・改善提案"
+        - "クリエイティブの定期更新"
+        - "チャットサポート(平日10-18時)"
+
+# ========================================
+# 6. Social Proof (実績・お客様の声)
+# ========================================
+social_proof_section:
+  section_label: "お客様の声"
+
+  headline: "導入店舗の97%が効果を実感"
+
+  sub_headline: "実際に導入いただいた店舗オーナー様からの声をご紹介します"
+
+  testimonials:
+    - customer_name: "田中 美咲 様"
+      store_type: "美容室"
+      store_name: "Hair Salon Lumiere"
+      location: "東京都世田谷区"
+      photo_url: "/images/testimonials/tanaka.jpg"
+      rating: 5
+      quote: "3ヶ月で新規顧客が2.5倍に。予約が埋まって嬉しい悲鳴です!"
+      full_testimonial: |
+        開業して2年、常連のお客様だけで回していましたが、
+        新規のお客様が全く来ず悩んでいました。
+        このサービスを導入してから、Instagram経由での予約が急増。
+        今では予約が2週間先まで埋まるようになり、
+        スタッフを1名増員できるまでになりました。
+        集客の専門家に任せて本当に良かったです。
+      results:
+        - metric: "新規顧客数"
+          before: "月12名"
+          after: "月31名"
+          change: "+158%"
+        - metric: "月商"
+          before: "82万円"
+          after: "147万円"
+          change: "+79%"
+
+    - customer_name: "山田 健太 様"
+      store_type: "飲食店"
+      store_name: "Italian Restaurant Bella Vista"
+      location: "大阪府大阪市"
+      photo_url: "/images/testimonials/yamada.jpg"
+      rating: 5
+      quote: "広告費を半分にしたのに、来店客数が1.8倍に増えました"
+      full_testimonial: |
+        以前は食べログやホットペッパーに月10万円以上使っていましたが、
+        費用対効果が見えず困っていました。
+        こちらに切り替えてから、Googleマップとインスタ広告で
+        効率的に集客できるように。広告費は月5万円に減ったのに、
+        来店客数は逆に増えて、利益率が大幅に改善しました。
+      results:
+        - metric: "月間来店客数"
+          before: "320名"
+          after: "580名"
+          change: "+81%"
+        - metric: "広告費"
+          before: "10.2万円"
+          after: "5.1万円"
+          change: "-50%"
+
+    - customer_name: "佐藤 智子 様"
+      store_type: "整体院"
+      store_name: "健康整体院 めぐり"
+      location: "神奈川県横浜市"
+      photo_url: "/images/testimonials/sato.jpg"
+      rating: 5
+      quote: "リピート率が劇的に改善。安定経営ができるようになりました"
+      full_testimonial: |
+        開業当初は新規のお客様ばかりで、リピートが全くなく
+        経営が不安定でした。LINE自動配信とポイントシステムを
+        導入してからは、2回目、3回目と継続してくださる方が激増。
+        今では売上の70%がリピーターで、安心して経営できています。
+      results:
+        - metric: "リピート率"
+          before: "18%"
+          after: "64%"
+          change: "+256%"
+        - metric: "顧客生涯価値"
+          before: "8,500円"
+          after: "28,700円"
+          change: "+238%"
+
+    - customer_name: "鈴木 大輔 様"
+      store_type: "小売店"
+      store_name: "セレクトショップ BRIDGE"
+      location: "愛知県名古屋市"
+      photo_url: "/images/testimonials/suzuki.jpg"
+      rating: 5
+      quote: "オンライン・オフライン両方で集客。売上が前年比+65%に"
+      full_testimonial: |
+        実店舗とECサイトの両方を運営していますが、
+        集客がバラバラで効率が悪かったんです。
+        統合的な集客システムを導入してから、
+        SNSで認知→実店舗来店→EC購入という流れができて、
+        顧客接点が大幅に増えました。売上も過去最高を更新中です。
+      results:
+        - metric: "年間売上"
+          before: "1,850万円"
+          after: "3,050万円"
+          change: "+65%"
+        - metric: "EC転換率"
+          before: "1.2%"
+          after: "3.8%"
+          change: "+217%"
+
+  case_study_cta:
+    text: "他の成功事例を見る"
+    link: "#more-case-studies"
+
+# ========================================
+# 7. Pricing / Packages (料金プラン)
+# ========================================
+pricing_section:
+  section_label: "料金プラン"
+
+  headline: "あなたの店舗規模に合わせた3つのプラン"
+
+  sub_headline: |
+    初期費用0円、成果が出なければ全額返金保証。
+    安心して始められる料金体系です。
+
+  pricing_note: |
+    ※全プラン、初月は無料トライアル期間があります
+    ※契約期間の縛りなし。いつでも解約可能です
+
+  plans:
+    - plan_id: "starter"
+      plan_name: "スタータープラン"
+      recommended: false
+      target_audience: "個人経営・小規模店舗向け"
+      monthly_price: "29,800円"
+      annual_price: "298,000円"
+      annual_discount: "2ヶ月分無料"
+      setup_fee: "0円"
+
+      tagline: "まずは小さく始めたい方に"
+
+      features:
+        included:
+          - feature: "Googleビジネスプロフィール最適化"
+            description: "MEO対策で地域検索1位を目指す"
+          - feature: "Instagram/Facebook広告運用"
+            description: "月間広告予算 3万円まで"
+          - feature: "LINE公式アカウント構築"
+            description: "友だち追加施策+月4回配信"
+          - feature: "月次レポート・改善提案"
+            description: "データ分析と次月の戦略提案"
+          - feature: "チャットサポート"
+            description: "平日10-18時対応"
+
+        not_included:
+          - "動画広告制作"
+          - "インフルエンサーマーケティング"
+          - "専用LP制作"
+
+      target_results:
+        - "新規顧客数: 月間30-50名増加"
+        - "ROI: 300-400%"
+
+      cta:
+        text: "スタータープランを始める"
+        link: "#contact-form?plan=starter"
+
+    - plan_id: "professional"
+      plan_name: "プロフェッショナルプラン"
+      recommended: true
+      recommended_badge: "最も人気"
+      target_audience: "中規模店舗・複数店舗向け"
+      monthly_price: "59,800円"
+      annual_price: "598,000円"
+      annual_discount: "2ヶ月分無料"
+      setup_fee: "0円"
+
+      tagline: "本格的に集客を伸ばしたい方に"
+
+      features:
+        included:
+          - feature: "スタータープランの全機能"
+            description: ""
+          - feature: "Instagram/Facebook広告運用"
+            description: "月間広告予算 10万円まで"
+          - feature: "Google広告運用"
+            description: "検索広告・ディスプレイ広告"
+          - feature: "LINE公式アカウント運用"
+            description: "セグメント配信+ステップ配信"
+          - feature: "クリエイティブ制作(月4本)"
+            description: "画像・動画バナー"
+          - feature: "専用ランディングページ制作"
+            description: "CVR最適化されたLP"
+          - feature: "週次データモニタリング"
+            description: "リアルタイムでの改善"
+          - feature: "電話サポート"
+            description: "平日10-18時対応"
+
+        not_included:
+          - "インフルエンサーマーケティング"
+          - "オリジナル動画広告制作"
+
+      target_results:
+        - "新規顧客数: 月間100-150名増加"
+        - "ROI: 400-500%"
+
+      cta:
+        text: "プロフェッショナルプランを始める"
+        link: "#contact-form?plan=professional"
+
+    - plan_id: "enterprise"
+      plan_name: "エンタープライズプラン"
+      recommended: false
+      target_audience: "大規模店舗・チェーン店向け"
+      monthly_price: "要相談"
+      annual_price: "要相談"
+      setup_fee: "0円"
+
+      tagline: "本気で事業成長を目指す方に"
+
+      features:
+        included:
+          - feature: "プロフェッショナルプランの全機能"
+            description: ""
+          - feature: "広告予算: 無制限"
+            description: "大規模キャンペーン対応"
+          - feature: "インフルエンサーマーケティング"
+            description: "適切なインフルエンサーをアサイン"
+          - feature: "オリジナル動画広告制作"
+            description: "プロカメラマン撮影"
+          - feature: "複数店舗一括管理"
+            description: "店舗別データダッシュボード"
+          - feature: "専任コンサルタント配置"
+            description: "月2回の訪問ミーティング"
+          - feature: "ブランディング戦略"
+            description: "長期的なブランド構築支援"
+          - feature: "24時間サポート"
+            description: "緊急時も対応可能"
+
+        not_included: []
+
+      target_results:
+        - "新規顧客数: 月間200名以上増加"
+        - "ROI: 500%以上"
+
+      cta:
+        text: "エンタープライズプランを相談する"
+        link: "#contact-form?plan=enterprise"
+
+  money_back_guarantee:
+    headline: "安心の成果保証制度"
+    description: |
+      導入後3ヶ月で、新規顧客数が月間30名以上増加しなかった場合、
+      **全額返金いたします**。(スタータープラン除く)
+      私たちは結果にコミットします。
+    badge_image: "/images/money-back-guarantee-badge.svg"
+
+# ========================================
+# 8. FAQ Section (よくある質問)
+# ========================================
+faq_section:
+  section_label: "よくある質問"
+
+  headline: "お問い合わせ前に、まずはこちらをご確認ください"
+
+  faqs:
+    - question: "契約期間の縛りはありますか?"
+      answer: |
+        いいえ、ございません。全プラン、契約期間の縛りなしでご利用いただけます。
+        サービスにご満足いただけない場合は、いつでも解約可能です。
+        (ただし、返金保証は3ヶ月継続された方が対象となります)
+      category: "契約・料金"
+
+    - question: "初期費用は本当に0円ですか?"
+      answer: |
+        はい、全プラン初期費用0円です。
+        システム構築費、アカウント設定費なども全て月額料金に含まれています。
+        追加費用が発生する場合は、事前に必ずご相談・ご承認をいただきます。
+      category: "契約・料金"
+
+    - question: "どんな業種でも対応できますか?"
+      answer: |
+        飲食店、美容室・サロン、整体院・クリニック、小売店、教室・スクール、
+        不動産、士業など、幅広い業種に対応しています。
+        ただし、アダルト関連業種、法令に抵触する業種はお断りさせていただいております。
+        ご不明な場合は、お気軽にお問い合わせください。
+      category: "サービス内容"
+
+    - question: "広告費は料金に含まれていますか?"
+      answer: |
+        いいえ、広告費は別途必要です。
+        月額料金は「集客システムの構築・運用代行費」であり、
+        Google広告やSNS広告の広告費は、各プランの上限内で別途ご負担いただきます。
+        (スタータープラン:月3万円、プロフェッショナルプラン:月10万円まで)
+      category: "契約・料金"
+
+    - question: "効果が出るまでどのくらいかかりますか?"
+      answer: |
+        早い方で2週間、平均的には1ヶ月程度で効果を実感していただけます。
+        Googleマップ最適化やSNS広告は比較的早く効果が出やすく、
+        SEOやブランディング施策は3ヶ月程度かかる場合があります。
+        初月から段階的に効果が現れるよう、戦略を設計します。
+      category: "効果・成果"
+
+    - question: "自分で何か作業する必要はありますか?"
+      answer: |
+        基本的に全てお任せいただけます。
+        ただし、店舗の写真素材や、サービス内容のヒアリングなど、
+        最低限のご協力をお願いすることがあります。
+        作業時間としては、月1-2時間程度とお考えください。
+      category: "サービス内容"
+
+    - question: "複数店舗を経営していますが、対応できますか?"
+      answer: |
+        はい、対応可能です。
+        プロフェッショナルプラン以上であれば、複数店舗の管理にも対応しています。
+        店舗数に応じてカスタムプランをご提案させていただきますので、
+        まずはご相談ください。
+      category: "サービス内容"
+
+    - question: "競合他社の状況も分析してもらえますか?"
+      answer: |
+        はい、もちろんです。
+        初回の無料診断時に、競合分析も実施いたします。
+        競合店の集客チャネル、強み・弱み、価格戦略などを分析し、
+        あなたの店舗がどう差別化すべきかをご提案します。
+      category: "サービス内容"
+
+    - question: "返金保証の条件を教えてください"
+      answer: |
+        プロフェッショナルプラン・エンタープライズプランで、
+        導入後3ヶ月継続していただき、新規顧客数が月間30名以上増加しなかった場合、
+        全額返金いたします。
+        ただし、以下の条件を満たしている必要があります:
+        1) 推奨された施策を全て実施している
+        2) 必要な素材・情報をご提供いただいている
+        3) 店舗側の営業活動が通常通り行われている
+      category: "契約・料金"
+
+    - question: "解約時に違約金はかかりますか?"
+      answer: |
+        いいえ、解約時の違約金は一切ございません。
+        ただし、当月分の料金は日割り計算できませんので、
+        月末までご利用いただく形となります。
+        解約希望の場合は、前月末までにご連絡ください。
+      category: "契約・料金"
+
+    - question: "地方の小さな町でも効果はありますか?"
+      answer: |
+        はい、むしろ地方こそ効果が出やすいケースが多いです。
+        競合が少なく、Googleマップ対策やローカルSNS広告が
+        非常に効果的に機能します。
+        実際、導入店舗の約40%が地方都市・郊外エリアで、
+        高い成果を上げています。
+      category: "効果・成果"
+
+    - question: "SNSのアカウントを持っていないのですが大丈夫ですか?"
+      answer: |
+        はい、大丈夫です。
+        Instagram、Facebook、LINE公式アカウントなど、
+        必要なアカウントの開設から全てサポートいたします。
+        SNSが苦手な方でも安心してご利用いただけます。
+      category: "サービス内容"
+
+# ========================================
+# 9. CTA Section (最終アクション喚起)
+# ========================================
+cta_section:
+  section_label: "今すぐ始める"
+
+  headline: "新規顧客が自動で集まる仕組み、作りませんか?"
+
+  sub_headline: |
+    まずは無料診断で、あなたの店舗の集客課題を明確にしましょう。
+    60分の無料相談で、具体的な改善策をご提案します。
+
+  urgency_message:
+    text: "今月の受付枠はあと3店舗のみ"
+    style: "warning"
+
+  benefits_recap:
+    - "初期費用0円・契約期間の縛りなし"
+    - "3ヶ月で効果が出なければ全額返金"
+    - "専任コンサルタントが完全サポート"
+
+  primary_cta:
+    text: "無料診断を予約する (残り3枠)"
+    button_style: "primary_large"
+    link: "#contact-form"
+
+  secondary_cta:
+    text: "資料をダウンロードする"
+    button_style: "secondary_large"
+    link: "#download-materials"
+
+  contact_info:
+    phone: "0120-XXX-XXX"
+    phone_hours: "平日 10:00-18:00"
+    email: "info@store-growth.jp"
+    line_id: "@store-growth"
+
+# ========================================
+# 10. Footer (フッター情報)
+# ========================================
+footer_section:
+  company_info:
+    company_name: "株式会社ストアグロース"
+    logo_url: "/images/logo-white.svg"
+    description: |
+      店舗ビジネスの成長を支援する、集客マーケティングのプロフェッショナル集団。
+      3,200店舗以上の実績をもとに、あなたの店舗を成功へと導きます。
+
+    address:
+      postal_code: "150-0001"
+      prefecture: "東京都"
+      city: "渋谷区"
+      street: "神宮前1-2-3"
+      building: "ストアビル 5F"
+
+    phone: "0120-XXX-XXX"
+    fax: "03-XXXX-XXXX"
+    email: "info@store-growth.jp"
+
+    business_hours:
+      - day: "平日"
+        hours: "10:00 - 18:00"
+      - day: "土日祝"
+        hours: "休業"
+
+  quick_links:
+    - title: "サービス内容"
+      link: "#solution"
+    - title: "料金プラン"
+      link: "#pricing"
+    - title: "導入事例"
+      link: "#case-studies"
+    - title: "よくある質問"
+      link: "#faq"
+    - title: "会社概要"
+      link: "/company"
+    - title: "採用情報"
+      link: "/careers"
+
+  legal_links:
+    - title: "利用規約"
+      link: "/terms"
+    - title: "プライバシーポリシー"
+      link: "/privacy"
+    - title: "特定商取引法に基づく表記"
+      link: "/legal"
+    - title: "個人情報の取り扱いについて"
+      link: "/privacy-policy"
+
+  social_media:
+    - platform: "facebook"
+      url: "https://facebook.com/storegrowth"
+      icon: "fab fa-facebook"
+    - platform: "instagram"
+      url: "https://instagram.com/storegrowth_official"
+      icon: "fab fa-instagram"
+    - platform: "twitter"
+      url: "https://twitter.com/storegrowth_jp"
+      icon: "fab fa-twitter"
+    - platform: "youtube"
+      url: "https://youtube.com/storegrowth"
+      icon: "fab fa-youtube"
+    - platform: "line"
+      url: "https://line.me/R/ti/p/@storegrowth"
+      icon: "fab fa-line"
+
+  copyright: "© 2025 Store Growth Inc. All Rights Reserved."
+
+  trust_badges:
+    - image: "/images/badges/ssl-secured.svg"
+      alt: "SSL Secured"
+    - image: "/images/badges/privacy-mark.svg"
+      alt: "Privacy Mark"
+    - image: "/images/badges/isms.svg"
+      alt: "ISMS認証"
+
+# ========================================
+# Additional Sections (追加セクション)
+# ========================================
+
+# Contact Form Configuration
+contact_form:
+  form_id: "main-contact-form"
+  headline: "60分無料診断を予約する"
+  sub_headline: "以下のフォームにご記入ください。24時間以内にご連絡いたします。"
+
+  fields:
+    - field_id: "store_name"
+      label: "店舗名"
+      type: "text"
+      required: true
+      placeholder: "例: Hair Salon Lumiere"
+
+    - field_id: "store_type"
+      label: "業種"
+      type: "select"
+      required: true
+      options:
+        - "飲食店"
+        - "美容室・サロン"
+        - "整体院・クリニック"
+        - "小売店"
+        - "教室・スクール"
+        - "不動産"
+        - "士業"
+        - "その他"
+
+    - field_id: "name"
+      label: "お名前"
+      type: "text"
+      required: true
+      placeholder: "例: 山田 太郎"
+
+    - field_id: "phone"
+      label: "電話番号"
+      type: "tel"
+      required: true
+      placeholder: "例: 090-1234-5678"
+
+    - field_id: "email"
+      label: "メールアドレス"
+      type: "email"
+      required: true
+      placeholder: "例: tanaka@example.com"
+
+    - field_id: "location"
+      label: "店舗所在地"
+      type: "text"
+      required: true
+      placeholder: "例: 東京都渋谷区"
+
+    - field_id: "monthly_customers"
+      label: "現在の月間顧客数(概算)"
+      type: "select"
+      required: false
+      options:
+        - "50名未満"
+        - "50-100名"
+        - "100-300名"
+        - "300-500名"
+        - "500名以上"
+
+    - field_id: "current_challenges"
+      label: "現在の課題(複数選択可)"
+      type: "checkbox"
+      required: false
+      options:
+        - "新規顧客が来ない"
+        - "リピーターが増えない"
+        - "広告費が高い"
+        - "集客方法が分からない"
+        - "時間がない"
+
+    - field_id: "preferred_plan"
+      label: "ご希望のプラン"
+      type: "select"
+      required: false
+      options:
+        - "スタータープラン"
+        - "プロフェッショナルプラン"
+        - "エンタープライズプラン"
+        - "まだ決めていない"
+
+    - field_id: "preferred_contact_time"
+      label: "ご希望の連絡時間帯"
+      type: "select"
+      required: false
+      options:
+        - "午前中(10-12時)"
+        - "午後(13-15時)"
+        - "夕方(15-18時)"
+        - "いつでも可"
+
+    - field_id: "message"
+      label: "ご質問・ご要望(任意)"
+      type: "textarea"
+      required: false
+      placeholder: "その他、ご質問やご要望があればご記入ください"
+
+    - field_id: "privacy_policy_agree"
+      label: "プライバシーポリシーに同意する"
+      type: "checkbox"
+      required: true
+      link: "/privacy"
+
+  submit_button:
+    text: "無料診断を予約する"
+    loading_text: "送信中..."
+
+  success_message: |
+    お申し込みありがとうございます!
+    24時間以内に担当者よりご連絡させていただきます。
+
+  error_message: |
+    送信中にエラーが発生しました。
+    お手数ですが、お電話(0120-XXX-XXX)にてお問い合わせください。
+
+# Tracking & Analytics
+tracking:
+  google_analytics: "G-XXXXXXXXXX"
+  google_tag_manager: "GTM-XXXXXXX"
+  facebook_pixel: "XXXXXXXXXXXXXXXX"
+
+  conversion_events:
+    - event_name: "form_submission"
+      trigger: "contact_form_submit"
+    - event_name: "cta_click"
+      trigger: "all_cta_buttons"
+    - event_name: "phone_click"
+      trigger: "phone_number_click"
+    - event_name: "scroll_depth"
+      trigger: "25%, 50%, 75%, 100%"
+
+# SEO Metadata
+seo:
+  meta_title: "店舗集客の悩みを解決 | 新規顧客を自動で獲得する集客システム"
+  meta_description: "飲食店、美容室、クリニック、小売店など、あらゆる店舗の集客課題を解決。月間100名以上の新規顧客獲得を実現する、プロの集客システムをご提供します。初期費用0円・成果保証付き。"
+  meta_keywords: "店舗集客, 新規顧客獲得, 集客システム, MEO対策, SNS広告, LINE公式アカウント, デジタルマーケティング"
+
+  og_tags:
+    og_title: "店舗集客の悩みを解決 | 新規顧客を自動で獲得"
+    og_description: "月間100名以上の新規顧客を自動獲得。初期費用0円・成果保証付き。3,200店舗の実績。"
+    og_image: "https://store-growth.jp/images/og-image.jpg"
+    og_url: "https://store-growth.jp/"
+    og_type: "website"
+
+  twitter_card:
+    card: "summary_large_image"
+    title: "店舗集客の悩みを解決 | 新規顧客を自動で獲得"
+    description: "月間100名以上の新規顧客を自動獲得。初期費用0円・成果保証付き。"
+    image: "https://store-growth.jp/images/twitter-card.jpg"
+
+  structured_data:
+    type: "Service"
+    name: "店舗集客自動化システム"
+    provider: "株式会社ストアグロース"
+    description: "店舗の新規顧客獲得を自動化する集客マーケティングシステム"
+    areaServed: "日本全国"
+    serviceType: "Digital Marketing"
+
+# Design System Reference
+design_system:
+  colors:
+    primary: "#2563EB"      # Blue
+    secondary: "#10B981"    # Green
+    accent: "#F59E0B"       # Orange
+    danger: "#EF4444"       # Red
+    neutral_dark: "#1F2937" # Dark Grey
+    neutral_light: "#F3F4F6" # Light Grey
+    white: "#FFFFFF"
+    black: "#000000"
+
+  typography:
+    font_family_primary: "'Noto Sans JP', sans-serif"
+    font_family_secondary: "'Roboto', sans-serif"
+
+    font_sizes:
+      h1: "48px"
+      h2: "36px"
+      h3: "28px"
+      h4: "24px"
+      body: "16px"
+      small: "14px"
+
+  spacing:
+    section_padding: "80px 0"
+    element_margin: "40px"
+
+  breakpoints:
+    mobile: "768px"
+    tablet: "1024px"
+    desktop: "1280px"
+
+# A/B Testing Variants (optional)
+ab_testing:
+  enabled: true
+  variants:
+    - variant_id: "hero_headline_a"
+      element: "hero_headline"
+      text: "「お客様が来ない」その悩み、今日で終わりにしませんか?"
+      weight: 50
+
+    - variant_id: "hero_headline_b"
+      element: "hero_headline"
+      text: "新規顧客が毎月100名以上増える集客システム"
+      weight: 50

@@ -1,0 +1,345 @@
+# 店舗集客ランディングページ コンテンツ構造
+# Store Customer Acquisition Landing Page Content Structure
+
+meta:
+  title: "店舗集客支援サービス | 来店数を最大3倍に"
+  description: "実店舗の集客課題を解決。月額3万円から始められる、成果にコミットする店舗集客支援サービス。"
+  keywords: "店舗集客, 集客支援, 来店促進, 店舗マーケティング"
+
+hero:
+  headline: "来店が増えない...<br>その悩み、<span class='highlight'>3ヶ月で解決</span>します"
+  subheadline: "データドリブンな店舗集客で、確実に成果を出す"
+  cta_primary: "無料診断を受ける"
+  cta_secondary: "サービス資料をダウンロード"
+  hero_image: "hero-store.jpg"
+  trust_badges:
+    - "導入店舗1,200店突破"
+    - "平均集客率2.8倍改善"
+    - "初期費用0円"
+
+problem:
+  title: "こんなお悩み、ありませんか？"
+  subtitle: "多くの店舗オーナー様が抱える共通の課題"
+  pain_points:
+    - icon: "fa-chart-line-down"
+      title: "来店客数が伸びない"
+      description: "広告を出しても効果が実感できず、投資対効果が見えない"
+    - icon: "fa-money-bill-wave"
+      title: "広告費が高すぎる"
+      description: "大手代理店に依頼すると月額数十万円。小規模店舗には負担が大きい"
+    - icon: "fa-clock"
+      title: "時間がない"
+      description: "SNS運用、チラシ配り、ポータルサイト更新...やることが多すぎる"
+    - icon: "fa-question-circle"
+      title: "何をすべきか分からない"
+      description: "集客施策は色々あるが、自分の店舗に何が最適か判断できない"
+
+solution:
+  title: "データ × 戦略 × 実行力で<br>確実に集客を増やします"
+  subtitle: "あなたの店舗に最適化された集客戦略を、丸ごとサポート"
+  description: |
+    私たちは、AIとデータ分析を活用した科学的アプローチで、
+    あなたの店舗に最適な集客施策を設計・実行します。
+    従来の「やってみないと分からない」ではなく、
+    「データに基づいた確実な成果」をお約束します。
+  features:
+    - icon: "fa-chart-bar"
+      title: "データ分析"
+      description: "商圏分析・競合調査・顧客データから最適戦略を導出"
+    - icon: "fa-bullseye"
+      title: "ターゲティング"
+      description: "あなたの店舗に来るべき顧客に、確実にリーチ"
+    - icon: "fa-rocket"
+      title: "実行支援"
+      description: "SNS運用からチラシ配布まで、全て代行可能"
+
+benefits:
+  title: "選ばれる3つの理由"
+  items:
+    - icon: "fa-yen-sign"
+      number: "01"
+      title: "月額3万円〜の低価格"
+      description: "大手代理店の1/10の価格で、同等以上の成果を実現。初期費用も0円なので、リスクなく始められます。"
+      metric: "平均費用削減"
+      metric_value: "73%"
+    - icon: "fa-chart-line"
+      number: "02"
+      title: "平均2.8倍の集客実績"
+      description: "1,200店舗以上の実績データから最適施策を提案。3ヶ月で平均2.8倍、最大5.2倍の来店増加を達成しています。"
+      metric: "平均来店増加率"
+      metric_value: "280%"
+    - icon: "fa-hands-helping"
+      number: "03"
+      title: "専任担当による伴走支援"
+      description: "集客のプロが専任で担当。月2回の定例MTGで進捗確認し、PDCAを高速で回します。"
+      metric: "顧客満足度"
+      metric_value: "98%"
+
+how_it_works:
+  title: "サービスの流れ"
+  subtitle: "無料診断から成果まで、たったの3ステップ"
+  steps:
+    - step: "01"
+      title: "無料診断（30分）"
+      description: "現状の課題をヒアリング。商圏分析データをもとに、集客ポテンシャルを診断します。"
+      icon: "fa-clipboard-list"
+      duration: "当日〜3営業日"
+    - step: "02"
+      title: "戦略設計＆提案"
+      description: "あなたの店舗専用の集客戦略を設計。具体的な施策と期待効果をご提案します。"
+      icon: "fa-lightbulb"
+      duration: "1週間"
+    - step: "03"
+      title: "実行＆改善"
+      description: "施策を実行し、週次でデータを分析。効果を見ながら継続的に改善します。"
+      icon: "fa-sync-alt"
+      duration: "継続的に"
+
+social_proof:
+  title: "導入店舗様の声"
+  subtitle: "実際に成果を出している店舗オーナー様の声"
+  testimonials:
+    - name: "田中 様"
+      store_type: "飲食店（居酒屋）"
+      location: "東京都渋谷区"
+      image: "testimonial-1.jpg"
+      rating: 5
+      quote: "導入3ヶ月で平日の来店数が2倍に。特にInstagram経由の新規客が明らかに増えました。月3万円でこの効果は正直驚きです。"
+      metrics:
+        - label: "来店数"
+          value: "+210%"
+        - label: "新規顧客"
+          value: "+340%"
+    - name: "佐藤 様"
+      store_type: "美容室"
+      location: "大阪府大阪市"
+      image: "testimonial-2.jpg"
+      rating: 5
+      quote: "SNS運用を全てお任せできるので、施術に集中できるように。しかもリピート率も上がって、売上も前年比150%です。"
+      metrics:
+        - label: "売上"
+          value: "+150%"
+        - label: "リピート率"
+          value: "+85%"
+    - name: "鈴木 様"
+      store_type: "小売店（雑貨）"
+      location: "福岡県福岡市"
+      image: "testimonial-3.jpg"
+      rating: 5
+      quote: "チラシやポスティングの効果測定までしてくれるので、何が効いているのかが明確。無駄な広告費を削減できました。"
+      metrics:
+        - label: "広告費削減"
+          value: "-60%"
+        - label: "ROI"
+          value: "+320%"
+
+case_studies:
+  title: "成功事例"
+  cases:
+    - category: "飲食店"
+      store_name: "カフェA店"
+      challenge: "駅から徒歩10分の立地で認知が低く、平日の来店が少ない"
+      solution: "Googleマップ最適化 + Instagram投稿代行 + ランチタイム限定クーポン配信"
+      results:
+        - metric: "来店数"
+          before: "1日平均20人"
+          after: "1日平均58人"
+          change: "+290%"
+        - metric: "売上"
+          before: "月商180万円"
+          after: "月商420万円"
+          change: "+233%"
+    - category: "美容・サロン"
+      store_name: "美容室B店"
+      challenge: "新規顧客は来るが、リピート率が低い"
+      solution: "LINE公式アカウント導入 + リピーター向けポイント制度 + 定期配信"
+      results:
+        - metric: "リピート率"
+          before: "28%"
+          after: "67%"
+          change: "+239%"
+        - metric: "顧客生涯価値"
+          before: "¥18,000"
+          after: "¥52,000"
+          change: "+289%"
+
+pricing:
+  title: "料金プラン"
+  subtitle: "あなたの店舗規模に合わせた3つのプラン"
+  note: "全プラン初期費用0円・最低契約期間なし"
+  plans:
+    - name: "スタートプラン"
+      recommended: false
+      price: "30,000"
+      unit: "円/月"
+      tax_note: "（税別）"
+      target: "小規模店舗・個人事業主向け"
+      features:
+        - text: "月1回の戦略MTG"
+          included: true
+        - text: "SNS運用代行（1媒体）"
+          included: true
+        - text: "Googleマイビジネス最適化"
+          included: true
+        - text: "月次レポート"
+          included: true
+        - text: "チラシ・ポスティング代行"
+          included: false
+        - text: "LINE公式アカウント運用"
+          included: false
+        - text: "広告運用（Google/Meta）"
+          included: false
+      cta: "このプランで始める"
+    - name: "スタンダードプラン"
+      recommended: true
+      price: "60,000"
+      unit: "円/月"
+      tax_note: "（税別）"
+      target: "中規模店舗・複数店舗向け"
+      badge: "人気No.1"
+      features:
+        - text: "月2回の戦略MTG"
+          included: true
+        - text: "SNS運用代行（2媒体）"
+          included: true
+        - text: "Googleマイビジネス最適化"
+          included: true
+        - text: "月次レポート + 週次速報"
+          included: true
+        - text: "チラシ・ポスティング代行"
+          included: true
+        - text: "LINE公式アカウント運用"
+          included: true
+        - text: "広告運用（Google/Meta）"
+          included: false
+      cta: "このプランで始める"
+    - name: "プレミアムプラン"
+      recommended: false
+      price: "100,000"
+      unit: "円/月"
+      tax_note: "（税別）"
+      target: "大規模店舗・本格的に成長したい方向け"
+      features:
+        - text: "月4回の戦略MTG"
+          included: true
+        - text: "SNS運用代行（全媒体）"
+          included: true
+        - text: "Googleマイビジネス最適化"
+          included: true
+        - text: "週次レポート + リアルタイムダッシュボード"
+          included: true
+        - text: "チラシ・ポスティング代行"
+          included: true
+        - text: "LINE公式アカウント運用"
+          included: true
+        - text: "広告運用（Google/Meta）"
+          included: true
+        - text: "専用チーム編成"
+          included: true
+      cta: "このプランで始める"
+
+faq:
+  title: "よくあるご質問"
+  subtitle: "導入前の不安を解消します"
+  questions:
+    - q: "本当に初期費用0円ですか？"
+      a: "はい、完全無料です。初月から月額料金のみで全てのサービスをご利用いただけます。解約時の違約金も一切ありません。"
+    - q: "最低契約期間はありますか？"
+      a: "ありません。1ヶ月単位でご契約可能で、いつでも解約できます。ただし、効果実感には通常3ヶ月程度かかるため、まずは3ヶ月のご利用をおすすめしています。"
+    - q: "どんな業種でも対応可能ですか？"
+      a: "飲食店、美容室、サロン、小売店、クリニック、整体院など、ほぼ全ての業種に対応可能です。ただし、アダルト関連の店舗様はお受けできません。"
+    - q: "地方でも利用できますか？"
+      a: "はい、全国どこでも対応可能です。オンラインMTGが基本ですので、場所を問わずサービスをご提供できます。"
+    - q: "自分でやることはありますか？"
+      a: "基本的には全てお任せいただけますが、店舗の写真提供や、メニュー・キャンペーン情報の共有など、最小限のご協力をお願いしています。"
+    - q: "効果が出なかったらどうなりますか？"
+      a: "3ヶ月継続して効果が見られない場合、無料で戦略を再設計します。それでも改善が見られない場合は、契約を解除いただいて問題ありません。"
+    - q: "支払い方法は？"
+      a: "銀行振込、クレジットカード決済に対応しています。請求書払いも法人様に限り対応可能です。"
+    - q: "相談だけでも可能ですか？"
+      a: "もちろんです。無料診断では、現状分析と改善提案を行います。その場で契約を迫ることは一切ありませんので、お気軽にご相談ください。"
+
+cta:
+  title: "まずは無料診断から始めませんか？"
+  subtitle: "あなたの店舗の集客ポテンシャルを診断します"
+  description: "30分の無料診断で、現状の課題と改善の方向性が明確になります。<br>強引な営業は一切ありません。まずはお気軽にご相談ください。"
+  benefits:
+    - "完全無料・オンライン対応"
+    - "商圏分析レポートをプレゼント"
+    - "その場で具体的な改善案をご提案"
+  form:
+    fields:
+      - name: "store_name"
+        label: "店舗名"
+        type: "text"
+        required: true
+        placeholder: "例）カフェ〇〇"
+      - name: "owner_name"
+        label: "ご担当者名"
+        type: "text"
+        required: true
+        placeholder: "例）山田 太郎"
+      - name: "email"
+        label: "メールアドレス"
+        type: "email"
+        required: true
+        placeholder: "example@example.com"
+      - name: "phone"
+        label: "電話番号"
+        type: "tel"
+        required: true
+        placeholder: "例）03-1234-5678"
+      - name: "store_type"
+        label: "業種"
+        type: "select"
+        required: true
+        options:
+          - "飲食店"
+          - "美容室・サロン"
+          - "小売店"
+          - "クリニック・医院"
+          - "整体・マッサージ"
+          - "その他"
+      - name: "challenge"
+        label: "現在の課題（任意）"
+        type: "textarea"
+        required: false
+        placeholder: "例）平日の来店数が少ない、新規顧客が増えない など"
+    cta_button: "無料診断を申し込む"
+    privacy_note: "個人情報の取り扱いについては、プライバシーポリシーをご確認ください。"
+
+footer:
+  company_name: "株式会社 店舗集客パートナーズ"
+  tagline: "あなたの店舗の成長を、全力でサポートします"
+  contact:
+    address: "〒150-0001 東京都渋谷区神宮前1-2-3"
+    phone: "03-1234-5678"
+    email: "info@store-partners.co.jp"
+    hours: "営業時間：平日 10:00-19:00"
+  links:
+    - label: "サービス概要"
+      url: "#solution"
+    - label: "料金プラン"
+      url: "#pricing"
+    - label: "成功事例"
+      url: "#case-studies"
+    - label: "よくある質問"
+      url: "#faq"
+    - label: "会社概要"
+      url: "/company"
+    - label: "プライバシーポリシー"
+      url: "/privacy"
+  social:
+    - platform: "facebook"
+      url: "https://facebook.com/store-partners"
+      icon: "fab fa-facebook-f"
+    - platform: "twitter"
+      url: "https://twitter.com/store-partners"
+      icon: "fab fa-twitter"
+    - platform: "instagram"
+      url: "https://instagram.com/store-partners"
+      icon: "fab fa-instagram"
+    - platform: "line"
+      url: "https://line.me/ti/p/@store-partners"
+      icon: "fab fa-line"
+  copyright: "© 2025 Store Partners Co., Ltd. All rights reserved."

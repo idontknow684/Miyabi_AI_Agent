@@ -1,0 +1,58 @@
+@startuml Orchestrator-Subagent Pattern (Simple View)
+
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName "Monaco"
+skinparam defaultFontSize 12
+
+title Orchestrator-Subagent Architecture Pattern
+
+' Define simple boxes
+rectangle "**User Request**\n\nComplex Task" as request #LightBlue
+
+rectangle "**Orchestrator Agent**\n━━━━━━━━━━━━━━━━━━━━\n• Analyzes Request\n• Decomposes Task\n• Delegates to Subagents" as orch1 #LightGreen
+
+note right of orch1
+  **Why Orchestrator?**
+  Single large agent with many tools
+  becomes cluttered and unreliable.
+
+  Solution: Specialized subagents
+  with isolated contexts.
+end note
+
+rectangle "**Isolated Execution**" as isolation #LightYellow {
+
+  rectangle "**Subagent 1**\n━━━━━━━━━━━\n• Own Context\n• Own Tools\n• Solves Task A" as sub1 #LightCoral
+
+  rectangle "**Subagent 2**\n━━━━━━━━━━━\n• Own Context\n• Own Tools\n• Solves Task B" as sub2 #LightSkyBlue
+
+  rectangle "**Subagent n...**\n━━━━━━━━━━━\n• Own Context\n• Own Tools\n• Solves Task C" as subn #LightSalmon
+}
+
+rectangle "**Orchestrator Agent**\n━━━━━━━━━━━━━━━━━━━━\n• Synthesizes **all** results\n• Generates coherent answer" as orch2 #LightGreen
+
+rectangle "**Final Answer**\n\nCompleted Task" as answer #LightBlue
+
+' Flow with simple arrows
+request -down-> orch1
+orch1 -down-> isolation
+
+orch1 -[dotted]-> sub1 : delegates
+orch1 -[dotted]-> sub2 : delegates
+orch1 -[dotted]-> subn : delegates
+
+sub1 -down-> orch2 : result
+sub2 -down-> orch2 : result
+subn -down-> orch2 : result
+
+orch2 -down-> answer
+
+' Timing note
+note bottom of isolation
+  **Parallel Execution**
+  All subagents run simultaneously
+  3x faster than sequential
+end note
+
+@enduml

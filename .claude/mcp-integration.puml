@@ -1,0 +1,155 @@
+@startuml MCP Integration Architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Model Context Protocol (MCP) Integration in Claude Code
+
+actor "User" as User
+
+package "Claude Code Core" {
+    component "Claude Agent" as Agent {
+        [Context Manager]
+        [Tool Orchestrator]
+        [Permission Manager]
+    }
+}
+
+package "MCP Client Layer" {
+    component "MCP Client" as MCPClient {
+        [Server Registry]
+        [Transport Manager]
+        [Resource Manager]
+        [Prompt Manager]
+    }
+}
+
+cloud "MCP Servers" {
+
+    package "Development & Testing" #LightBlue {
+        component "Sentry" as Sentry
+        component "Socket" as Socket
+        component "Hugging Face" as HF
+        component "Jam" as Jam
+    }
+
+    package "Project Management" #LightGreen {
+        component "Asana" as Asana
+        component "Atlassian" as Atlassian
+        component "Linear" as Linear
+        component "Notion" as Notion
+        component "Monday" as Monday
+    }
+
+    package "Databases & Data" #LightYellow {
+        component "Airtable" as Airtable
+        component "HubSpot" as HubSpot
+        component "Daloopa" as Daloopa
+    }
+
+    package "Payments & Commerce" #LightPink {
+        component "PayPal" as PayPal
+        component "Stripe" as Stripe
+        component "Square" as Square
+    }
+
+    package "Design & Media" #LightCyan {
+        component "Figma" as Figma
+        component "Canva" as Canva
+        component "invideo" as invideo
+    }
+
+    package "Infrastructure & DevOps" #Lavender {
+        component "Cloudflare" as Cloudflare
+        component "Netlify" as Netlify
+        component "Vercel" as Vercel
+    }
+
+    package "Automation" #LightGray {
+        component "Zapier" as Zapier
+        component "Workato" as Workato
+    }
+}
+
+database "Configuration" {
+    file ".mcp.json" as MCPConfig
+    file "~/.claude/settings.json" as UserConfig
+    file "managed-mcp.json" as EnterpriseConfig
+}
+
+' User interactions
+User --> Agent : Requests with @mentions
+
+' Agent to MCP Client
+Agent --> [Context Manager]
+[Context Manager] --> [Server Registry] : Query available servers
+[Tool Orchestrator] --> [Transport Manager] : Execute MCP tools
+[Permission Manager] --> [Resource Manager] : Access resources
+
+' MCP Client to Servers (Transport Types)
+[Transport Manager] --> Sentry : HTTP
+[Transport Manager] --> Asana : SSE
+[Transport Manager] --> Airtable : stdio
+
+[Transport Manager] --> Atlassian : SSE
+[Transport Manager] --> Linear : HTTP
+[Transport Manager] --> Notion : HTTP
+[Transport Manager] --> Monday : HTTP
+
+[Transport Manager] --> HubSpot : HTTP
+[Transport Manager] --> Daloopa : HTTP
+
+[Transport Manager] --> PayPal : HTTP
+[Transport Manager] --> Stripe : HTTP
+[Transport Manager] --> Square : SSE
+
+[Transport Manager] --> Figma : HTTP
+[Transport Manager] --> Canva : HTTP
+[Transport Manager] --> invideo : SSE
+
+[Transport Manager] --> Netlify : HTTP
+[Transport Manager] --> Vercel : HTTP
+
+[Transport Manager] --> Zapier : HTTP
+[Transport Manager] --> Workato : HTTP
+
+' Configuration loading
+[Server Registry] ..> MCPConfig : load project config
+[Server Registry] ..> UserConfig : load user config
+[Server Registry] ..> EnterpriseConfig : load enterprise config
+
+' Resource and Prompt Management
+[Resource Manager] --> Sentry : @sentry:error://123
+[Resource Manager] --> Notion : @notion:page://abc
+[Prompt Manager] --> Linear : /mcp__linear__create_issue
+
+note right of [Transport Manager]
+    Transport Types:
+    - HTTP: Remote servers (recommended)
+    - SSE: Server-Sent Events (deprecated)
+    - stdio: Local processes
+end note
+
+note bottom of MCPConfig
+    Configuration Scopes:
+    - local: Project-specific (default)
+    - project: Shared via .mcp.json
+    - user: Cross-project
+    - enterprise: Managed by IT
+
+    Priority:
+    enterprise > project > user > local
+end note
+
+legend right
+    |= Category |= Example Tools |
+    | <back:#LightBlue>Dev & Test</back> | Sentry, Jam, Socket |
+    | <back:#LightGreen>Project Mgmt</back> | Jira, Linear, Notion |
+    | <back:#LightYellow>Data</back> | Airtable, HubSpot |
+    | <back:#LightPink>Payments</back> | Stripe, PayPal |
+    | <back:#LightCyan>Design</back> | Figma, Canva |
+    | <back:#Lavender>DevOps</back> | Cloudflare, Vercel |
+    | <back:#LightGray>Automation</back> | Zapier, Workato |
+endlegend
+
+@enduml

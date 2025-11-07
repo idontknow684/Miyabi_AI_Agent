@@ -1,0 +1,122 @@
+@startuml Sub-agents Structure
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Claude Code Sub-agents Architecture
+
+package "Claude Code Core" {
+    [Task Tool] as TaskTool
+    note right of TaskTool
+        Entry point for all
+        sub-agent invocations
+    end note
+}
+
+package "Built-in Sub-agents" {
+    component "general-purpose" as GP {
+        [Research Engine]
+        [Code Search]
+        [Multi-step Executor]
+        database "All Tools (*)" as GPTools
+    }
+
+    component "Explore" as Explore {
+        [Pattern Matcher]
+        [Keyword Search]
+        [Codebase Analyzer]
+        database "All Tools" as ExploreTools
+
+        note bottom of Explore
+            Thoroughness Levels:
+            - quick
+            - medium
+            - very thorough
+        end note
+    }
+
+    component "Plan" as Plan {
+        [Architecture Planner]
+        [Task Breakdown]
+        [Dependency Analyzer]
+        database "All Tools" as PlanTools
+    }
+
+    component "statusline-setup" as Status {
+        [Config Reader]
+        [Settings Editor]
+        database "Read, Edit" as StatusTools
+    }
+}
+
+package "Custom Sub-agents" {
+    component "code-reviewer" as CodeReview {
+        [Quality Checker]
+        [Security Scanner]
+        [Performance Analyzer]
+    }
+
+    component "test-generator" as TestGen {
+        [Test Template Engine]
+        [Coverage Analyzer]
+        [Assertion Generator]
+    }
+
+    component "documentation-writer" as DocWriter {
+        [JSDoc Generator]
+        [Markdown Builder]
+        [Diagram Creator]
+    }
+
+    note right of CodeReview
+        Custom agents defined in
+        .claude/agnets/*.md
+    end note
+}
+
+cloud "Agent Invocation Flow" {
+    (User Request) as UR
+    (Agent Selection) as AS
+    (Prompt Expansion) as PE
+    (Autonomous Execution) as AE
+    (Result Report) as RR
+}
+
+UR --> TaskTool
+TaskTool --> AS
+AS --> GP : complex multi-step
+AS --> Explore : codebase exploration
+AS --> Plan : architecture planning
+AS --> Status : config setup
+AS --> CodeReview : code review needed
+AS --> TestGen : test generation
+AS --> DocWriter : documentation
+
+AS --> PE
+PE --> AE
+AE --> RR
+
+note bottom of AE
+    Stateless execution:
+    - No follow-up messages
+    - Single final report
+    - Fully autonomous
+end note
+
+' Connections to tools
+[Research Engine] --> GPTools
+[Code Search] --> GPTools
+[Multi-step Executor] --> GPTools
+
+[Pattern Matcher] --> ExploreTools
+[Keyword Search] --> ExploreTools
+[Codebase Analyzer] --> ExploreTools
+
+[Architecture Planner] --> PlanTools
+[Task Breakdown] --> PlanTools
+[Dependency Analyzer] --> PlanTools
+
+[Config Reader] --> StatusTools
+[Settings Editor] --> StatusTools
+
+@enduml

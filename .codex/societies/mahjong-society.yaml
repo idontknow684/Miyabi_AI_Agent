@@ -1,0 +1,545 @@
+# Mahjong Master Society Configuration
+# Version: 1.0.0
+# Purpose: World-class Mahjong AI with coordinated specialist agents
+
+name: "mahjong-master-society"
+version: "1.0.0"
+description: "Multi-agent society for professional-level Mahjong (麻雀) game analysis and decision-making"
+
+# ============================================
+# Society Structure
+# ============================================
+
+roles:
+  # --- Orchestrator Layer ---
+  orchestrator:
+    - name: "mahjong-master"
+      agent: "mahjong-master"
+      responsibility: "Overall strategy coordination and final decision making"
+      authority:
+        - final_decision
+        - risk_management
+        - situational_strategy
+        - agent_coordination
+
+  # --- Specialist Layer ---
+  # Mahjong society uses peer specialist model (no managers)
+  # All specialists report directly to master for parallel analysis
+
+  specialists:
+    - name: "tile-efficiency-expert"
+      agent: "tile-efficiency-analyzer"
+      consultancy: true
+      specialty: "Tile efficiency optimization (牌効率)"
+      on_demand: true
+      outputs:
+        - shanten_count
+        - effective_tiles
+        - optimal_discards
+
+    - name: "opponent-reader"
+      agent: "opponent-hand-reader"
+      consultancy: true
+      specialty: "Opponent hand reading from discards (捨て牌読み)"
+      on_demand: true
+      outputs:
+        - hand_range_estimation
+        - danger_tiles
+        - wait_prediction
+
+    - name: "defense-specialist"
+      agent: "defense-specialist"
+      consultancy: true
+      specialty: "Defense and risk assessment (守備・リスク管理)"
+      on_demand: true
+      outputs:
+        - danger_level_assessment
+        - safe_tiles
+        - fold_recommendation
+
+    - name: "scoring-optimizer"
+      agent: "scoring-optimizer"
+      consultancy: true
+      specialty: "Yaku optimization and scoring (役・得点最大化)"
+      on_demand: true
+      outputs:
+        - yaku_paths
+        - expected_value
+        - scoring_potential
+
+    - name: "situation-strategist"
+      agent: "situation-strategist"
+      consultancy: true
+      specialty: "Game situation analysis (状況判断)"
+      on_demand: true
+      outputs:
+        - position_strategy
+        - risk_appetite
+        - endgame_adjustments
+
+# ============================================
+# Communication Configuration
+# ============================================
+
+communication:
+  type: "hub-and-spoke"  # Master coordinates all specialists
+  message_bus: "files"
+  shared_context: ".claude/shared/mahjong-society/"
+
+  protocols:
+    # Position analysis results
+    position_analysis:
+      enabled: true
+      format: "yaml"
+      location: ".claude/shared/mahjong-society/positions/"
+
+    # Decision logs
+    decision_log:
+      enabled: true
+      format: "markdown"
+      location: ".claude/shared/mahjong-society/decisions/"
+
+    # Learning data
+    game_records:
+      enabled: true
+      format: "json"
+      location: ".claude/shared/mahjong-society/records/"
+
+  # Shared directories
+  directories:
+    intake: ".claude/shared/mahjong-society/intake/"
+    analysis: ".claude/shared/mahjong-society/analysis/"
+    decisions: ".claude/shared/mahjong-society/decisions/"
+    learning: ".claude/shared/mahjong-society/learning/"
+
+# ============================================
+# Workflows
+# ============================================
+
+workflows:
+  # --- Single Position Analysis ---
+  analyze_position:
+    name: "Analyze Single Mahjong Position"
+    trigger: "on_demand"
+    phases:
+      - phase: 1
+        name: "Parallel Specialist Analysis"
+        parallel: true
+        tasks:
+          - agent: "tile-efficiency-expert"
+            task: "Calculate shanten and optimal discards"
+            output: "tile_analysis.yaml"
+
+          - agent: "opponent-reader"
+            task: "Analyze opponent discards and estimate hands"
+            output: "opponent_analysis.yaml"
+
+          - agent: "defense-specialist"
+            task: "Assess danger levels and safe tiles"
+            output: "defense_analysis.yaml"
+
+          - agent: "scoring-optimizer"
+            task: "Calculate yaku paths and expected values"
+            output: "scoring_analysis.yaml"
+
+          - agent: "situation-strategist"
+            task: "Analyze game situation and recommend strategy"
+            output: "situation_analysis.yaml"
+
+      - phase: 2
+        name: "Master Synthesis"
+        sequential: true
+        tasks:
+          - agent: "mahjong-master"
+            task: "Integrate all analyses and make final decision"
+            requires: ["tile_analysis.yaml", "opponent_analysis.yaml",
+                      "defense_analysis.yaml", "scoring_analysis.yaml",
+                      "situation_analysis.yaml"]
+            output: "final_decision.md"
+
+  # --- Full Game Simulation ---
+  simulate_game:
+    name: "Simulate Complete Mahjong Game"
+    trigger: "manual"
+    phases:
+      - phase: 1
+        name: "Game Setup"
+        tasks:
+          - agent: "mahjong-master"
+            task: "Initialize game state and player positions"
+            output: "game_state.json"
+
+      - phase: 2
+        name: "Turn-by-Turn Analysis"
+        parallel: false  # Sequential turns
+        repeat: true      # Repeat until game ends
+        tasks:
+          - agent: "mahjong-master"
+            task: "Analyze current turn and make decision"
+            requires: ["game_state.json"]
+            output: "turn_decision.json"
+
+      - phase: 3
+        name: "Post-Game Analysis"
+        tasks:
+          - agent: "mahjong-master"
+            task: "Review game decisions and extract learnings"
+            requires: ["game_state.json", "all_turn_decisions"]
+            output: "game_review.md"
+
+  # --- Training from Records ---
+  learn_from_records:
+    name: "Learn from Professional Game Records"
+    trigger: "manual"
+    phases:
+      - phase: 1
+        name: "Record Analysis"
+        parallel: true
+        tasks:
+          - agent: "tile-efficiency-expert"
+            task: "Analyze tile efficiency patterns"
+            output: "efficiency_patterns.json"
+
+          - agent: "opponent-reader"
+            task: "Extract hand reading patterns"
+            output: "reading_patterns.json"
+
+          - agent: "scoring-optimizer"
+            task: "Analyze yaku frequency and optimization"
+            output: "yaku_patterns.json"
+
+      - phase: 2
+        name: "Pattern Integration"
+        tasks:
+          - agent: "mahjong-master"
+            task: "Integrate learned patterns into decision models"
+            requires: ["efficiency_patterns.json", "reading_patterns.json",
+                      "yaku_patterns.json"]
+            output: "updated_models.yaml"
+
+  # --- Tournament Play ---
+  tournament_mode:
+    name: "Tournament Multi-Game Play"
+    trigger: "manual"
+    phases:
+      - phase: 1
+        name: "Tournament Setup"
+        tasks:
+          - agent: "mahjong-master"
+            task: "Initialize tournament state"
+            output: "tournament_state.json"
+
+      - phase: 2
+        name: "Play Multiple Games"
+        parallel: false
+        repeat: true
+        tasks:
+          - agent: "mahjong-master"
+            task: "Play single game with tournament strategy"
+            requires: ["tournament_state.json"]
+            output: "game_result.json"
+
+      - phase: 3
+        name: "Tournament Summary"
+        tasks:
+          - agent: "mahjong-master"
+            task: "Generate tournament performance report"
+            requires: ["all_game_results"]
+            output: "tournament_report.md"
+
+# ============================================
+# Policies & Constraints
+# ============================================
+
+policies:
+  # Resource limits
+  max_parallel_agents: 5  # All specialists can run simultaneously
+  timeout_per_task: "30s"  # Fast decision making
+  retry_on_failure: 1
+
+  # Decision quality gates
+  quality_gates:
+    - name: "Probability Validation"
+      required: true
+      blocker: true
+      agent: "tile-efficiency-expert"
+      criteria: "All probabilities must sum to <=100%"
+
+    - name: "Safety Check"
+      required: true
+      blocker: false
+      agent: "defense-specialist"
+      criteria: "Flag high-risk decisions for master review"
+
+    - name: "EV Calculation"
+      required: true
+      blocker: false
+      agent: "scoring-optimizer"
+      criteria: "All decisions must include expected value"
+
+  # Performance requirements
+  performance:
+    max_decision_time: "5s"    # Real-time play requirement
+    analysis_depth: "complete"  # Full analysis every time
+    logging_level: "detailed"   # Log all decisions for learning
+
+# ============================================
+# Configuration Parameters
+# ============================================
+
+config:
+  # Game rules
+  rules:
+    variant: "riichi"  # Japanese Riichi Mahjong
+    aka_dora: true     # Red 5 tiles
+    open_tanyao: true  # Allow open hand tanyao
+    double_riichi: true
+    nagashi_mangan: true
+
+  # AI personality (adjustable)
+  personality:
+    aggression: 0.65      # 0.0 (defensive) to 1.0 (aggressive)
+    reading_weight: 0.75  # Trust in hand reading (0.0 to 1.0)
+    risk_tolerance: 0.60  # Risk appetite (0.0 to 1.0)
+    bluff_rate: 0.05      # Frequency of deceptive plays
+
+  # Strategic preferences
+  strategy:
+    prefer_riichi: true       # Tend toward riichi over damaten
+    prefer_speed: false       # Speed vs. value trade-off
+    prefer_safety: "adaptive" # adaptive/always/never
+    call_threshold: "medium"  # low/medium/high for pon/chi
+
+  # Learning settings
+  learning:
+    enabled: true
+    learn_from_mistakes: true
+    update_models: true
+    record_all_games: true
+
+# ============================================
+# Metrics & Monitoring
+# ============================================
+
+metrics:
+  track:
+    # Decision quality
+    - optimal_discard_rate
+    - riichi_timing_accuracy
+    - call_decision_accuracy
+    - fold_decision_accuracy
+
+    # Game performance
+    - average_placement
+    - win_rate
+    - deal_in_rate
+    - riichi_success_rate
+    - average_score
+
+    # Strategic metrics
+    - hand_reading_accuracy
+    - ev_prediction_error
+    - トップ目_defense_success
+    - ラス目_comeback_rate
+
+  goals:
+    average_placement: 1.8      # Better than 2nd place average
+    win_rate: 0.27              # >25% (better than 1/4)
+    deal_in_rate: 0.13          # <15%
+    riichi_success_rate: 0.50   # >50% riichi leads to win
+    hand_reading_accuracy: 0.65 # >60% correct predictions
+
+  alerts:
+    - condition: "deal_in_rate > 0.20"
+      action: "increase_defense_weight"
+
+    - condition: "win_rate < 0.20"
+      action: "increase_aggression"
+
+    - condition: "average_placement > 2.2"
+      action: "review_strategy_balance"
+
+# ============================================
+# Integration
+# ============================================
+
+integrations:
+  # Game engines
+  game_engines:
+    - name: "tenhou"
+      type: "online_platform"
+      enabled: true
+
+    - name: "majsoul"
+      type: "online_platform"
+      enabled: false
+
+  # Data sources
+  data_sources:
+    - name: "tenhou_records"
+      type: "game_records"
+      path: ".claude/shared/mahjong-society/data/tenhou/"
+
+    - name: "mleague_games"
+      type: "professional_records"
+      path: ".claude/shared/mahjong-society/data/mleague/"
+
+  # Analysis tools
+  tools:
+    - name: "shanten_calculator"
+      type: "efficiency_tool"
+      command: "python3 scripts/mahjong/shanten.py"
+
+    - name: "probability_engine"
+      type: "calculation_tool"
+      command: "python3 scripts/mahjong/probability.py"
+
+# ============================================
+# Templates
+# ============================================
+
+templates:
+  # Position analysis template
+  position:
+    file: ".claude/templates/mahjong-position.yaml"
+
+  # Decision report template
+  decision:
+    file: ".claude/templates/mahjong-decision.md"
+
+  # Game review template
+  review:
+    file: ".claude/templates/mahjong-review.md"
+
+# ============================================
+# Bootstrap Script
+# ============================================
+
+bootstrap:
+  script: |
+    #!/bin/bash
+    # Initialize Mahjong Master Society
+
+    echo "Initializing Mahjong Master Society..."
+
+    # Create directory structure
+    mkdir -p .claude/shared/mahjong-society/{intake,analysis,decisions,learning,data}
+    mkdir -p .claude/shared/mahjong-society/data/{tenhou,mleague,training}
+
+    # Create specialized agent definitions (if not exist)
+    agents=(
+      "tile-efficiency-analyzer"
+      "opponent-hand-reader"
+      "defense-specialist"
+      "scoring-optimizer"
+      "situation-strategist"
+    )
+
+    for agent in "${agents[@]}"; do
+      if [ ! -f ".claude/agents/${agent}.md" ]; then
+        echo "⚠️  Missing agent: ${agent}.md"
+        echo "   Create this agent definition to complete the society"
+      fi
+    done
+
+    # Create calculation scripts directory
+    mkdir -p scripts/mahjong
+
+    # Create sample position template
+    cat > .claude/templates/mahjong-position.yaml << 'EOF'
+hand: []          # 13 tiles
+dora: []          # Dora indicators
+turn: 1           # Current turn (1-18)
+position: "子"    # 親 or 子
+round: "東1局"    # Round name
+points:           # Point standings
+  self: 25000
+  opponent1: 25000
+  opponent2: 25000
+  opponent3: 25000
+riichi: []        # Players in riichi
+discards:         # Opponent discards
+  opponent1: []
+  opponent2: []
+  opponent3: []
+EOF
+
+    echo "Mahjong Master Society initialized successfully!"
+    echo ""
+    echo "Next steps:"
+    echo "1. Create missing specialist agent definitions"
+    echo "2. Add game record data to .claude/shared/mahjong-society/data/"
+    echo "3. Launch analysis with:"
+    echo "   ./scripts/tools/tmux-orchestrator.sh society mahjong-society.yaml analyze_position"
+
+# ============================================
+# Documentation
+# ============================================
+
+documentation:
+  readme: |
+    # Mahjong Master Society
+
+    World-class Mahjong AI system using coordinated specialist agents.
+
+    ## Architecture
+
+    - **Hub-and-Spoke**: Master orchestrates 5 specialist agents
+    - **Parallel Analysis**: All specialists analyze simultaneously
+    - **Synthesis**: Master integrates findings for optimal decision
+
+    ## Specialists
+
+    1. **Tile Efficiency**: Shanten calculation, optimal discards
+    2. **Opponent Reading**: Hand estimation from discards
+    3. **Defense**: Risk assessment, safe tile identification
+    4. **Scoring**: Yaku optimization, EV calculation
+    5. **Situation**: Game state strategy adjustment
+
+    ## Usage
+
+    ```bash
+    # Analyze single position
+    ./scripts/tools/tmux-orchestrator.sh society \
+      .claude/societies/mahjong-society.yaml \
+      analyze_position
+
+    # Simulate full game
+    ./scripts/tools/tmux-orchestrator.sh society \
+      .claude/societies/mahjong-society.yaml \
+      simulate_game
+
+    # Learn from records
+    ./scripts/tools/tmux-orchestrator.sh society \
+      .claude/societies/mahjong-society.yaml \
+      learn_from_records
+
+    # Tournament mode
+    ./scripts/tools/tmux-orchestrator.sh society \
+      .claude/societies/mahjong-society.yaml \
+      tournament_mode
+    ```
+
+    ## Performance Targets
+
+    - Average placement: <1.8 (better than 2nd)
+    - Win rate: >27% (better than 1/4)
+    - Deal-in rate: <13%
+    - Hand reading accuracy: >65%
+
+    ## Strategy Modes
+
+    Adjust in `config.strategy`:
+    - **Aggressive**: High risk, high reward
+    - **Balanced**: Standard optimal play (default)
+    - **Defensive**: Minimize deal-ins, steady placement
+
+  guides:
+    - name: "Quick Start Guide"
+      file: ".claude/docs/mahjong-quick-start.md"
+
+    - name: "Strategy Customization"
+      file: ".claude/docs/mahjong-strategy.md"
+
+    - name: "Performance Tuning"
+      file: ".claude/docs/mahjong-tuning.md"

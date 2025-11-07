@@ -1,0 +1,113 @@
+@startuml Hooks Structure
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+
+title Claude Code Hooks Architecture
+
+actor User
+participant "Claude Code" as Claude
+participant "Hook Manager" as HookMgr
+participant "Shell Executor" as Shell
+
+box "Event Triggers" #LightBlue
+    participant "user-prompt-submit" as PromptHook
+    participant "tool-call" as ToolHook
+    participant "pre-commit" as CommitHook
+end box
+
+box "Hook Scripts" #LightGreen
+    participant "backup-on-write.sh" as BackupScript
+    participant "pre-commit-lint.sh" as LintScript
+    participant "run-tests.sh" as TestScript
+    participant "log-activity.sh" as LogScript
+end box
+
+database "Settings" as Settings {
+    [~/.claude/settings.json]
+    [.claude/settings.json]
+}
+
+== User Prompt Submit Hook ==
+User -> Claude: Submit Prompt
+Claude -> HookMgr: trigger(user-prompt-submit)
+HookMgr -> Settings: load hook config
+Settings --> HookMgr: hook definition
+HookMgr -> PromptHook: check enabled
+alt Hook Enabled
+    PromptHook -> Shell: execute command
+    Shell -> TestScript: run
+    TestScript --> Shell: exit code
+    Shell --> HookMgr: result
+    HookMgr --> Claude: feedback
+    note right
+        Feedback treated as
+        user input
+    end note
+else Hook Disabled
+    HookMgr --> Claude: skip
+end
+
+== Tool Call Hook (Write) ==
+Claude -> HookMgr: trigger(tool-call:Write)
+HookMgr -> Settings: load hook config
+Settings --> HookMgr: Write hook definition
+HookMgr -> ToolHook: check enabled & match tool
+alt Hook Matches & Enabled
+    ToolHook -> Shell: execute with ${file_path}
+    Shell -> BackupScript: create backup
+    BackupScript --> Shell: backup created
+    Shell --> HookMgr: success
+    HookMgr --> Claude: proceed with write
+else No Match or Disabled
+    HookMgr --> Claude: proceed
+end
+
+== Pre-commit Hook ==
+Claude -> HookMgr: trigger(pre-commit)
+HookMgr -> Settings: load hook config
+Settings --> HookMgr: pre-commit definition
+HookMgr -> CommitHook: check enabled
+alt Hook Enabled
+    CommitHook -> Shell: execute command
+    Shell -> LintScript: run lint
+    LintScript --> Shell: exit code
+
+    alt Exit Code = 0
+        Shell --> HookMgr: passed
+        HookMgr --> Claude: allow commit
+        Claude -> User: commit successful
+    else Exit Code != 0
+        Shell --> HookMgr: failed
+        HookMgr --> Claude: block commit
+        note right
+            failureMode determines
+            behavior:
+            - error: block
+            - warn: allow with warning
+            - ignore: silent
+        end note
+        Claude -> User: commit blocked
+    end
+else Hook Disabled
+    HookMgr --> Claude: allow commit
+end
+
+== Tool Call Hook (All Tools - Logging) ==
+Claude -> HookMgr: trigger(tool-call:*)
+HookMgr -> Settings: load hook config
+Settings --> HookMgr: wildcard hook
+HookMgr -> ToolHook: check wildcard match
+ToolHook -> Shell: execute log script
+Shell -> LogScript: log activity
+note right of LogScript
+    Environment Variables:
+    - $CLAUDE_PROJECT_DIR
+    - $CLAUDE_TOOL_NAME
+    - $CLAUDE_TOOL_PARAMS
+end note
+LogScript --> Shell: logged
+Shell --> HookMgr: success (ignore failures)
+HookMgr --> Claude: continue
+
+@enduml

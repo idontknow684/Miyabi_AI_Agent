@@ -1,0 +1,265 @@
+@startuml Slash Command Lifecycle Flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam activityFontSize 12
+
+title Slash Command Execution Lifecycle
+
+|User|
+start
+:Type Slash Command;
+note right
+  Examples:
+  /review-pr 123
+  /test
+  /deploy production
+  /refactor
+  /docs
+end note
+
+|Command Parser|
+:Parse Input;
+
+partition "Parsing Phase" {
+  :Extract Command Name;
+  note right
+    Remove leading "/"
+    Example: "/review-pr" -> "review-pr"
+  end note
+
+  :Extract Arguments;
+  note right
+    Parse remaining text
+    Example: "123" -> PR_NUMBER=123
+  end note
+
+  :Validate Syntax;
+
+  if (Valid Format?) then (no)
+    :Return Syntax Error;
+    |User|
+    :Receive Error Message;
+    stop
+  else (yes)
+    :Continue;
+  endif
+}
+
+|Command Registry|
+:Lookup Command;
+
+partition "Command Resolution" {
+  if (Built-in Command?) then (yes)
+    #LightBlue:Load Built-in Handler;
+    note right
+      Built-in Commands:
+      - /help
+      - /clear
+      - /reset
+    end note
+
+    :Execute Built-in;
+    |User|
+    :Receive Result;
+    stop
+
+  else (custom command)
+    :Search .claude/commands/;
+
+    if (Command File Exists?) then (no)
+      :Return Command Not Found;
+      note right
+        "Command '/xxx' not found.
+        Check available commands."
+      end note
+      |User|
+      :Receive Error;
+      stop
+    else (yes)
+      :Load Command Definition;
+    endif
+  endif
+
+  :Parse YAML Front Matter;
+  note right
+    Extract:
+    - description
+    - options
+    - metadata
+  end note
+
+  :Load Prompt Template;
+}
+
+|Command Executor|
+:Check Command State;
+
+if (Command Already Running?) then (yes)
+  :Return Error;
+  note right
+    "Command is already running.
+    Please wait for completion."
+  end note
+  |User|
+  :Wait or Cancel;
+  stop
+else (not running)
+  :Mark as Running;
+  :Display <command-message>;
+  note right
+    <command-message>
+    {name} is running...
+    </command-message>
+  end note
+endif
+
+partition "Command Execution" {
+  :Expand Prompt Template;
+  note right
+    Substitute variables:
+    ${PR_NUMBER}
+    ${environment}
+    ${args}
+  end note
+
+  :Initialize Command Context;
+
+  :Execute Command Steps;
+
+  if (Command Type?) then (/review-pr)
+    #LightGreen:**PR Review Steps**;
+    :Fetch PR details (gh pr view);
+    :Read changed files (gh pr diff);
+    :Analyze changes;
+    :Generate review report;
+
+  else if (/test)
+    #LightYellow:**Test Steps**;
+    :Run test suite;
+    :Analyze failures;
+    :Fix failing tests;
+    :Re-run tests;
+    :Generate test report;
+
+  else if (/deploy)
+    #LightPink:**Deploy Steps**;
+    :Pre-flight checks;
+    :Run tests & lint;
+    :Build project;
+    :Deploy to environment;
+    :Verify deployment;
+    :Generate deploy report;
+
+  else if (/refactor)
+    #LightCyan:**Refactor Steps**;
+    :Analyze code smells;
+    :Identify duplications;
+    :Apply refactoring patterns;
+    :Run tests;
+    :Generate refactor report;
+
+  else if (/docs)
+    #LightGray:**Documentation Steps**;
+    :Analyze codebase;
+    :Generate JSDoc comments;
+    :Update README;
+    :Create examples;
+    :Generate docs report;
+
+  else (custom command)
+    #Lavender:**Custom Steps**;
+    :Execute custom logic;
+  endif
+
+  :Collect Results;
+
+  if (Execution Error?) then (yes)
+    :Capture Error Details;
+    :Determine Error Type;
+
+    if (Recoverable?) then (yes)
+      :Attempt Recovery;
+      if (Recovery Success?) then (yes)
+        :Continue;
+      else (failed)
+        :Return Partial Results;
+      endif
+    else (not recoverable)
+      :Return Error;
+    endif
+  else (success)
+    :Continue;
+  endif
+}
+
+partition "Result Formatting" {
+  :Format Output;
+  note right
+    Command-specific format:
+    - PR Review: Review report
+    - Test: Test results
+    - Deploy: Deployment status
+    - Refactor: Changes made
+    - Docs: Documentation stats
+  end note
+
+  :Validate Output Format;
+
+  if (Output Complete?) then (yes)
+    :Finalize Result;
+  else (incomplete)
+    :Add Warning to Output;
+    note right
+      "Command completed with warnings:
+      Some steps may have been skipped"
+    end note
+  endif
+}
+
+|Command Executor|
+:Mark Command Complete;
+:Clear Running State;
+
+|User|
+:Receive Command Result;
+
+if (Result Satisfactory?) then (yes)
+  :Continue Work;
+  stop
+else if (Need Modifications?) then (yes)
+  :Run Command Again;
+  detach
+else (failed)
+  :Review Error;
+  :Fix Issues;
+  :Retry;
+  detach
+endif
+
+note bottom
+  **Slash Command Characteristics:**
+
+  1. **User-Initiated** - Always triggered by user input
+  2. **Sequential Execution** - Cannot run same command twice
+  3. **Stateful Progress** - Tracks running/completed state
+  4. **Template-Based** - Uses markdown files with YAML front matter
+  5. **Context-Aware** - Access to full conversation history
+  6. **Formatted Output** - Structured, readable results
+  7. **Error Recovery** - Attempts to handle failures gracefully
+end note
+
+legend right
+  |= Command Type |= Primary Use Case |
+  | /review-pr | GitHub PR code review |
+  | /test | Run and fix tests |
+  | /deploy | Deploy to environment |
+  | /refactor | Code refactoring |
+  | /docs | Generate documentation |
+
+  |= Command File Structure |
+  | Filename | .claude/commands/{name}.md |
+  | Front Matter | YAML with description |
+  | Body | Prompt template |
+endlegend
+
+@enduml

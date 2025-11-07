@@ -1,0 +1,311 @@
+@startuml Agent State Machine
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Claude Code Agent - Complete State Machine
+
+[*] --> Idle : System Start
+
+state Idle {
+  [*] --> AwaitingInput
+  AwaitingInput : Waiting for user request
+  AwaitingInput : Loading context (CLAUDE.md)
+  AwaitingInput : Hooks registered
+}
+
+Idle --> Understanding : User Input Received
+
+state Understanding {
+  [*] --> ParsingIntent
+  ParsingIntent : Parse user request
+  ParsingIntent : Identify task type
+  ParsingIntent --> AnalyzingCapabilities
+  AnalyzingCapabilities : Determine required tools
+  AnalyzingCapabilities : Check available extensions
+  AnalyzingCapabilities --> [*]
+}
+
+Understanding --> Planning : Intent Understood
+
+state Planning {
+  [*] --> DecomposingTask
+  DecomposingTask : Break down into steps
+  DecomposingTask --> SelectingTools
+  SelectingTools : Choose appropriate tools
+  SelectingTools --> CheckingExtensions
+
+  CheckingExtensions : Check Sub-agents needed
+  CheckingExtensions : Check Skills needed
+  CheckingExtensions : Check Slash Commands
+
+  CheckingExtensions --> BuildingPlan
+  BuildingPlan : Create execution plan
+  BuildingPlan --> [*]
+}
+
+Planning --> ResourceAllocation : Plan Ready
+
+state ResourceAllocation {
+  [*] --> LoadingContext
+  LoadingContext : Load project context
+  LoadingContext : Load settings
+  LoadingContext --> VerifyingPermissions
+  VerifyingPermissions : Check file access
+  VerifyingPermissions : Check tool availability
+  VerifyingPermissions --> InitializingHooks
+  InitializingHooks : Register hooks
+  InitializingHooks : Setup hook listeners
+  InitializingHooks --> [*]
+}
+
+ResourceAllocation --> Executing : Resources Allocated
+
+state Executing {
+  [*] --> ExecutionChoice
+
+  state ExecutionChoice <<choice>>
+  ExecutionChoice --> SubAgentExecution : Needs Sub-agent
+  ExecutionChoice --> SkillExecution : Needs Skill
+  ExecutionChoice --> CommandExecution : Slash Command
+  ExecutionChoice --> DirectExecution : Direct Tool Use
+
+  state SubAgentExecution {
+    [*] --> InvokingTask
+    InvokingTask : Call Task Tool
+    InvokingTask --> SelectingAgent
+    SelectingAgent : Choose agent type
+    SelectingAgent --> ExpandingPrompt
+    ExpandingPrompt : Expand agent prompt
+    ExpandingPrompt --> AutonomousRun
+    AutonomousRun : Agent runs independently
+    AutonomousRun : Stateless execution
+    AutonomousRun --> ReceivingReport
+    ReceivingReport : Get final report
+    ReceivingReport --> [*]
+  }
+
+  state SkillExecution {
+    [*] --> InvokingSkill
+    InvokingSkill : Call Skill Tool
+    InvokingSkill --> LoadingSkill
+    LoadingSkill : Load skill definition
+    LoadingSkill --> CheckingDeps
+    CheckingDeps : Verify dependencies
+    CheckingDeps --> ExecutingSkill : Dependencies OK
+    CheckingDeps --> [*] : Missing Dependencies
+    ExecutingSkill : Run skill logic
+    ExecutingSkill --> [*]
+  }
+
+  state CommandExecution {
+    [*] --> ParsingCommand
+    ParsingCommand : Parse command & args
+    ParsingCommand --> LoadingCommand
+    LoadingCommand : Load command file
+    LoadingCommand --> ExpandingTemplate
+    ExpandingTemplate : Expand prompt template
+    ExpandingTemplate --> ExecutingSteps
+    ExecutingSteps : Execute command steps
+    ExecutingSteps --> FormattingOutput
+    FormattingOutput : Format results
+    FormattingOutput --> [*]
+  }
+
+  state DirectExecution {
+    [*] --> ToolSelection
+    ToolSelection : Select tool(s)
+    ToolSelection --> ToolExecution
+
+    state ToolExecution {
+      [*] --> PreHook
+      PreHook : Trigger tool-call hook
+      PreHook --> ToolChoice : Hook Passed
+
+      state ToolChoice <<choice>>
+      ToolChoice --> Read : Read files
+      ToolChoice --> Write : Write files
+      ToolChoice --> Edit : Edit files
+      ToolChoice --> Bash : Execute commands
+      ToolChoice --> Grep : Search code
+      ToolChoice --> Glob : Find files
+      ToolChoice --> Other : Other tools
+
+      Read --> PostHook
+      Write --> PostHook
+      Edit --> PostHook
+      Bash --> PostHook
+      Grep --> PostHook
+      Glob --> PostHook
+      Other --> PostHook
+
+      PostHook : Process results
+      PostHook --> [*]
+    }
+
+    ToolExecution --> [*]
+  }
+
+  SubAgentExecution --> ResultCollection
+  SkillExecution --> ResultCollection
+  CommandExecution --> ResultCollection
+  DirectExecution --> ResultCollection
+
+  ResultCollection : Collect all results
+  ResultCollection --> [*]
+}
+
+Executing --> HookProcessing : Execution Complete
+
+state HookProcessing {
+  [*] --> HookCheck
+
+  state HookCheck <<choice>>
+  HookCheck --> UserPromptHook : user-prompt-submit
+  HookCheck --> ToolCallHook : tool-call
+  HookCheck --> PreCommitHook : pre-commit
+  HookCheck --> NoHook : No hook triggered
+
+  state UserPromptHook {
+    [*] --> ExecutingPromptHook
+    ExecutingPromptHook --> CheckingResult
+    CheckingResult --> [*] : Success
+    CheckingResult --> [*] : Warning
+    CheckingResult --> Blocked : Error
+    Blocked --> [*]
+  }
+
+  state ToolCallHook {
+    [*] --> ExecutingToolHook
+    ExecutingToolHook --> CheckingToolResult
+    CheckingToolResult --> [*] : Success
+    CheckingToolResult --> [*] : Warning
+    CheckingToolResult --> Blocked : Error
+  }
+
+  state PreCommitHook {
+    [*] --> ExecutingCommitHook
+    ExecutingCommitHook --> CheckingCommitResult
+    CheckingCommitResult --> [*] : Success
+    CheckingCommitResult --> [*] : Warning
+    CheckingCommitResult --> Blocked : Error
+  }
+
+  NoHook --> [*]
+  UserPromptHook --> [*]
+  ToolCallHook --> [*]
+  PreCommitHook --> [*]
+}
+
+HookProcessing --> Integrating : Hooks Processed
+HookProcessing --> ErrorHandling : Hook Blocked
+
+state Integrating {
+  [*] --> CombiningResults
+  CombiningResults : Merge outputs
+  CombiningResults --> FormattingResponse
+  FormattingResponse : Format for user
+  FormattingResponse --> UpdatingContext
+  UpdatingContext : Update internal state
+  UpdatingContext --> [*]
+}
+
+Integrating --> Learning : Results Integrated
+
+state Learning {
+  [*] --> UpdatingState
+  UpdatingState : Refine understanding
+  UpdatingState : Update knowledge
+  UpdatingState --> PreparingNext
+  PreparingNext : Prepare for iteration
+  PreparingNext --> IterationCheck
+
+  state IterationCheck <<choice>>
+  IterationCheck --> [*] : Task Complete
+  IterationCheck --> IterationLoop : More Steps Needed
+}
+
+Learning --> Delivering : Learning Complete
+Learning --> Understanding : More Iterations [via IterationLoop]
+
+state Delivering {
+  [*] --> SendingResults
+  SendingResults : Send to user
+  SendingResults --> [*]
+}
+
+Delivering --> Idle : Results Delivered
+
+state ErrorHandling {
+  [*] --> AnalyzingError
+  AnalyzingError : Identify error type
+  AnalyzingError --> ErrorChoice
+
+  state ErrorChoice <<choice>>
+  ErrorChoice --> RecoverableError : Can retry
+  ErrorChoice --> FatalError : Cannot recover
+
+  state RecoverableError {
+    [*] --> AdjustingStrategy
+    AdjustingStrategy : Modify approach
+    AdjustingStrategy --> [*]
+  }
+
+  RecoverableError --> Planning : Retry
+
+  state FatalError {
+    [*] --> FormattingError
+    FormattingError : Create error report
+    FormattingError --> [*]
+  }
+
+  FatalError --> Delivering : Report Error
+}
+
+note right of Understanding
+  θ₁: Understand
+  Parse and comprehend
+  user intent
+end note
+
+note right of Planning
+  θ₂: Generate
+  Create detailed
+  execution plan
+end note
+
+note right of ResourceAllocation
+  θ₃: Allocate
+  Assign resources
+  and prepare tools
+end note
+
+note right of Executing
+  θ₄: Execute
+  Perform planned
+  actions
+end note
+
+note right of Integrating
+  θ₅: Integrate
+  Combine and format
+  results
+end note
+
+note right of Learning
+  θ₆: Learn
+  Update state for
+  next iteration
+
+  lim_{n→∞} composition
+end note
+
+legend bottom
+  |= State Category |= Description |
+  | <back:#LightBlue>Idle</back> | Waiting for input |
+  | <back:#LightGreen>Active</back> | Processing task |
+  | <back:#LightYellow>Extension</back> | Using Sub-agent/Skill/Command |
+  | <back:#LightPink>Error</back> | Handling errors |
+  | <back:#LightGray>Complete</back> | Task finished |
+endlegend
+
+@enduml

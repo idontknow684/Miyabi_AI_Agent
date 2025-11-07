@@ -1,0 +1,107 @@
+@startuml Orchestrator Execution Flow
+
+skinparam sequenceMessageAlign center
+skinparam backgroundColor #FEFEFE
+
+title Orchestrator Execution Flow\nStep-by-Step Process
+
+actor User as user
+participant "Orchestrator" as orch
+participant "Isolated\nExecutor" as exec
+participant "Subagent 1" as sub1
+participant "Subagent 2" as sub2
+participant "Subagent n" as subn
+database "Results\nCollector" as results
+
+== Phase 1: Analysis ==
+user -> orch : UserRequest
+activate orch
+orch -> orch : analyze_request()
+note right
+  **θ₁ Understand**
+  - Parse intent
+  - Assess complexity
+  - Identify capabilities
+end note
+orch -> orch : RequestAnalysis
+
+== Phase 2: Decomposition ==
+orch -> orch : decompose_tasks()
+note right
+  **θ₂ Generate**
+  - Break into subtasks
+  - Determine dependencies
+  - Prioritize
+end note
+orch -> orch : Vec<Task>
+
+== Phase 3: Delegation ==
+orch -> orch : assign_tasks()
+note right
+  **θ₃ Allocate**
+  - Select subagents
+  - Match capabilities
+  - Create assignments
+end note
+orch -> orch : Vec<TaskAssignment>
+
+== Phase 4: Parallel Execution ==
+note over orch, subn
+  **θ₄ Execute**
+  All subagents execute in parallel
+  Each in isolated environment
+end note
+
+orch -> exec : execute_tasks()
+activate exec
+
+par Task A
+  exec -> sub1 : execute(Task A, Context)
+  activate sub1
+  sub1 -> sub1 : process Task A
+  sub1 --> results : SubagentResult 1
+  deactivate sub1
+else Task B
+  exec -> sub2 : execute(Task B, Context)
+  activate sub2
+  sub2 -> sub2 : process Task B
+  sub2 --> results : SubagentResult 2
+  deactivate sub2
+else Task C
+  exec -> subn : execute(Task C, Context)
+  activate subn
+  subn -> subn : process Task C
+  subn --> results : SubagentResult n
+  deactivate subn
+end
+
+exec -> exec : await all tasks
+exec --> orch : Vec<SubagentResult>
+deactivate exec
+
+== Phase 5: Synthesis ==
+orch -> results : collect all results
+activate results
+results --> orch : all SubagentResults
+deactivate results
+
+orch -> orch : synthesize_results()
+note right
+  **θ₅ Integrate**
+  - Combine outputs
+  - Resolve conflicts
+  - Generate coherent answer
+end note
+
+orch -> orch : FinalAnswer
+
+== Phase 6: Return ==
+orch --> user : FinalAnswer
+deactivate orch
+
+note over user, subn
+  **Total Time**: ~100-200ms for 2-3 parallel tasks
+  **Speedup**: 2-3x compared to sequential execution
+end note
+
+@enduml

@@ -1,0 +1,84 @@
+#!/bin/bash
+# VoiceVox Quick Command Wrapper
+# 簡単にVoiceVoxを使えるラッパースクリプト
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Usage function
+usage() {
+    cat << EOF
+VoiceVox Quick Command (vv)
+
+Usage:
+    vv start                     - Start background worker
+    vv stop                      - Stop background worker
+    vv status                    - Show worker status
+    vv say <text> [speaker]      - Queue text for speech (async)
+    vv say! <text> [speaker]     - Speak immediately (sync)
+    vv queue                     - Show task queue
+
+Examples:
+    vv start                     # Start worker
+    vv say "こんにちは" zundamon  # Queue speech (non-blocking)
+    vv say! "緊急です" metan      # Immediate speech (blocking)
+    vv queue                     # Check queue
+    vv stop                      # Stop worker
+
+Available speakers: zundamon, metan, tsumugi, ritsu
+EOF
+}
+
+# Main command dispatcher
+case "$1" in
+    start)
+        echo "🚀 Starting VoiceVox background worker..."
+        python3 "$SCRIPT_DIR/voicevox_worker.py" --start &
+        sleep 1
+        python3 "$SCRIPT_DIR/voicevox_worker.py" --status
+        ;;
+
+    stop)
+        echo "🛑 Stopping VoiceVox background worker..."
+        python3 "$SCRIPT_DIR/voicevox_worker.py" --stop
+        ;;
+
+    status)
+        python3 "$SCRIPT_DIR/voicevox_worker.py" --status
+        ;;
+
+    say)
+        if [ -z "$2" ]; then
+            echo "Error: Missing text argument"
+            usage
+            exit 1
+        fi
+        TEXT="$2"
+        SPEAKER="${3:-zundamon}"
+        python3 "$SCRIPT_DIR/voicevox_enqueue.py" "$TEXT" "$SPEAKER"
+        ;;
+
+    say!)
+        if [ -z "$2" ]; then
+            echo "Error: Missing text argument"
+            usage
+            exit 1
+        fi
+        TEXT="$2"
+        SPEAKER="${3:-zundamon}"
+        python3 "$SCRIPT_DIR/voicevox_speak.py" "$TEXT" "$SPEAKER"
+        ;;
+
+    queue)
+        python3 "$SCRIPT_DIR/voicevox_enqueue.py" --status
+        ;;
+
+    help|--help|-h)
+        usage
+        ;;
+
+    *)
+        echo "Error: Unknown command '$1'"
+        usage
+        exit 1
+        ;;
+esac

@@ -1,0 +1,114 @@
+@startuml Subagent Isolation Model
+
+skinparam backgroundColor #FEFEFE
+skinparam component {
+  BackgroundColor LightYellow
+  BorderColor Black
+}
+
+title Subagent Isolation Model\nIsolated Execution Environment
+
+package "Isolated Executor" as executor #LightBlue {
+  component "Executor\nCore" as core
+  component "Task\nScheduler" as scheduler
+  component "Resource\nManager" as resources
+
+  core -down-> scheduler
+  core -down-> resources
+}
+
+frame "Execution Environment" as env {
+
+  package "Subagent 1 Context" as ctx1 #LightCoral {
+    component "Context ID" as id1
+    component "Parameters" as params1
+    component "Workspace\n/tmp/sub1/" as ws1
+    component "Tool Access\nRead, Write" as tools1
+
+    database "Isolated\nMemory" as mem1
+
+    id1 -down-> params1
+    params1 -down-> ws1
+    ws1 -down-> tools1
+    tools1 -down-> mem1
+  }
+
+  package "Subagent 2 Context" as ctx2 #LightSkyBlue {
+    component "Context ID" as id2
+    component "Parameters" as params2
+    component "Workspace\n/tmp/sub2/" as ws2
+    component "Tool Access\nRead, Bash" as tools2
+
+    database "Isolated\nMemory" as mem2
+
+    id2 -down-> params2
+    params2 -down-> ws2
+    ws2 -down-> tools2
+    tools2 -down-> mem2
+  }
+
+  package "Subagent n Context" as ctxn #LightSalmon {
+    component "Context ID" as idn
+    component "Parameters" as paramsn
+    component "Workspace\n/tmp/subn/" as wsn
+    component "Tool Access\nBash, Grep" as toolsn
+
+    database "Isolated\nMemory" as memn
+
+    idn -down-> paramsn
+    paramsn -down-> wsn
+    wsn -down-> toolsn
+    toolsn -down-> memn
+  }
+}
+
+' Connections
+core --> ctx1 : create & execute
+core --> ctx2 : create & execute
+core --> ctxn : create & execute
+
+' Results
+component "Result\nCollector" as collector #LightGreen
+
+ctx1 --> collector : result 1
+ctx2 --> collector : result 2
+ctxn --> collector : result n
+
+' Isolation barriers
+note right of ctx1
+  **Isolation Guarantees**
+  - Separate memory space
+  - Independent filesystem
+  - No shared state
+  - Tool access control
+  - Timeout enforcement
+end note
+
+note left of env
+  **Parallel Execution**
+  All contexts run concurrently
+  No blocking between subagents
+  Maximum throughput
+end note
+
+note bottom of collector
+  **Result Aggregation**
+  - Independent collection
+  - No cross-contamination
+  - Partial results OK
+  - Failure isolation
+end note
+
+' Security boundary
+rectangle "Security Boundary" as security #Red {
+  note as N1
+    **Isolation Properties**
+    1. Memory isolation
+    2. Filesystem isolation
+    3. Network isolation (optional)
+    4. Resource limits
+    5. Timeout enforcement
+  end note
+}
+
+@enduml

@@ -1,0 +1,234 @@
+@startuml Skill Lifecycle Flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam activityFontSize 12
+
+title Skill Execution Lifecycle
+
+|Main Agent|
+start
+:Analyze User Request;
+
+if (Request Matches Skill?) then (yes)
+  :Identify Appropriate Skill;
+  note right
+    Match against:
+    - PDF processing
+    - Excel processing
+    - API testing
+    - Code review
+    - Custom skills
+  end note
+else (no)
+  :Use Standard Tools;
+  stop
+endif
+
+|Skill Registry|
+:Lookup Skill Definition;
+
+if (Skill Found?) then (no)
+  :Report Skill Not Available;
+  |Main Agent|
+  :Fallback to Alternative;
+  stop
+else (yes)
+  :Load Skill Metadata;
+  note right
+    Metadata includes:
+    - Skill name
+    - Trigger conditions
+    - Required dependencies
+    - Prompt template
+  end note
+endif
+
+|Skill Tool|
+:Invoke Skill Tool;
+:Validate Skill Name;
+
+if (Skill Already Running?) then (yes)
+  :Return Error;
+  note right
+    Cannot invoke skill
+    that is already running
+  end note
+  |Main Agent|
+  :Wait for Completion;
+  stop
+else (not running)
+  :Mark as Running;
+endif
+
+|Skill Executor|
+partition "Skill Initialization" {
+  :Load Skill Prompt;
+  :Check Dependencies;
+
+  if (Dependencies Met?) then (no)
+    :Report Missing Dependencies;
+    note right
+      Example:
+      "PyPDF2 not installed
+      Run: pip install PyPDF2"
+    end note
+    |Main Agent|
+    :Handle Dependency Error;
+    stop
+  else (yes)
+    :Initialize Skill Context;
+  endif
+
+  :Expand Prompt Template;
+  note right
+    Skill prompt provides:
+    - Task instructions
+    - Domain knowledge
+    - Best practices
+    - Expected output format
+  end note
+}
+
+partition "Skill Execution" {
+  :Process with Skill Context;
+
+  if (Skill Pattern?) then (Proactive)
+    #LightBlue:Auto-execute on Conditions;
+    note right
+      Example:
+      Auto-test after code changes
+    end note
+
+  else if (On-Demand)
+    #LightGreen:Execute User Request;
+    note right
+      Example:
+      User requests PDF processing
+    end note
+
+  else (Pipeline)
+    #LightYellow:Execute in Chain;
+    note right
+      Example:
+      code-review -> test -> deploy
+    end note
+
+    :Check Previous Step;
+    if (Previous Failed?) then (yes)
+      :Skip Execution;
+      :Report Dependency Failure;
+      |Main Agent|
+      :Handle Pipeline Failure;
+      stop
+    else (passed)
+      :Continue Execution;
+    endif
+  endif
+
+  :Execute Skill Logic;
+
+  if (Skill Type?) then (PDF Processing)
+    :Read/Generate PDF;
+    :Extract/Merge Content;
+  else if (Excel Processing)
+    :Parse Spreadsheet;
+    :Process Data;
+    :Generate Excel;
+  else if (API Testing)
+    :Build Requests;
+    :Validate Responses;
+    :Generate Report;
+  else if (Code Review)
+    :Analyze Code Quality;
+    :Check Security;
+    :Review Performance;
+    :Generate Feedback;
+  else (Custom Skill)
+    :Execute Custom Logic;
+  endif
+
+  :Collect Results;
+}
+
+partition "Result Processing" {
+  if (Execution Successful?) then (yes)
+    :Format Output;
+    note right
+      Format based on skill type:
+      - PDF: file path + metadata
+      - Excel: data + statistics
+      - API: test results
+      - Review: feedback report
+    end note
+
+    :Validate Output;
+
+    if (Output Valid?) then (yes)
+      :Return Success;
+    else (invalid)
+      :Return Error;
+      note right
+        Partial results may
+        still be useful
+      end note
+    endif
+
+  else (failed)
+    :Capture Error Details;
+    :Return Failure;
+  endif
+}
+
+|Skill Tool|
+:Mark as Completed;
+:Return Results to Agent;
+
+|Main Agent|
+:Process Skill Results;
+
+if (Results Satisfactory?) then (yes)
+  :Integrate Results;
+  :Continue Main Task;
+
+else if (Need Different Skill?) then (yes)
+  :Select Another Skill;
+  detach
+
+else (failed)
+  :Handle Skill Failure;
+
+  if (Can Fallback?) then (yes)
+    :Use Alternative Approach;
+  else (no)
+    :Report Error to User;
+  endif
+endif
+
+:Complete Task;
+stop
+
+note bottom
+  **Skill Execution Characteristics:**
+
+  1. **Domain-Specific** - Specialized knowledge and capabilities
+  2. **Stateful** - Cannot run same skill twice concurrently
+  3. **Dependency-Aware** - Checks requirements before execution
+  4. **Pattern-Based** - Proactive, On-Demand, or Pipeline
+  5. **Context-Rich** - Uses expanded prompts with domain expertise
+  6. **Validated Output** - Results checked for correctness
+end note
+
+legend right
+  |= Skill Pattern |= Trigger |
+  | Proactive | Auto on conditions |
+  | On-Demand | User request |
+  | Pipeline | Chained execution |
+
+  |= Common Skills |= Purpose |
+  | PDF | Document processing |
+  | Excel | Data analysis |
+  | API Test | Endpoint validation |
+  | Code Review | Quality check |
+endlegend
+
+@enduml

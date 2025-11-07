@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="飲食店、美容室、クリニック、小売店など、あらゆる店舗の集客課題を解決。月間100名以上の新規顧客獲得を実現する、プロの集客システムをご提供します。">
+    <meta name="keywords" content="店舗集客, 新規顧客獲得, 集客システム, デジタルマーケティング, 地域集客">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://store-growth.jp/">
+    <meta property="og:title" content="店舗集客の悩みを解決 | 新規顧客を自動で獲得">
+    <meta property="og:description" content="月間100名以上の新規顧客を自動獲得。初期費用0円・成果保証付き。3,200店舗の実績。">
+    <meta property="og:image" content="/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://store-growth.jp/">
+    <meta property="twitter:title" content="店舗集客の悩みを解決 | 新規顧客を自動で獲得">
+    <meta property="twitter:description" content="月間100名以上の新規顧客を自動獲得。初期費用0円・成果保証付き。">
+    <meta property="twitter:image" content="/images/twitter-card.jpg">
+
+    <title>店舗集客の悩みを解決 | 新規顧客を自動で獲得する集客システム</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "店舗集客自動化システム",
+      "provider": {
+        "@type": "Organization",
+        "name": "株式会社ストアグロース"
+      },
+      "description": "店舗の新規顧客獲得を自動化する集客マーケティングシステム",
+      "areaServed": "日本全国",
+      "serviceType": "Digital Marketing"
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Brand Colors */
+            --primary-blue: #2563EB;
+            --secondary-green: #10B981;
+            --accent-orange: #F59E0B;
+            --danger-red: #EF4444;
+            --dark-grey: #1F2937;
+            --light-grey: #F3F4F6;
+            --white: #FFFFFF;
+            --black: #000000;
+
+            /* Typography */
+            --font-primary: 'Noto Sans JP', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+            --spacing-xl: 4rem;
+
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--dark-grey);
+            background-color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3rem); }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+        p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Section */
+        section {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .section-label {
+            color: var(--primary-blue);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--spacing-xs);
+            text-align: center;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), #3B82F6);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dark-grey);
+            border: 2px solid var(--dark-grey);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-grey);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem var(--spacing-md);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark-grey);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-grey);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(3deg); }
+            66% { transform: translate(-20px, 20px) rotate(-3deg); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text .eyebrow {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: var(--white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-text h1 {
+            color: var(--dark-grey);
+            margin-bottom: var(--spacing-sm);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero-text h1 .highlight {
+            color: var(--primary-blue);
+            display: block;
+            font-size: 1.2em;
+        }
+
+        .hero-text .value-prop {
+            font-size: 1.125rem;
+            color: #4B5563;
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid #E5E7EB;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .trust-badge i {
+            font-size: 1.5rem;
+            color: var(--secondary-green);
+        }
+
+        .trust-badge-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeIn 1s ease-out 0.8s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-blue);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--white);
+        }
+
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .pain-point-card {
+            background: var(--light-grey);
+            padding: var(--spacing-lg);
+            border-radius: 15px;
+            transition: var(--transition);
+            border-left: 4px solid var(--danger-red);
+        }
+
+        .pain-point-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pain-point-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--danger-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .empathy-statement {
+            text-align: center;
+            max-width: 700px;
+            margin: var(--spacing-xl) auto 0;
+            padding: var(--spacing-lg);
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-radius: 15px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+
+        /* Solution Section */
+        .solution-section {
+            background: linear-gradient(135deg, #EBF5FF 0%, #FFFFFF 100%);
+        }
+
+        .solution-overview {
+            max-width: 800px;
+            margin: var(--spacing-lg) auto;
+            text-align: center;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        .key-differentiators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .differentiator-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .differentiator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .differentiator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .differentiator-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .benefit-card {
+            background: var(--light-grey);
+            padding: var(--spacing-lg);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary-green), #34D399);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.75rem;
+            color: var(--white);
+        }
+
+        .benefit-metric {
+            display: inline-block;
+            background: var(--secondary-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-top: var(--spacing-sm);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            position: relative;
+        }
+
+        .process-step {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .step-number-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), #3B82F6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .step-duration {
+            display: inline-block;
+            background: #FEF3C7;
+            color: #92400E;
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .step-details {
+            list-style: none;
+            margin-top: var(--spacing-sm);
+        }
+
+        .step-details li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .step-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-green);
+            font-weight: 700;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .testimonial-card {
+            background: var(--light-grey);
+            padding: var(--spacing-lg);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .testimonial-rating {
+            color: var(--accent-orange);
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .testimonial-quote {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
+
+        .testimonial-text {
+            color: #6B7280;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding-top: var(--spacing-sm);
+            border-top: 1px solid #D1D5DB;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .author-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            margin: 0;
+        }
+
+        .testimonial-results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .result-item {
+            background: var(--white);
+            padding: var(--spacing-sm);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            color: #6B7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-change {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary-green);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid #E5E7EB;
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.2);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .plan-price .yen {
+            font-size: 1.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: var(--spacing-md) 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #F3F4F6;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-xs);
+        }
+
+        .plan-features li i {
+            color: var(--secondary-green);
+            margin-top: 0.25rem;
+        }
+
+        .money-back-guarantee {
+            max-width: 800px;
+            margin: var(--spacing-xl) auto 0;
+            padding: var(--spacing-lg);
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .guarantee-badge {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--white);
+        }
+
+        .faq-grid {
+            max-width: 900px;
+            margin: var(--spacing-lg) auto 0;
+        }
+
+        .faq-item {
+            background: var(--light-grey);
+            margin-bottom: var(--spacing-sm);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: var(--spacing-md);
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-blue);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 var(--spacing-md);
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 0 var(--spacing-md) var(--spacing-md);
+        }
+
+        .faq-icon {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-grey) 0%, #111827 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+        }
+
+        .urgency-message {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: var(--spacing-md) 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .benefits-recap {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .benefits-recap li {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .benefits-recap li i {
+            color: var(--secondary-green);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: var(--spacing-lg) auto;
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+
+        .form-required {
+            color: var(--danger-red);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-grey);
+            color: var(--white);
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .scroll-to-top.visible {
+            display: flex;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: var(--spacing-sm);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                gap: var(--spacing-sm);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .pain-points-grid,
+            .key-differentiators,
+            .benefits-grid,
+            .process-steps,
+            .testimonials-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-recap {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            section {
+                padding: var(--spacing-lg) 0;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-primary { color: var(--primary-blue); }
+        .bg-primary { background: var(--primary-blue); }
+        .mt-1 { margin-top: var(--spacing-sm); }
+        .mt-2 { margin-top: var(--spacing-md); }
+        .mb-1 { margin-bottom: var(--spacing-sm); }
+        .mb-2 { margin-bottom: var(--spacing-md); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">ストアグロース</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#solution">解決策</a></li>
+                    <li><a href="#benefits">メリット</a></li>
+                    <li><a href="#process">導入の流れ</a></li>
+                    <li><a href="#pricing">料金</a></li>
+                    <li><a href="#testimonials">お客様の声</a></li>
+                    <li><a href="#contact-form" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">無料相談</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="メニュー">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="eyebrow">月間100名以上の新規顧客獲得を実現</span>
+                    <h1>
+                        <span class="highlight">「お客様が来ない」</span>
+                        その悩み、今日で終わりにしませんか?
+                    </h1>
+                    <p class="value-prop">
+                        集客の専門家が、あなたの店舗に最適な新規顧客獲得システムを構築します。
+                        初月から効果を実感できる、実績No.1の集客サービス。
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contact-form" class="btn btn-primary btn-large">無料相談を予約する</a>
+                        <a href="#case-studies" class="btn btn-secondary btn-large">導入事例を見る</a>
+                    </div>
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="fas fa-store"></i>
+                            <span class="trust-badge-text">導入店舗数<br>3,200店以上</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fas fa-star"></i>
+                            <span class="trust-badge-text">顧客満足度<br>97.2%</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fas fa-chart-line"></i>
+                            <span class="trust-badge-text">平均ROI<br>420%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">多くの店舗オーナーが抱える悩み</p>
+                <h2>こんなお悩み、ありませんか?</h2>
+                <p>真面目に営業しているのに、なぜかお客様が増えない...そんな悩みを抱えている店舗オーナー様は少なくありません。</p>
+            </div>
+            <div class="pain-points-grid">
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-users-slash"></i>
+                    </div>
+                    <h3>新規顧客が全く来ない</h3>
+                    <p>チラシを配っても、SNSを更新しても、新しいお客様が全然来店してくれない。このままでは経営が厳しい...</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>広告費ばかりかかる</h3>
+                    <p>Web広告やフリーペーパーに何十万も使ったのに、効果が見えない。本当にこのやり方で合っているのか不安...</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>集客に時間を取られすぎる</h3>
+                    <p>SNS投稿、ブログ更新、キャンペーン企画...本業に集中したいのに、集客作業に追われて疲弊している...</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>何をすればいいか分からない</h3>
+                    <p>集客の情報はたくさんあるけど、自分の店に何が合うのか分からない。専門知識もないし、どこから手をつければ...</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-chart-line-down"></i>
+                    </div>
+                    <h3>リピーターが定着しない</h3>
+                    <p>一度は来てくれるけど、リピートしてくれない。顧客管理の方法も分からず、せっかくの見込み客を逃している...</p>
+                </div>
+            </div>
+            <div class="empathy-statement">
+                実は、これらの悩みは「正しい集客の仕組み」がないことが原因です。<br>
+                個人の努力や根性では、もう限界なのです。
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">解決策</p>
+                <h2>必要なのは「自動で回る集客システム」</h2>
+                <p>もう、闇雲に広告を出したり、SNSを更新し続ける必要はありません。<br>私たちが提供するのは、あなたの店舗に合わせた「集客の自動化システム」です。</p>
+            </div>
+            <div class="solution-overview">
+                <p>
+                    3,200店舗以上の導入実績から生まれた、<strong>データドリブンな集客システム</strong>を、
+                    あなたの店舗に完全カスタマイズして構築します。
+                </p>
+                <p>
+                    一度仕組みを作れば、あとは自動的に新規顧客が集まり、
+                    リピーターが増え続ける。それが私たちの提供する価値です。
+                </p>
+            </div>
+            <h3 class="text-center mb-2">他の集客サービスとの違い</h3>
+            <div class="key-differentiators">
+                <div class="differentiator-card">
+                    <h3>丸投げOK</h3>
+                    <p>専任の集客コンサルタントが、戦略設計から実行まで全て代行。あなたは本業に集中できます。</p>
+                </div>
+                <div class="differentiator-card">
+                    <h3>業種特化の知見</h3>
+                    <p>飲食、美容、医療、小売など、各業種の成功パターンを熟知。あなたの業種に最適な施策をご提案。</p>
+                </div>
+                <div class="differentiator-card">
+                    <h3>成果保証付き</h3>
+                    <p>3ヶ月で成果が出なければ全額返金。私たちは結果にコミットします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">導入メリット</p>
+                <h2>このシステムがもたらす5つの変化</h2>
+                <p>実際の導入店舗が実感している、ビジネスへのインパクト</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>新規顧客が月間100名以上増加</h3>
+                    <p>
+                        Googleマップ最適化、SNS広告、LINE配信など、
+                        複数のチャネルを組み合わせた集客で、
+                        安定的に新規顧客を獲得できます。
+                        平均的な導入店舗で、月間100〜150名の新規顧客が来店。
+                    </p>
+                    <span class="benefit-metric">平均+127名/月</span>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>広告費を70%削減しながら効果UP</h3>
+                    <p>
+                        無駄な広告費を徹底的に排除し、
+                        費用対効果の高い施策だけに集中投資。
+                        データ分析により、1円単位で最適化します。
+                        結果、広告費は下がっても集客数は増える。
+                    </p>
+                    <span class="benefit-metric">広告費-70% / 集客数+250%</span>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-repeat"></i>
+                    </div>
+                    <h3>リピート率が平均2.3倍に向上</h3>
+                    <p>
+                        来店後の自動フォローアップ、ポイントプログラム、
+                        パーソナライズされたオファーなど、
+                        顧客との長期的な関係構築を自動化。
+                        一度来たお客様が、何度も戻ってきてくれます。
+                    </p>
+                    <span class="benefit-metric">リピート率+230%</span>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>集客作業時間を週20時間削減</h3>
+                    <p>
+                        SNS投稿、広告運用、顧客対応など、
+                        全ての集客業務を自動化・システム化。
+                        あなたは本業のサービス品質向上に集中でき、
+                        さらなる顧客満足度アップにつながります。
+                    </p>
+                    <span class="benefit-metric">作業時間-20時間/週</span>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>売上が平均42%増加</h3>
+                    <p>
+                        新規顧客増加 + リピート率向上 + 客単価アップ。
+                        3つの要素が同時に改善されることで、
+                        店舗全体の売上が大きく成長します。
+                        導入3ヶ月後の平均売上増加率は42%。
+                    </p>
+                    <span class="benefit-metric">売上+42%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="process">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">導入の流れ</p>
+                <h2>たった4ステップで、集客システムが完成</h2>
+                <p>初回相談から実際の集客開始まで、最短2週間。専任コンサルタントが伴走するので、初めてでも安心です。</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <span class="step-number-badge">01</span>
+                    <h3>無料診断・ヒアリング</h3>
+                    <span class="step-duration">60分 / オンラインまたは訪問</span>
+                    <p>
+                        まずは現状の課題を徹底的にヒアリング。
+                        あなたの店舗の強み、ターゲット顧客、競合状況などを分析し、
+                        最適な集客戦略の方向性をご提案します。
+                    </p>
+                    <ul class="step-details">
+                        <li>現状の集客状況の分析</li>
+                        <li>競合調査とポジショニング</li>
+                        <li>ターゲット顧客の明確化</li>
+                        <li>概算ROIシミュレーション</li>
+                    </ul>
+                </div>
+                <div class="process-step">
+                    <span class="step-number-badge">02</span>
+                    <h3>カスタム戦略設計</h3>
+                    <span class="step-duration">1週間</span>
+                    <p>
+                        ヒアリング内容をもとに、専任チームが
+                        あなたの店舗専用の集客システムを設計。
+                        使用するチャネル、クリエイティブ、配信スケジュール、
+                        KPI設定まで、詳細な戦略書を作成します。
+                    </p>
+                    <ul class="step-details">
+                        <li>集客チャネルの選定(Google/SNS/LINE等)</li>
+                        <li>クリエイティブ制作(画像・動画・テキスト)</li>
+                        <li>配信スケジュールの策定</li>
+                        <li>KPI・目標設定</li>
+                    </ul>
+                </div>
+                <div class="process-step">
+                    <span class="step-number-badge">03</span>
+                    <h3>システム構築・実装</h3>
+                    <span class="step-duration">1週間</span>
+                    <p>
+                        戦略に基づいて、実際の集客システムを構築。
+                        Googleビジネスプロフィール最適化、SNS広告設定、
+                        LINE公式アカウント構築、予約システム連携など、
+                        全ての設定を私たちが代行します。
+                    </p>
+                    <ul class="step-details">
+                        <li>Googleマップ・MEO対策</li>
+                        <li>SNS広告アカウント設定</li>
+                        <li>LINE公式アカウント構築</li>
+                        <li>予約・決済システム連携</li>
+                    </ul>
+                </div>
+                <div class="process-step">
+                    <span class="step-number-badge">04</span>
+                    <h3>運用開始・継続改善</h3>
+                    <span class="step-duration">継続サポート</span>
+                    <p>
+                        システム稼働後も、専任コンサルタントが
+                        データを分析し、継続的に改善。
+                        月1回のレポート提出と改善提案で、
+                        集客効果を最大化し続けます。
+                    </p>
+                    <ul class="step-details">
+                        <li>週次データモニタリング</li>
+                        <li>月次レポート・改善提案</li>
+                        <li>クリエイティブの定期更新</li>
+                        <li>チャットサポート(平日10-18時)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">お客様の声</p>
+                <h2>導入店舗の97%が効果を実感</h2>
+                <p>実際に導入いただいた店舗オーナー様からの声をご紹介します</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        「3ヶ月で新規顧客が2.5倍に。予約が埋まって嬉しい悲鳴です!」
+                    </p>
+                    <p class="testimonial-text">
+                        開業して2年、常連のお客様だけで回していましたが、
+                        新規のお客様が全く来ず悩んでいました。
+                        このサービスを導入してから、Instagram経由での予約が急増。
+                        今では予約が2週間先まで埋まるようになり、
+                        スタッフを1名増員できるまでになりました。
+                    </p>
+                    <div class="testimonial-results">
+                        <div class="result-item">
+                            <div class="result-label">新規顧客数</div>
+                            <div class="result-change">+158%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">月商</div>
+                            <div class="result-change">+79%</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">田</div>
+                        <div class="author-info">
+                            <h4>田中 美咲 様</h4>
+                            <p>Hair Salon Lumiere / 東京都世田谷区</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        「広告費を半分にしたのに、来店客数が1.8倍に増えました」
+                    </p>
+                    <p class="testimonial-text">
+                        以前は食べログやホットペッパーに月10万円以上使っていましたが、
+                        費用対効果が見えず困っていました。
+                        こちらに切り替えてから、Googleマップとインスタ広告で
+                        効率的に集客できるように。広告費は月5万円に減ったのに、
+                        来店客数は逆に増えて、利益率が大幅に改善しました。
+                    </p>
+                    <div class="testimonial-results">
+                        <div class="result-item">
+                            <div class="result-label">来店客数</div>
+                            <div class="result-change">+81%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">広告費</div>
+                            <div class="result-change">-50%</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">山</div>
+                        <div class="author-info">
+                            <h4>山田 健太 様</h4>
+                            <p>Italian Restaurant Bella Vista / 大阪府大阪市</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        「リピート率が劇的に改善。安定経営ができるようになりました」
+                    </p>
+                    <p class="testimonial-text">
+                        開業当初は新規のお客様ばかりで、リピートが全くなく
+                        経営が不安定でした。LINE自動配信とポイントシステムを
+                        導入してからは、2回目、3回目と継続してくださる方が激増。
+                        今では売上の70%がリピーターで、安心して経営できています。
+                    </p>
+                    <div class="testimonial-results">
+                        <div class="result-item">
+                            <div class="result-label">リピート率</div>
+                            <div class="result-change">+256%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">顧客生涯価値</div>
+                            <div class="result-change">+238%</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">佐</div>
+                        <div class="author-info">
+                            <h4>佐藤 智子 様</h4>
+                            <p>健康整体院 めぐり / 神奈川県横浜市</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">料金プラン</p>
+                <h2>あなたの店舗規模に合わせた3つのプラン</h2>
+                <p>初期費用0円、成果が出なければ全額返金保証。安心して始められる料金体系です。</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="plan-name">スタータープラン</h3>
+                    <div class="plan-price">
+                        <span class="yen">¥</span>29,800
+                    </div>
+                    <p style="color: #6B7280; margin-bottom: var(--spacing-md);">月額 / 個人経営・小規模店舗向け</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> <span>Googleビジネスプロフィール最適化</span></li>
+                        <li><i class="fas fa-check"></i> <span>Instagram/Facebook広告運用(月3万円まで)</span></li>
+                        <li><i class="fas fa-check"></i> <span>LINE公式アカウント構築</span></li>
+                        <li><i class="fas fa-check"></i> <span>月次レポート・改善提案</span></li>
+                        <li><i class="fas fa-check"></i> <span>チャットサポート</span></li>
+                    </ul>
+                    <a href="#contact-form" class="btn btn-secondary" style="width: 100%; margin-top: var(--spacing-md);">プランを選択</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <span class="pricing-badge">最も人気</span>
+                    <h3 class="plan-name">プロフェッショナルプラン</h3>
+                    <div class="plan-price">
+                        <span class="yen">¥</span>59,800
+                    </div>
+                    <p style="color: #6B7280; margin-bottom: var(--spacing-md);">月額 / 中規模店舗・複数店舗向け</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> <span>スタータープランの全機能</span></li>
+                        <li><i class="fas fa-check"></i> <span>広告運用(月10万円まで)</span></li>
+                        <li><i class="fas fa-check"></i> <span>Google広告運用</span></li>
+                        <li><i class="fas fa-check"></i> <span>LINEセグメント配信+ステップ配信</span></li>
+                        <li><i class="fas fa-check"></i> <span>クリエイティブ制作(月4本)</span></li>
+                        <li><i class="fas fa-check"></i> <span>専用ランディングページ制作</span></li>
+                        <li><i class="fas fa-check"></i> <span>週次データモニタリング</span></li>
+                        <li><i class="fas fa-check"></i> <span>電話サポート</span></li>
+                    </ul>
+                    <a href="#contact-form" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-md);">プランを選択</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="plan-name">エンタープライズプラン</h3>
+                    <div class="plan-price" style="font-size: 2rem;">
+                        要相談
+                    </div>
+                    <p style="color: #6B7280; margin-bottom: var(--spacing-md);">月額 / 大規模店舗・チェーン店向け</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> <span>プロフェッショナルプランの全機能</span></li>
+                        <li><i class="fas fa-check"></i> <span>広告予算: 無制限</span></li>
+                        <li><i class="fas fa-check"></i> <span>インフルエンサーマーケティング</span></li>
+                        <li><i class="fas fa-check"></i> <span>オリジナル動画広告制作</span></li>
+                        <li><i class="fas fa-check"></i> <span>複数店舗一括管理</span></li>
+                        <li><i class="fas fa-check"></i> <span>専任コンサルタント配置</span></li>
+                        <li><i class="fas fa-check"></i> <span>ブランディング戦略</span></li>
+                        <li><i class="fas fa-check"></i> <span>24時間サポート</span></li>
+                    </ul>
+                    <a href="#contact-form" class="btn btn-secondary" style="width: 100%; margin-top: var(--spacing-md);">お問い合わせ</a>
+                </div>
+            </div>
+
+            <div class="money-back-guarantee">
+                <div class="guarantee-badge">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>安心の成果保証制度</h3>
+                <p>
+                    導入後3ヶ月で、新規顧客数が月間30名以上増加しなかった場合、
+                    <strong>全額返金いたします</strong>。(スタータープラン除く)<br>
+                    私たちは結果にコミットします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">よくある質問</p>
+                <h2>お問い合わせ前に、まずはこちらをご確認ください</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>契約期間の縛りはありますか?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>いいえ、ございません。全プラン、契約期間の縛りなしでご利用いただけます。サービスにご満足いただけない場合は、いつでも解約可能です。(ただし、返金保証は3ヶ月継続された方が対象となります)</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>初期費用は本当に0円ですか?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>はい、全プラン初期費用0円です。システム構築費、アカウント設定費なども全て月額料金に含まれています。追加費用が発生する場合は、事前に必ずご相談・ご承認をいただきます。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>どんな業種でも対応できますか?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>飲食店、美容室・サロン、整体院・クリニック、小売店、教室・スクール、不動産、士業など、幅広い業種に対応しています。ただし、アダルト関連業種、法令に抵触する業種はお断りさせていただいております。ご不明な場合は、お気軽にお問い合わせください。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>効果が出るまでどのくらいかかりますか?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>早い方で2週間、平均的には1ヶ月程度で効果を実感していただけます。Googleマップ最適化やSNS広告は比較的早く効果が出やすく、SEOやブランディング施策は3ヶ月程度かかる場合があります。初月から段階的に効果が現れるよう、戦略を設計します。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>自分で何か作業する必要はありますか?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>基本的に全てお任せいただけます。ただし、店舗の写真素材や、サービス内容のヒアリングなど、最低限のご協力をお願いすることがあります。作業時間としては、月1-2時間程度とお考えください。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>返金保証の条件を教えてください</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>プロフェッショナルプラン・エンタープライズプランで、導入後3ヶ月継続していただき、新規顧客数が月間30名以上増加しなかった場合、全額返金いたします。ただし、以下の条件を満たしている必要があります: 1) 推奨された施策を全て実施している 2) 必要な素材・情報をご提供いただいている 3) 店舗側の営業活動が通常通り行われている</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact-form">
+        <div class="container">
+            <div class="cta-content">
+                <h2>新規顧客が自動で集まる仕組み、作りませんか?</h2>
+                <p>まずは無料診断で、あなたの店舗の集客課題を明確にしましょう。<br>60分の無料相談で、具体的な改善策をご提案します。</p>
+
+                <div class="urgency-message">
+                    <i class="fas fa-clock"></i> 今月の受付枠はあと3店舗のみ
+                </div>
+
+                <ul class="benefits-recap">
+                    <li><i class="fas fa-check-circle"></i> 初期費用0円・契約期間の縛りなし</li>
+                    <li><i class="fas fa-check-circle"></i> 3ヶ月で効果が出なければ全額返金</li>
+                    <li><i class="fas fa-check-circle"></i> 専任コンサルタントが完全サポート</li>
+                </ul>
+
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="store_name">店舗名 <span class="form-required">*</span></label>
+                                <input type="text" id="store_name" name="store_name" required placeholder="例: Hair Salon Lumiere">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="store_type">業種 <span class="form-required">*</span></label>
+                                <select id="store_type" name="store_type" required>
+                                    <option value="">選択してください</option>
+                                    <option value="restaurant">飲食店</option>
+                                    <option value="beauty">美容室・サロン</option>
+                                    <option value="clinic">整体院・クリニック</option>
+                                    <option value="retail">小売店</option>
+                                    <option value="school">教室・スクール</option>
+                                    <option value="realestate">不動産</option>
+                                    <option value="professional">士業</option>
+                                    <option value="other">その他</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">お名前 <span class="form-required">*</span></label>
+                                <input type="text" id="name" name="name" required placeholder="例: 山田 太郎">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">電話番号 <span class="form-required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="例: 090-1234-5678">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">メールアドレス <span class="form-required">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="例: tanaka@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">店舗所在地 <span class="form-required">*</span></label>
+                                <input type="text" id="location" name="location" required placeholder="例: 東京都渋谷区">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="preferred_plan">ご希望のプラン</label>
+                                <select id="preferred_plan" name="preferred_plan">
+                                    <option value="">選択してください</option>
+                                    <option value="starter">スタータープラン</option>
+                                    <option value="professional">プロフェッショナルプラン</option>
+                                    <option value="enterprise">エンタープライズプラン</option>
+                                    <option value="undecided">まだ決めていない</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>現在の課題(複数選択可)</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="challenges" value="no_customers"> 新規顧客が来ない
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="challenges" value="no_repeat"> リピーターが増えない
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="challenges" value="high_cost"> 広告費が高い
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="challenges" value="dont_know"> 集客方法が分からない
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="challenges" value="no_time"> 時間がない
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">ご質問・ご要望(任意)</label>
+                                <textarea id="message" name="message" placeholder="その他、ご質問やご要望があればご記入ください"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="privacy_agree" required>
+                                    <a href="#" style="color: var(--primary-blue);">プライバシーポリシー</a>に同意する <span class="form-required">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-top: var(--spacing-md);">
+                            無料診断を予約する <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div style="margin-top: var(--spacing-lg); color: rgba(255, 255, 255, 0.8);">
+                    <p><i class="fas fa-phone"></i> お電話でのお問い合わせ: <strong>0120-XXX-XXX</strong> (平日 10:00-18:00)</p>
+                    <p><i class="fas fa-envelope"></i> メール: info@store-growth.jp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>株式会社ストアグロース</h3>
+                    <p>店舗ビジネスの成長を支援する、集客マーケティングのプロフェッショナル集団。</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LINE"><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>サービス</h3>
+                    <ul class="footer-links">
+                        <li><a href="#solution">サービス内容</a></li>
+                        <li><a href="#pricing">料金プラン</a></li>
+                        <li><a href="#testimonials">導入事例</a></li>
+                        <li><a href="#faq">よくある質問</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>会社情報</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">会社概要</a></li>
+                        <li><a href="#">採用情報</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">特定商取引法に基づく表記</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> 0120-XXX-XXX</li>
+                        <li><i class="fas fa-envelope"></i> info@store-growth.jp</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 東京都渋谷区神宮前1-2-3</li>
+                        <li style="margin-top: var(--spacing-sm);">平日 10:00 - 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Store Growth Inc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="ページトップへ">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const faqAnswer = faqItem.querySelector('.faq-answer');
+                const isActive = faqItem.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                    faqAnswer.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // Validation
+            if (!data.store_name || !data.store_type || !data.name || !data.phone || !data.email || !data.location) {
+                alert('必須項目をすべて入力してください。');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                alert('有効なメールアドレスを入力してください。');
+                return;
+            }
+
+            // Phone validation
+            const phoneRegex = /^[\d\-\+\(\)\s]+$/;
+            if (!phoneRegex.test(data.phone)) {
+                alert('有効な電話番号を入力してください。');
+                return;
+            }
+
+            // Privacy policy check
+            if (!data.privacy_agree) {
+                alert('プライバシーポリシーに同意してください。');
+                return;
+            }
+
+            // Here you would typically send the data to your backend
+            console.log('Form data:', data);
+
+            // Show success message
+            alert('お問い合わせありがとうございます！\n24時間以内に担当者よりご連絡させていただきます。');
+
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.pain-point-card, .differentiator-card, .benefit-card, .process-step, .testimonial-card, .pricing-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add animation delay to staggered elements
+        document.querySelectorAll('.pain-points-grid .pain-point-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        document.querySelectorAll('.benefits-grid .benefit-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        document.querySelectorAll('.process-steps .process-step').forEach((step, index) => {
+            step.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        document.querySelectorAll('.testimonials-grid .testimonial-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Analytics tracking (placeholder)
+        function trackEvent(eventName, eventData) {
+            // Google Analytics tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventData);
+            }
+            console.log('Event tracked:', eventName, eventData);
+        }
+
+        // Track CTA clicks
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                trackEvent('cta_click', {
+                    button_text: e.target.textContent.trim(),
+                    button_location: e.target.closest('section')?.id || 'unknown'
+                });
+            });
+        });
+
+        // Track form submission
+        contactForm.addEventListener('submit', () => {
+            trackEvent('form_submission', {
+                form_type: 'contact_form'
+            });
+        });
+
+        // Track scroll depth
+        let maxScroll = 0;
+        const scrollDepths = [25, 50, 75, 100];
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                scrollDepths.forEach(depth => {
+                    if (maxScroll >= depth && !window[`tracked_${depth}`]) {
+                        window[`tracked_${depth}`] = true;
+                        trackEvent('scroll_depth', { depth: `${depth}%` });
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Google Analytics (replace with your tracking ID) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+</body>
+</html>

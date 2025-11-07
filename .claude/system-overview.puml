@@ -1,0 +1,167 @@
+@startuml Claude Code System Overview
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Claude Code - Complete System Architecture
+
+actor "User" as User
+
+package "Claude Code Core System" {
+    component "Claude Code Engine" as Engine {
+        [Intent Parser]
+        [Context Manager]
+        [Execution Orchestrator]
+        [Result Formatter]
+    }
+
+    component "Tool System" as Tools {
+        [Read]
+        [Write]
+        [Edit]
+        [Bash]
+        [Grep]
+        [Glob]
+        [Task]
+        [Skill]
+        [SlashCommand]
+        [WebFetch]
+        [WebSearch]
+    }
+}
+
+package "Extension Layer" {
+
+    package "Sub-agents (.claude/agnets/)" {
+        component "general-purpose" as GP
+        component "Explore" as Explore
+        component "Plan" as Plan
+        component "Custom Agents" as CustomAgents
+    }
+
+    package "Hooks (.claude/hooks/)" {
+        component "user-prompt-submit" as PromptHook
+        component "tool-call" as ToolHook
+        component "pre-commit" as CommitHook
+        component "Custom Hooks" as CustomHooks
+    }
+
+    package "Skills (.claude/skills/)" {
+        component "PDF Processing" as PDFSkill
+        component "Excel Processing" as XLSXSkill
+        component "API Testing" as APISkill
+        component "Code Review" as ReviewSkill
+        component "Custom Skills" as CustomSkills
+    }
+
+    package "Slash Commands (.claude/commands/)" {
+        component "/review-pr" as ReviewPRCmd
+        component "/test" as TestCmd
+        component "/deploy" as DeployCmd
+        component "/refactor" as RefactorCmd
+        component "/docs" as DocsCmd
+        component "Custom Commands" as CustomCmds
+    }
+}
+
+package "Configuration" {
+    database "Settings" {
+        file "~/.claude/settings.json" as GlobalSettings
+        file ".claude/settings.json" as ProjectSettings
+        file "CLAUDE.md" as ContextFile
+    }
+
+    database "Project Context" {
+        folder ".claude/context/" as ContextDir
+        folder ".claude/agents/" as AgentsDir
+    }
+}
+
+package "External Integrations" {
+    cloud "GitHub" as GitHub {
+        [Issues]
+        [Pull Requests]
+        [Actions]
+    }
+
+    cloud "MCP Servers" as MCP {
+        [IDE Server]
+        [Custom Servers]
+    }
+
+    database "File System" as FS
+    database "Git Repository" as Git
+}
+
+' User interactions
+User --> Engine : send request
+Engine --> User : return result
+
+' Core flow
+Engine --> [Intent Parser] : parse intent
+[Intent Parser] --> [Context Manager] : load context
+[Context Manager] --> ContextFile : read
+[Context Manager] --> ContextDir : read
+[Context Manager] --> ProjectSettings : read
+[Context Manager] --> GlobalSettings : read
+
+[Context Manager] --> [Execution Orchestrator] : execute with context
+[Execution Orchestrator] --> Tools : use tools
+
+' Tool to Extension connections
+[Task] --> GP : invoke
+[Task] --> Explore : invoke
+[Task] --> Plan : invoke
+[Task] --> CustomAgents : invoke
+
+[Skill] --> PDFSkill : invoke
+[Skill] --> XLSXSkill : invoke
+[Skill] --> APISkill : invoke
+[Skill] --> ReviewSkill : invoke
+[Skill] --> CustomSkills : invoke
+
+[SlashCommand] --> ReviewPRCmd : invoke
+[SlashCommand] --> TestCmd : invoke
+[SlashCommand] --> DeployCmd : invoke
+[SlashCommand] --> RefactorCmd : invoke
+[SlashCommand] --> DocsCmd : invoke
+[SlashCommand] --> CustomCmds : invoke
+
+' Hook integrations
+[Execution Orchestrator] --> PromptHook : trigger on prompt
+[Execution Orchestrator] --> ToolHook : trigger on tool call
+[Execution Orchestrator] --> CommitHook : trigger on commit
+[Execution Orchestrator] --> CustomHooks : trigger custom
+
+' External integrations
+[Read] --> FS : read files
+[Write] --> FS : write files
+[Edit] --> FS : edit files
+[Bash] --> Git : git commands
+[Bash] --> GitHub : gh CLI
+
+[WebFetch] ..> MCP : fetch via MCP
+[WebSearch] ..> MCP : search via MCP
+
+Tools --> [mcp__ide__*] : IDE integration
+
+' Result flow
+[Execution Orchestrator] --> [Result Formatter] : format results
+[Result Formatter] --> Engine : formatted output
+
+note right of Engine
+    Agent(Intent, World₀) =
+    lim_{n→∞} (θ₆_{Learn} ◦ θ₅_{Integrate} ◦
+    θ₄_{Execute} ◦ θ₃_{Allocate} ◦
+    θ₂_{Generate} ◦ θ₁_{Understand})ⁿ
+    (Intent, World₀)
+end note
+
+legend right
+    |= Component Type |= Description |
+    | <back:#LightBlue>Built-in</back> | Core Claude Code components |
+    | <back:#LightGreen>Custom</back> | User-defined extensions |
+    | <back:#LightYellow>External</back> | External services |
+endlegend
+
+@enduml

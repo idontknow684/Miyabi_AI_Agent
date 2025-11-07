@@ -1,0 +1,155 @@
+@startuml Agent Lifecycle Flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam activityFontSize 12
+
+title Claude Code Agent Lifecycle - Main Flow
+
+|User|
+start
+:Submit Intent/Request;
+
+|Claude Code Engine|
+:θ₁ **Understand** Intent;
+note right
+  Parse user request
+  Identify task type
+  Determine required capabilities
+end note
+
+:θ₂ **Generate** Plan;
+note right
+  Break down into steps
+  Select appropriate tools
+  Identify Sub-agents/Skills/Commands
+end note
+
+:θ₃ **Allocate** Resources;
+note right
+  Check available tools
+  Verify permissions
+  Load context (CLAUDE.md)
+  Initialize hooks
+end note
+
+|Extension Layer|
+if (Requires Sub-agent?) then (yes)
+  :Invoke Task Tool;
+  :Select Sub-agent Type;
+  note right
+    - general-purpose
+    - Explore
+    - Plan
+    - Custom agents
+  end note
+  :Expand Sub-agent Prompt;
+  :Execute Autonomously;
+  :Return Final Report;
+else if (Requires Skill?) then (yes)
+  :Invoke Skill Tool;
+  :Load Skill Definition;
+  :Expand Skill Prompt;
+  :Execute Skill Logic;
+  :Return Skill Results;
+else if (Slash Command?) then (yes)
+  :Invoke SlashCommand Tool;
+  :Parse Command & Args;
+  :Expand Command Prompt;
+  :Execute Command Steps;
+  :Return Command Results;
+else (direct execution)
+  :Use Core Tools;
+  note right
+    Read, Write, Edit,
+    Bash, Grep, Glob, etc.
+  end note
+endif
+
+|Hook System|
+if (Hook Triggered?) then (yes)
+  fork
+    :Execute Hook Script;
+  fork again
+    :Continue Main Flow;
+  end fork
+
+  if (Hook Failed?) then (yes)
+    if (failureMode = error) then (yes)
+      :Block Operation;
+      stop
+    else if (failureMode = warn) then (yes)
+      :Show Warning;
+      :Continue;
+    else (ignore)
+      :Silent Continue;
+    endif
+  else (passed)
+    :Continue;
+  endif
+else (no hook)
+  :Continue;
+endif
+
+|Claude Code Engine|
+:θ₄ **Execute** Actions;
+note right
+  Perform planned operations
+  Handle tool calls
+  Process sub-agent results
+  Apply hooks
+end note
+
+if (Execution Successful?) then (yes)
+  :θ₅ **Integrate** Results;
+  note right
+    Combine outputs
+    Format response
+    Update context
+  end note
+
+  :θ₆ **Learn** from Execution;
+  note right
+    Update internal state
+    Refine understanding
+    Prepare for next iteration
+  end note
+
+  if (More Steps Required?) then (yes)
+    :Iterate (n+1);
+    note right
+      lim_{n→∞} of composition
+      Loop back to Understand
+    end note
+    detach
+  else (complete)
+    :Format Final Response;
+  endif
+else (failed)
+  :Error Handling;
+
+  if (Can Retry?) then (yes)
+    :Adjust Strategy;
+    note right
+      Return to Generate Plan
+    end note
+    detach
+  else (no)
+    :Report Error;
+  endif
+endif
+
+|User|
+:Receive Results;
+stop
+
+legend right
+  |= Phase |= Description |
+  | θ₁ Understand | Parse and comprehend user intent |
+  | θ₂ Generate | Create execution plan |
+  | θ₃ Allocate | Assign resources and tools |
+  | θ₄ Execute | Perform planned actions |
+  | θ₅ Integrate | Combine and format results |
+  | θ₆ Learn | Update state for next iteration |
+endlegend
+
+@enduml

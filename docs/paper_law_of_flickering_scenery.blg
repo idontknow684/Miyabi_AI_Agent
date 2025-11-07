@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2024/Homebrew)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper_law_of_flickering_scenery.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty booktitle in mcdermott1998pddl
+
+Done.
+You've used 8 entries,
+            4087 wiz_defined-function locations,
+            864 strings with 8510 characters,
+and the built_in function-call counts, 5143 in all, are:
+= -- 392
+> -- 125
+< -- 32
++ -- 66
+- -- 24
+* -- 241
+:= -- 795
+add.period$ -- 16
+call.type$ -- 8
+change.case$ -- 8
+chr.to.int$ -- 72
+cite$ -- 9
+duplicate$ -- 381
+empty$ -- 444
+format.name$ -- 29
+if$ -- 1178
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 73
+newline$ -- 47
+num.names$ -- 8
+pop$ -- 184
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 402
+stack$ -- 0
+substring$ -- 176
+swap$ -- 278
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 8
+warning$ -- 1
+while$ -- 20
+width$ -- 9
+write$ -- 93
+(There was 1 warning)

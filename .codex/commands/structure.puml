@@ -1,0 +1,142 @@
+@startuml Slash Commands Structure
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+
+title Claude Code Slash Commands Architecture
+
+actor User
+participant "Claude Code" as Claude
+participant "Command Parser" as Parser
+participant "Command Executor" as Executor
+
+box "Built-in Commands" #LightBlue
+    participant "/help" as HelpCmd
+    participant "/clear" as ClearCmd
+    participant "/reset" as ResetCmd
+end box
+
+box "Custom Commands" #LightGreen
+    collections "Command Definitions" as CmdDefs {
+        file ".claude/commands/review-pr.md" as ReviewPR
+        file ".claude/commands/test.md" as TestCmd
+        file ".claude/commands/deploy.md" as DeployCmd
+        file ".claude/commands/refactor.md" as RefactorCmd
+        file ".claude/commands/docs.md" as DocsCmd
+    }
+end box
+
+database "Command Registry" as Registry
+
+== Command Registration ==
+CmdDefs -> Registry: register commands
+note right of Registry
+    Commands registered with:
+    - name (from filename)
+    - description (from YAML front matter)
+    - prompt template
+end note
+
+== Command Execution Flow ==
+
+User -> Claude: "/review-pr 123"
+Claude -> Parser: parse command
+Parser -> Parser: extract name & args
+
+alt Built-in Command
+    Parser -> HelpCmd: /help
+    HelpCmd --> User: display help
+else Custom Command
+    Parser -> Registry: lookup "review-pr"
+    Registry --> Parser: command definition
+
+    Parser -> Executor: execute with args
+    note right of Executor
+        <command-message>
+        review-pr is running...
+        </command-message>
+    end note
+
+    Executor -> ReviewPR: expand prompt template
+    ReviewPR --> Executor: expanded prompt
+
+    Executor -> Executor: substitute ${PR_NUMBER} = 123
+
+    Executor -> Claude: process with expanded prompt
+
+    Claude -> Claude: execute command steps:
+    note right
+        1. Fetch PR details
+        2. Read changed files
+        3. Analyze changes
+        4. Generate review
+        5. Format output
+    end note
+
+    Claude --> User: review results
+end
+
+== Command Examples ==
+
+group /review-pr Flow
+    User -> Claude: "/review-pr 456"
+    Claude -> ReviewPR: expand
+    ReviewPR -> Claude: """
+    ReviewPR -> Claude: gh pr view 456
+    ReviewPR -> Claude: gh pr diff 456
+    ReviewPR -> Claude: analyze for quality, security, performance
+    ReviewPR -> Claude: provide feedback
+    ReviewPR -> Claude: """
+    Claude --> User: PR Review Report
+end
+
+group /test Flow
+    User -> Claude: "/test"
+    Claude -> TestCmd: expand
+    TestCmd -> Claude: """
+    TestCmd -> Claude: npm test
+    TestCmd -> Claude: analyze failures
+    TestCmd -> Claude: fix issues
+    TestCmd -> Claude: re-run tests
+    TestCmd -> Claude: """
+    Claude --> User: Test Results Report
+end
+
+group /deploy Flow
+    User -> Claude: "/deploy production"
+    Claude -> DeployCmd: expand with env=production
+    DeployCmd -> Claude: """
+    DeployCmd -> Claude: pre-flight checks
+    DeployCmd -> Claude: run tests & lint
+    DeployCmd -> Claude: build project
+    DeployCmd -> Claude: deploy to production
+    DeployCmd -> Claude: verify deployment
+    DeployCmd -> Claude: """
+    Claude --> User: Deployment Report
+end
+
+group /refactor Flow
+    User -> Claude: "/refactor"
+    Claude -> RefactorCmd: expand
+    RefactorCmd -> Claude: """
+    RefactorCmd -> Claude: analyze code smells
+    RefactorCmd -> Claude: identify duplications
+    RefactorCmd -> Claude: apply refactoring patterns
+    RefactorCmd -> Claude: run tests
+    RefactorCmd -> Claude: """
+    Claude --> User: Refactoring Report
+end
+
+group /docs Flow
+    User -> Claude: "/docs"
+    Claude -> DocsCmd: expand
+    DocsCmd -> Claude: """
+    DocsCmd -> Claude: analyze codebase
+    DocsCmd -> Claude: generate JSDoc comments
+    DocsCmd -> Claude: update README
+    DocsCmd -> Claude: create examples
+    DocsCmd -> Claude: """
+    Claude --> User: Documentation Report
+end
+
+@enduml

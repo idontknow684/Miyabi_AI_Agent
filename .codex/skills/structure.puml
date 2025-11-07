@@ -1,0 +1,160 @@
+@startuml Skills Structure
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Claude Code Skills Architecture
+
+package "Claude Code Core" {
+    [Skill Tool] as SkillTool
+    note right of SkillTool
+        Entry point for all
+        skill invocations
+    end note
+}
+
+package "Available Skills" {
+    component "PDF Processing" as PDF {
+        [PDF Reader]
+        [Text Extractor]
+        [PDF Generator]
+        [PDF Merger]
+
+        database "Dependencies" as PDFDeps {
+            (PyPDF2)
+            (fpdf)
+        }
+    }
+
+    component "Excel Processing" as XLSX {
+        [Spreadsheet Reader]
+        [Data Parser]
+        [Formula Evaluator]
+        [Excel Generator]
+
+        database "Dependencies" as XLSXDeps {
+            (openpyxl)
+            (pandas)
+        }
+    }
+
+    component "API Testing" as APITest {
+        [Request Builder]
+        [Response Validator]
+        [Error Handler]
+        [Performance Tester]
+        [Doc Generator]
+
+        database "Dependencies" as APIDeps {
+            (curl)
+            (jq)
+        }
+    }
+
+    component "Code Review" as CodeReview {
+        [Quality Checker]
+        [Security Scanner]
+        [Performance Analyzer]
+        [Best Practices Validator]
+        [Documentation Verifier]
+
+        note bottom of CodeReview
+            Review Aspects:
+            - Code Quality
+            - Security (OWASP Top 10)
+            - Performance
+            - Testing
+            - Documentation
+        end note
+    }
+}
+
+package "Custom Skills" {
+    component "Custom Skill Template" as CustomSkill {
+        [Feature 1]
+        [Feature 2]
+        [Feature N]
+
+        note bottom of CustomSkill
+            Defined in:
+            .claude/skills/*.md
+        end note
+    }
+}
+
+cloud "Skill Invocation Flow" {
+    rectangle "User Request" as UR
+    rectangle "Skill Matching" as SM
+    rectangle "Prompt Expansion" as PE
+    rectangle "Skill Execution" as SE
+    rectangle "Result Delivery" as RD
+}
+
+actor User
+
+User --> UR : "Process this PDF"
+UR --> SkillTool
+SkillTool --> SM
+
+SM --> PDF : pdf skill
+SM --> XLSX : xlsx skill
+SM --> APITest : api-test skill
+SM --> CodeReview : code-review skill
+SM --> CustomSkill : custom skills
+
+SM --> PE : expand skill prompt
+PE --> SE : execute with context
+
+SE --> [PDF Reader] : read PDF
+SE --> [Spreadsheet Reader] : read Excel
+SE --> [Request Builder] : test API
+SE --> [Quality Checker] : review code
+
+SE --> RD : deliver results
+RD --> User : results
+
+' Dependencies
+[PDF Reader] ..> PDFDeps : uses
+[Text Extractor] ..> PDFDeps : uses
+[PDF Generator] ..> PDFDeps : uses
+
+[Spreadsheet Reader] ..> XLSXDeps : uses
+[Data Parser] ..> XLSXDeps : uses
+[Excel Generator] ..> XLSXDeps : uses
+
+[Request Builder] ..> APIDeps : uses
+[Response Validator] ..> APIDeps : uses
+
+package "Skill Patterns" {
+    card "Proactive Skills" as ProactivePattern {
+        rectangle "Auto-trigger on conditions"
+        note right
+            Example:
+            Auto-test after code changes
+        end note
+    }
+
+    card "On-Demand Skills" as OnDemandPattern {
+        rectangle "User explicitly requests"
+        note right
+            Example:
+            User asks for performance analysis
+        end note
+    }
+
+    card "Pipeline Skills" as PipelinePattern {
+        rectangle "Chain with dependencies"
+        note right
+            Example:
+            code-review -> test -> deploy
+        end note
+    }
+}
+
+PDF ..> OnDemandPattern : follows
+XLSX ..> OnDemandPattern : follows
+APITest ..> OnDemandPattern : follows
+CodeReview ..> ProactivePattern : follows
+CustomSkill ..> PipelinePattern : can follow
+
+@enduml

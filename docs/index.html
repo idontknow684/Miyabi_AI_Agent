@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive guide to controlling detail levels in Claude Code's subagent system">
+    <title>Claude Code Detail Control - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --border: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .quick-links {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .quick-links h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--surface-light);
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .link-item:hover {
+            background: var(--background);
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .link-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .comparison-section {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .comparison-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--background);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--surface);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .tag-quick {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent);
+        }
+
+        .tag-medium {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+        }
+
+        .tag-thorough {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--secondary);
+        }
+
+        .code-example {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-example pre {
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Claude Code Detail Control</h1>
+            <p class="subtitle">
+                Master the art of controlling detail levels in Claude Code's subagent system.
+                From quick scans to comprehensive audits.
+            </p>
+            <div class="cta-buttons">
+                <a href="./index.md" class="btn btn-primary">📖 Read the Docs</a>
+                <a href="./guides/controlling-detail-levels.md" class="btn btn-secondary">🚀 Complete Guide</a>
+                <a href="./examples/detail-control-examples.md" class="btn btn-secondary">💻 Code Examples</a>
+            </div>
+        </header>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎚️</div>
+                <h3>Fine-Grained Control</h3>
+                <p>
+                    Choose from quick, medium, or thorough detail levels.
+                    Control agent behavior with precision through explicit configuration.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Specialized Agents</h3>
+                <p>
+                    15+ specialized agent types for different tasks: exploration,
+                    security audits, UI/UX review, and more.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Performance Optimized</h3>
+                <p>
+                    Match detail levels to task complexity. Use Haiku for speed,
+                    Sonnet for balance, or Opus for complex reasoning.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Security Bounded</h3>
+                <p>
+                    Each agent has explicit tool access control. Know exactly
+                    what operations are possible for predictable, secure behavior.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Predictable Results</h3>
+                <p>
+                    Explicit agent definitions ensure consistent, testable behavior.
+                    No surprises from dynamic tool selection.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Production Ready</h3>
+                <p>
+                    Learn patterns used in real-world development workflows.
+                    From onboarding to bug hunting to security audits.
+                </p>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <h2>📚 Quick Links</h2>
+            <div class="link-grid">
+                <a href="./index.md" class="link-item">
+                    <span class="link-icon">🏠</span>
+                    <span>Documentation Home</span>
+                </a>
+                <a href="./guides/controlling-detail-levels.md#introduction" class="link-item">
+                    <span class="link-icon">📖</span>
+                    <span>Introduction</span>
+                </a>
+                <a href="./guides/controlling-detail-levels.md#architecture-comparison" class="link-item">
+                    <span class="link-icon">🏗️</span>
+                    <span>Architecture Comparison</span>
+                </a>
+                <a href="./guides/controlling-detail-levels.md#control-mechanisms-in-claude-code" class="link-item">
+                    <span class="link-icon">⚙️</span>
+                    <span>Control Mechanisms</span>
+                </a>
+                <a href="./examples/detail-control-examples.md#quick-reference-examples" class="link-item">
+                    <span class="link-icon">⚡</span>
+                    <span>Quick Examples</span>
+                </a>
+                <a href="./examples/detail-control-examples.md#real-world-scenarios" class="link-item">
+                    <span class="link-icon">🌍</span>
+                    <span>Real-World Scenarios</span>
+                </a>
+                <a href="./guides/controlling-detail-levels.md#best-practices" class="link-item">
+                    <span class="link-icon">✅</span>
+                    <span>Best Practices</span>
+                </a>
+                <a href="./guides/controlling-detail-levels.md#advanced-patterns" class="link-item">
+                    <span class="link-icon">🚀</span>
+                    <span>Advanced Patterns</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <h2>📊 Detail Level Comparison</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Detail Level</th>
+                            <th>Use Case</th>
+                            <th>Speed</th>
+                            <th>Cost</th>
+                            <th>Model</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag tag-quick">Quick</span></td>
+                            <td>File searches, simple queries</td>
+                            <td>Fast (30-90s)</td>
+                            <td>$0.01-0.05</td>
+                            <td>Haiku</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-medium">Medium</span></td>
+                            <td>Feature understanding, code review</td>
+                            <td>Moderate (2-5min)</td>
+                            <td>$0.10-0.30</td>
+                            <td>Sonnet</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-thorough">Very Thorough</span></td>
+                            <td>Security audits, comprehensive analysis</td>
+                            <td>Slow (5-15min)</td>
+                            <td>$0.50-2.00</td>
+                            <td>Opus</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <h2>💡 Usage Example</h2>
+            <div class="code-example">
+                <pre>// Control detail level explicitly
+await Task({
+  subagent_type: "Explore",
+  thoroughness: "medium",  // ← Control detail
+  model: "sonnet",         // ← Control model
+  prompt: `
+    Analyze authentication system:
+    - Main files with line refs
+    - Flow description (3-5 paragraphs)
+    - Security assessment
+
+    Detail level: Medium (balanced)
+  `
+})</pre>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <h2>🔍 Featured Comparison</h2>
+            <p style="margin-bottom: 1rem;">
+                This documentation compares Claude Code's <strong>explicit subagent model</strong>
+                with approaches described in:
+            </p>
+            <ul style="margin-left: 2rem; color: var(--text-muted);">
+                <li>Phil Schmid's "The Rise of Subagents"</li>
+                <li>Poke.com's dynamic agent system</li>
+                <li>Traditional monolithic agent approaches</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                Learn when to use each approach and how to get the most from Claude Code's
+                explicit, controllable architecture.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>
+            Part of the <strong>AI_Agent</strong> project |
+            <a href="https://github.com/anthropics/claude-code">GitHub</a> |
+            <a href="https://docs.claude.com/claude-code">Official Docs</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+            Comparing with <a href="https://www.philschmid.de/the-rise-of-subagents" target="_blank">Phil Schmid's work</a>
+        </p>
+    </footer>
+</body>
+</html>

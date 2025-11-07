@@ -1,0 +1,124 @@
+@startuml Orchestrator-Subagent Architecture
+
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Orchestrator-Subagent Architecture\nImplementation of Director-Worker Pattern
+
+' User Request
+actor User as user
+rectangle "User Request" as UR #LightBlue {
+  [Request ID]
+  [Content]
+  [Context]
+}
+
+' Orchestrator Agent
+package "Orchestrator Agent" as orchestrator #LightGreen {
+  component "θ₁ Analyze\nRequest" as analyze
+  component "θ₂ Decompose\nTasks" as decompose
+  component "θ₃ Allocate\nResources" as allocate
+  component "θ₄ Execute\nTasks" as execute
+  component "θ₅ Integrate\nResults" as synthesize
+  component "θ₆ Learn\n(Future)" as learn
+
+  analyze -down-> decompose
+  decompose -down-> allocate
+  allocate -down-> execute
+  execute -down-> synthesize
+  synthesize -down-> learn
+}
+
+' Isolated Execution Environment
+frame "Isolated Execution Environment" as isolation #LightYellow {
+
+  ' Subagent 1
+  package "Subagent 1" as sub1 #LightCoral {
+    component "Own Context" as ctx1
+    component "Own Tools\n(Read, Write, Bash)" as tools1
+    component "Solves Task A" as solve1
+
+    ctx1 -down-> tools1
+    tools1 -down-> solve1
+  }
+
+  ' Subagent 2
+  package "Subagent 2" as sub2 #LightSkyBlue {
+    component "Own Context" as ctx2
+    component "Own Tools\n(Read, Write, Bash)" as tools2
+    component "Solves Task B" as solve2
+
+    ctx2 -down-> tools2
+    tools2 -down-> solve2
+  }
+
+  ' Subagent N
+  package "Subagent n..." as subn #LightSalmon {
+    component "Own Context" as ctxn
+    component "Own Tools\n(Read, Write, Bash)" as toolsn
+    component "Solves Task C" as solven
+
+    ctxn -down-> toolsn
+    toolsn -down-> solven
+  }
+}
+
+' Results
+rectangle "Subagent Results" as results #LightPink {
+  [Task ID]
+  [Output]
+  [Artifacts]
+  [Execution Time]
+}
+
+' Final Answer
+rectangle "Final Answer" as final #LightGreen {
+  [Request ID]
+  [Synthesized Answer]
+  [All Results]
+  [Total Time]
+}
+
+' Flow
+user --> UR : submits
+UR --> analyze : process()
+
+execute --> sub1 : delegate Task A
+execute --> sub2 : delegate Task B
+execute --> subn : delegate Task C
+
+sub1 --> results : result 1
+sub2 --> results : result 2
+subn --> results : result n
+
+results --> synthesize : collect all
+synthesize --> final : generate
+final --> user : return
+
+' Notes
+note right of isolation
+  **Parallel Execution**
+  - Each subagent runs independently
+  - Own isolated context
+  - No shared state
+  - Concurrent execution
+end note
+
+note left of orchestrator
+  **Orchestrator Responsibilities**
+  1. Analyze user request
+  2. Break into subtasks
+  3. Select appropriate subagents
+  4. Monitor execution
+  5. Synthesize final answer
+  6. Learn from results (future)
+end note
+
+note bottom of final
+  **Performance**
+  Sequential: Task₁ + Task₂ + Task₃ = 300ms
+  Parallel:   max(Task₁, Task₂, Task₃) ≈ 100ms
+  Speedup:    3x (with 3 tasks)
+end note
+
+@enduml

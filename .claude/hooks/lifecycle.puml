@@ -1,0 +1,186 @@
+@startuml Hook Lifecycle Flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam activityFontSize 12
+
+title Hook Execution Lifecycle
+
+|Claude Code Engine|
+start
+:Agent Execution Started;
+
+partition "Initialization Phase" {
+  :Load Settings;
+  note right
+    Sources (priority order):
+    1. .claude/settings.json
+    2. ~/.claude/settings.json
+  end note
+
+  :Parse Hook Configurations;
+  :Register Active Hooks;
+  note right
+    Hook Types:
+    - user-prompt-submit
+    - tool-call
+    - pre-commit
+    - custom hooks
+  end note
+}
+
+|Event System|
+:Wait for Event;
+
+partition "Event Triggered" {
+  if (Event Type?) then (user-prompt-submit)
+    :User Prompt Submitted;
+    #LightBlue:Trigger user-prompt-submit hooks;
+  else if (tool-call)
+    :Tool About to Execute;
+    #LightGreen:Trigger tool-call hooks;
+  else if (pre-commit)
+    :Git Commit Starting;
+    #LightYellow:Trigger pre-commit hooks;
+  else (custom)
+    :Custom Event;
+    #LightPink:Trigger custom hooks;
+  endif
+}
+
+|Hook Manager|
+:Find Matching Hooks;
+
+if (Hook Enabled?) then (no)
+  :Skip Hook;
+  |Claude Code Engine|
+  :Continue Normal Flow;
+  stop
+else (yes)
+  :Prepare Hook Execution;
+endif
+
+:Build Environment;
+note right
+  Environment Variables:
+  - CLAUDE_PROJECT_DIR
+  - CLAUDE_TOOL_NAME
+  - CLAUDE_TOOL_PARAMS
+  - Custom vars
+end note
+
+:Substitute Parameters;
+note right
+  Replace placeholders:
+  ${file_path}
+  ${command}
+  ${PR_NUMBER}
+  etc.
+end note
+
+|Shell Executor|
+:Execute Hook Script;
+
+if (Timeout Set?) then (yes)
+  fork
+    :Run Script;
+  fork again
+    :Start Timer;
+    if (Timeout Reached?) then (yes)
+      :Kill Process;
+      :Return Timeout Error;
+    endif
+  end fork
+else (no)
+  :Run Script (default 5s timeout);
+endif
+
+:Capture Output;
+note right
+  - stdout
+  - stderr
+  - exit code
+end note
+
+|Hook Manager|
+:Process Results;
+
+if (Exit Code?) then (0 - success)
+  :Hook Passed;
+
+  if (Output Present?) then (yes)
+    :Send Output to Claude;
+    note right
+      Output treated as
+      user feedback
+    end note
+  endif
+
+  |Claude Code Engine|
+  :Continue Normal Flow;
+
+else (non-zero - failure)
+  :Hook Failed;
+
+  if (Failure Mode?) then (error)
+    #Pink:Block Operation;
+
+    :Send Error to User;
+    note right
+      Operation blocked:
+      "Hook failed: <error message>"
+    end note
+
+    |User|
+    :Receive Error;
+    :Fix Issue / Adjust Hooks;
+    stop
+
+  else if (warn)
+    #Yellow:Allow with Warning;
+
+    :Send Warning to User;
+    note right
+      Warning shown:
+      "Hook warning: <message>
+      Continuing anyway..."
+    end note
+
+    |Claude Code Engine|
+    :Continue Normal Flow;
+
+  else (ignore)
+    #LightGray:Silent Continue;
+
+    :Log Failure (internal);
+
+    |Claude Code Engine|
+    :Continue Normal Flow;
+  endif
+endif
+
+stop
+
+note bottom
+  **Hook Execution Characteristics:**
+
+  1. **Synchronous** - Blocks main flow until complete
+  2. **Parameterized** - Can access event context
+  3. **Configurable Timeout** - Default 5s, max 600s
+  4. **Flexible Error Handling** - error/warn/ignore modes
+  5. **Feedback Loop** - Output sent back to Claude
+  6. **Environment-aware** - Access to project context
+end note
+
+legend right
+  |= Failure Mode |= Behavior |
+  | error | Block operation completely |
+  | warn | Show warning but continue |
+  | ignore | Silent failure, continue |
+
+  |= Common Use Cases |
+  | Pre-commit | Lint, test, format check |
+  | Tool-call | Backup, validation, logging |
+  | User-prompt | Auto-test, custom checks |
+endlegend
+
+@enduml

@@ -1,0 +1,161 @@
+@startuml Sub-agent Execution Lifecycle
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam activityFontSize 12
+
+title Sub-agent Execution Lifecycle
+
+|Main Agent|
+start
+:Identify Need for Sub-agent;
+note right
+  Conditions:
+  - Complex multi-step task
+  - Codebase exploration
+  - Planning required
+  - Specialized capability
+end note
+
+:Select Sub-agent Type;
+if (Task Type?) then (multi-step research)
+  :general-purpose;
+else if (codebase exploration)
+  :Explore;
+else if (architecture planning)
+  :Plan;
+else (custom task)
+  :Custom Sub-agent;
+endif
+
+:Prepare Invocation;
+note right
+  - Define task description
+  - Set thoroughness level
+  - Specify expected output
+  - Include context
+end note
+
+|Task Tool|
+:Invoke Task Tool;
+:Validate Parameters;
+note right
+  Required:
+  - subagent_type
+  - prompt
+  - description
+
+  Optional:
+  - model (sonnet/opus/haiku)
+  - resume (agent ID)
+end note
+
+if (Resume from Previous?) then (yes)
+  :Load Previous Transcript;
+  :Continue from Checkpoint;
+else (new execution)
+  :Initialize New Agent;
+endif
+
+|Sub-agent Instance|
+partition "Autonomous Execution" {
+  :Receive Expanded Prompt;
+  note right
+    Agent has access to:
+    - Full conversation history
+    - Current context
+    - All specified tools
+  end note
+
+  :Parse Task Requirements;
+
+  repeat
+    :Select Appropriate Tool;
+
+    if (Tool Type?) then (Read)
+      :Read Files;
+    else if (Grep)
+      :Search Code;
+    else if (Glob)
+      :Find Files;
+    else if (Bash)
+      :Execute Commands;
+    else if (WebFetch)
+      :Fetch Web Content;
+    else (other)
+      :Use Other Tools;
+    endif
+
+    :Process Tool Results;
+    :Update Internal State;
+
+    if (Task Complete?) then (yes)
+      :Prepare Final Report;
+    else if (Error Encountered?) then (yes)
+      if (Can Recover?) then (yes)
+        :Adjust Strategy;
+        :Continue;
+      else (no)
+        :Report Error;
+        :Prepare Partial Results;
+      endif
+    else (continue)
+      :Plan Next Action;
+    endif
+
+  repeat while (More Steps Needed?) is (yes)
+  ->no;
+
+  :Compile Final Report;
+  note right
+    Report includes:
+    - Task completion status
+    - Findings/Results
+    - Recommendations
+    - Any errors encountered
+  end note
+}
+
+|Task Tool|
+:Receive Agent Report;
+:Validate Output;
+
+if (Output Valid?) then (yes)
+  :Return to Main Agent;
+else (invalid)
+  :Handle Error;
+  :Return Error Report;
+endif
+
+|Main Agent|
+:Process Sub-agent Results;
+
+if (Results Satisfactory?) then (yes)
+  :Continue with Main Task;
+else if (Need More Info?) then (yes)
+  :Invoke Another Sub-agent;
+  backward :Return to Select;
+else (failed)
+  :Handle Failure;
+  :Report to User;
+endif
+
+:Integrate Results;
+stop
+
+note bottom
+  **Key Characteristics:**
+  1. Stateless - Each invocation is independent
+  2. Autonomous - No mid-execution communication
+  3. Single Output - One final report only
+  4. Context-aware - Has access to conversation history
+  5. Tool-rich - Can use all specified tools
+end note
+
+legend right
+  |= Thoroughness Level |= Behavior |
+  | quick | Basic search, fast execution |
+  | medium | Moderate exploration, balanced |
+  | very thorough | Comprehensive analysis, slower |
+endlegend
+
+@enduml

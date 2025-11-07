@@ -1,0 +1,136 @@
+@startuml Before vs After Architecture
+
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontSize 11
+
+title Architecture Evolution: Single Agent → Orchestrator-Subagent
+
+' Before: Single Large Agent
+package "❌ Before: Single Large Agent" as before #FFE6E6 {
+
+  rectangle "User Request" as req1 #LightBlue
+
+  rectangle "**Single Large Agent**" as single #LightCoral {
+    component "Context: 200K tokens" as ctx_large
+    component "Tools: 50+ tools\n(Read, Write, Bash, Grep, Glob, Edit...)" as tools_large
+    component "Tasks: All tasks mixed" as tasks_large
+
+    ctx_large -down-> tools_large
+    tools_large -down-> tasks_large
+  }
+
+  rectangle "Problems" as problems #Pink {
+    note as N1
+      ❌ Context becomes cluttered
+      ❌ Tool selection unreliable
+      ❌ Sequential execution (slow)
+      ❌ Hard to debug
+      ❌ Single point of failure
+    end note
+  }
+
+  rectangle "Result\n(after 300ms)" as res1 #LightBlue
+
+  req1 -down-> single
+  single -down-> problems
+  problems -down-> res1
+}
+
+' Separator
+note as separator
+  ═══════════════════════════════════════════════════════════
+                        TRANSFORMATION
+  ═══════════════════════════════════════════════════════════
+end note
+
+' After: Orchestrator-Subagent
+package "✅ After: Orchestrator-Subagent" as after #E6FFE6 {
+
+  rectangle "User Request" as req2 #LightBlue
+
+  rectangle "**Orchestrator Agent**\n━━━━━━━━━━━━━━━━━━━━" as orch #LightGreen {
+    component "θ₁ Analyze" as analyze
+    component "θ₂ Decompose" as decompose
+    component "θ₃ Delegate" as delegate
+
+    analyze -down-> decompose
+    decompose -down-> delegate
+  }
+
+  frame "Isolated Execution (Parallel)" as iso #LightYellow {
+
+    rectangle "**Subagent 1**" as sub1 #LightCoral {
+      component "Context: 50K" as ctx1
+      component "Tools: 5" as tools1
+      component "Task A" as task1
+
+      ctx1 -down-> tools1
+      tools1 -down-> task1
+    }
+
+    rectangle "**Subagent 2**" as sub2 #LightSkyBlue {
+      component "Context: 50K" as ctx2
+      component "Tools: 5" as tools2
+      component "Task B" as task2
+
+      ctx2 -down-> tools2
+      tools2 -down-> task2
+    }
+
+    rectangle "**Subagent 3**" as sub3 #LightSalmon {
+      component "Context: 50K" as ctx3
+      component "Tools: 5" as tools3
+      component "Task C" as task3
+
+      ctx3 -down-> tools3
+      tools3 -down-> task3
+    }
+  }
+
+  rectangle "**Orchestrator Agent**\n━━━━━━━━━━━━━━━━━━━━" as synth #LightGreen {
+    component "θ₅ Synthesize" as synthesize
+  }
+
+  rectangle "Benefits" as benefits #LightGreen {
+    note as N2
+      ✅ Focused context (4x smaller)
+      ✅ Reliable tool selection
+      ✅ Parallel execution (3x faster)
+      ✅ Easy to debug
+      ✅ Failure isolation
+    end note
+  }
+
+  rectangle "Result\n(after 100ms)" as res2 #LightBlue
+
+  req2 -down-> orch
+  orch -down-> iso
+
+  iso --> sub1
+  iso --> sub2
+  iso --> sub3
+
+  sub1 -down-> synth
+  sub2 -down-> synth
+  sub3 -down-> synth
+
+  synth -down-> benefits
+  benefits -down-> res2
+}
+
+' Performance Comparison
+note bottom of before
+  **Performance**
+  Sequential: 300ms
+  Context: Cluttered (200K)
+  Success Rate: 70%
+end note
+
+note bottom of after
+  **Performance**
+  Parallel: 100ms (3x faster)
+  Context: Clean (50K each)
+  Success Rate: 95%
+end note
+
+@enduml

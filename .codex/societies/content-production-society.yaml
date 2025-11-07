@@ -1,0 +1,503 @@
+# Content Production Society Configuration
+# Version: 1.0.0
+# Purpose: Complete content creation pipeline from ideation to publication
+
+name: "content-production-society"
+version: "1.0.0"
+description: "Multi-agent society for comprehensive content production including courses, presentations, and educational materials"
+
+# ============================================
+# Society Structure
+# ============================================
+
+roles:
+  # --- Orchestrator Layer ---
+  orchestrator:
+    - name: "content-director"
+      agent: "design-director"
+      responsibility: "Overall content strategy and quality"
+      authority:
+        - approve_final_output
+        - allocate_resources
+        - set_priorities
+        - resolve_conflicts
+
+  # --- Management Layer ---
+  managers:
+    - name: "curriculum-manager"
+      agent: "team-manager"
+      team: "curriculum_development"
+      responsibility: "Course structure and learning objectives"
+      reports_to: "content-director"
+
+    - name: "production-manager"
+      agent: "team-manager"
+      team: "content_production"
+      responsibility: "Slide creation and visual assets"
+      reports_to: "content-director"
+
+    - name: "quality-manager"
+      agent: "team-manager"
+      team: "quality_assurance"
+      responsibility: "Quality control and accessibility"
+      reports_to: "content-director"
+
+  # --- Worker Layer ---
+  workers:
+    # Curriculum Development Team
+    curriculum_development:
+      - name: "course-designer"
+        agent: "curriculum-specialist"
+        specialty: "Learning design and instructional strategy"
+        parallel: false
+        outputs:
+          - course_outline
+          - learning_objectives
+          - module_structure
+
+      - name: "content-writer"
+        agent: "content-writer"
+        specialty: "Educational content writing"
+        parallel: true
+        outputs:
+          - lesson_scripts
+          - slide_content
+          - activity_descriptions
+
+    # Content Production Team
+    content_production:
+      - name: "slide-designer"
+        agent: "slide-generator"
+        specialty: "Slide generation with YAML templates"
+        parallel: true
+        outputs:
+          - yaml_templates
+          - visual_specifications
+
+      - name: "visual-designer"
+        agent: "designer-worker"
+        specialty: "Graphics and visual assets"
+        parallel: true
+        outputs:
+          - custom_graphics
+          - diagrams
+          - illustrations
+
+      - name: "asset-coordinator"
+        agent: "asset-manager"
+        specialty: "Asset organization and management"
+        parallel: false
+        outputs:
+          - asset_library
+          - file_organization
+
+    # Quality Assurance Team
+    quality_assurance:
+      - name: "accessibility-specialist"
+        agent: "a11y-specialist"
+        specialty: "WCAG compliance and accessibility"
+        parallel: false
+        outputs:
+          - accessibility_audit
+          - remediation_plan
+
+      - name: "content-reviewer"
+        agent: "content-reviewer"
+        specialty: "Content accuracy and quality"
+        parallel: false
+        outputs:
+          - review_report
+          - improvement_suggestions
+
+  # --- Specialist Layer ---
+  specialists:
+    - name: "brand-specialist"
+      agent: "brand-guardian"
+      consultancy: true
+      specialty: "Brand consistency and guidelines"
+      on_demand: true
+
+    - name: "technical-writer"
+      agent: "documentation-specialist"
+      consultancy: true
+      specialty: "Technical documentation"
+      on_demand: true
+
+# ============================================
+# Communication Configuration
+# ============================================
+
+communication:
+  type: "hierarchical"
+  message_bus: "tmux"
+  shared_context: ".claude/shared/content-production/"
+
+  protocols:
+    # Daily standups (async via files)
+    daily_standup:
+      enabled: true
+      format: "markdown"
+      location: ".claude/shared/content-production/standups/"
+      frequency: "daily"
+
+    # Weekly synthesis
+    weekly_review:
+      enabled: true
+      format: "markdown"
+      location: ".claude/shared/content-production/reviews/"
+      frequency: "weekly"
+      participants:
+        - "content-director"
+        - "curriculum-manager"
+        - "production-manager"
+        - "quality-manager"
+
+    # Handoff documents
+    handoffs:
+      enabled: true
+      template: ".claude/templates/handoff-template.md"
+      approval_required: true
+
+  # Shared directories
+  directories:
+    intake: ".claude/shared/content-production/intake/"
+    in_progress: ".claude/shared/content-production/in-progress/"
+    review: ".claude/shared/content-production/review/"
+    completed: ".claude/shared/content-production/completed/"
+    assets: ".claude/shared/content-production/assets/"
+
+# ============================================
+# Workflows
+# ============================================
+
+workflows:
+  # --- Course Creation Workflow ---
+  course_creation:
+    name: "Complete Course Creation"
+    trigger: "manual"
+    phases:
+      - phase: 1
+        name: "Planning & Design"
+        sequential: true
+        tasks:
+          - agent: "course-designer"
+            task: "Create course outline and learning objectives"
+            output: "course_structure.md"
+
+          - agent: "content-director"
+            task: "Review and approve course structure"
+            requires: ["course_structure.md"]
+            output: "approved_structure.md"
+
+      - phase: 2
+        name: "Content Development"
+        parallel: true
+        tasks:
+          - agent: "content-writer"
+            task: "Write lesson scripts for all modules"
+            requires: ["approved_structure.md"]
+            output: "lesson_scripts/*.md"
+
+          - agent: "visual-designer"
+            task: "Create visual style guide and templates"
+            requires: ["approved_structure.md"]
+            output: "style_guide.md"
+
+      - phase: 3
+        name: "Slide Production"
+        parallel: true
+        tasks:
+          - agent: "slide-designer"
+            task: "Generate YAML templates for all slides"
+            requires: ["lesson_scripts/*.md", "style_guide.md"]
+            output: "slides/*.yaml"
+            count: "all_lessons"
+
+      - phase: 4
+        name: "Asset Creation"
+        parallel: true
+        tasks:
+          - agent: "visual-designer"
+            task: "Create custom graphics per YAML specs"
+            requires: ["slides/*.yaml"]
+            output: "assets/graphics/*.svg"
+
+          - agent: "slide-designer"
+            task: "Generate AI images as specified"
+            requires: ["slides/*.yaml"]
+            output: "assets/images/*.png"
+
+      - phase: 5
+        name: "Quality Assurance"
+        sequential: true
+        tasks:
+          - agent: "accessibility-specialist"
+            task: "Audit all slides for WCAG compliance"
+            requires: ["slides/*.yaml"]
+            output: "accessibility_report.md"
+
+          - agent: "content-reviewer"
+            task: "Review content accuracy and quality"
+            requires: ["slides/*.yaml"]
+            output: "content_review_report.md"
+
+      - phase: 6
+        name: "Finalization"
+        sequential: true
+        tasks:
+          - agent: "asset-coordinator"
+            task: "Organize all assets and create manifest"
+            requires: ["slides/*.yaml", "assets/**/*"]
+            output: "asset_manifest.json"
+
+          - agent: "content-director"
+            task: "Final review and approval"
+            requires: ["all_previous_outputs"]
+            output: "final_approval.md"
+
+  # --- Single Slide Creation Workflow ---
+  single_slide:
+    name: "Single Slide Generation"
+    trigger: "on_demand"
+    phases:
+      - phase: 1
+        name: "Slide Design"
+        sequential: true
+        tasks:
+          - agent: "slide-designer"
+            task: "Generate YAML template for slide"
+            output: "slide.yaml"
+
+          - agent: "visual-designer"
+            task: "Create visuals as specified"
+            requires: ["slide.yaml"]
+            output: "slide_assets/*"
+
+          - agent: "accessibility-specialist"
+            task: "Quick accessibility check"
+            requires: ["slide.yaml"]
+            output: "a11y_check.md"
+
+  # --- Presentation Creation Workflow ---
+  presentation_creation:
+    name: "Complete Presentation"
+    trigger: "manual"
+    phases:
+      - phase: 1
+        name: "Outline"
+        tasks:
+          - agent: "content-writer"
+            task: "Create presentation outline"
+            output: "presentation_outline.md"
+
+      - phase: 2
+        name: "Parallel Production"
+        parallel: true
+        tasks:
+          - agent: "slide-designer"
+            task: "Generate title slide"
+            requires: ["presentation_outline.md"]
+            output: "slides/title.yaml"
+
+          - agent: "slide-designer"
+            task: "Generate content slides"
+            requires: ["presentation_outline.md"]
+            output: "slides/content_*.yaml"
+            count: "outline_sections"
+
+          - agent: "slide-designer"
+            task: "Generate summary slide"
+            requires: ["presentation_outline.md"]
+            output: "slides/summary.yaml"
+
+      - phase: 3
+        name: "Review & Polish"
+        tasks:
+          - agent: "content-reviewer"
+            task: "Review all slides"
+            requires: ["slides/*.yaml"]
+            output: "review.md"
+
+# ============================================
+# Policies & Constraints
+# ============================================
+
+policies:
+  # Resource limits
+  max_parallel_agents: 10
+  timeout_per_task: "45m"
+  retry_on_failure: 2
+
+  # Quality gates
+  quality_gates:
+    - name: "Accessibility Check"
+      required: true
+      blocker: true
+      agent: "accessibility-specialist"
+
+    - name: "Brand Compliance"
+      required: true
+      blocker: false
+      agent: "brand-specialist"
+
+    - name: "Content Review"
+      required: true
+      blocker: true
+      agent: "content-reviewer"
+
+  # Approval requirements
+  approvals:
+    course_structure:
+      required: true
+      approver: "content-director"
+
+    final_deliverable:
+      required: true
+      approver: "content-director"
+
+# ============================================
+# Metrics & Monitoring
+# ============================================
+
+metrics:
+  track:
+    - slides_created_per_day
+    - average_slide_generation_time
+    - accessibility_compliance_rate
+    - revision_count
+    - asset_reuse_ratio
+
+  goals:
+    slides_per_day: 20
+    accessibility_compliance: 100
+    first_pass_approval_rate: 85
+
+  alerts:
+    - condition: "slides_per_day < 10"
+      action: "notify_content_director"
+
+    - condition: "accessibility_compliance < 95"
+      action: "escalate_to_quality_manager"
+
+# ============================================
+# Integration
+# ============================================
+
+integrations:
+  # File storage
+  storage:
+    type: "local"
+    base_path: ".claude/shared/content-production/"
+
+  # Version control
+  version_control:
+    enabled: true
+    type: "git"
+    auto_commit: false
+    commit_message_prefix: "[content-production]"
+
+  # Asset management
+  asset_pipeline:
+    enabled: true
+    formats:
+      - yaml
+      - svg
+      - png
+      - jpg
+    optimization: true
+
+# ============================================
+# Templates
+# ============================================
+
+templates:
+  # Task card
+  task:
+    file: ".claude/templates/task-card.md"
+
+  # Handoff document
+  handoff:
+    file: ".claude/templates/handoff.md"
+
+  # Review report
+  review:
+    file: ".claude/templates/review-report.md"
+
+  # YAML slide
+  slide:
+    file: ".claude/agents/slideGenAgent.md"
+
+# ============================================
+# Bootstrap Script
+# ============================================
+
+bootstrap:
+  script: |
+    #!/bin/bash
+    # Initialize content production society
+
+    echo "Initializing Content Production Society..."
+
+    # Create directory structure
+    mkdir -p .claude/shared/content-production/{intake,in-progress,review,completed,assets,standups,reviews}
+
+    # Create sub-directories for assets
+    mkdir -p .claude/shared/content-production/assets/{graphics,images,icons,diagrams}
+
+    # Initialize git (if not already)
+    if [ ! -d .git ]; then
+      git init
+      echo "Git repository initialized"
+    fi
+
+    # Create .gitignore for large assets
+    cat > .claude/shared/content-production/assets/.gitignore << EOF
+    # Large image files
+    *.psd
+    *.ai
+    *.sketch
+    EOF
+
+    echo "Content Production Society initialized successfully!"
+    echo "Ready to launch with: ./scripts/tools/tmux-orchestrator.sh society content-production-society.yaml"
+
+# ============================================
+# Documentation
+# ============================================
+
+documentation:
+  readme: |
+    # Content Production Society
+
+    Multi-agent system for creating high-quality educational content.
+
+    ## Usage
+
+    ```bash
+    # Launch full course creation
+    ./scripts/tools/tmux-orchestrator.sh society content-production-society.yaml course_creation
+
+    # Create single slide
+    ./scripts/tools/tmux-orchestrator.sh society content-production-society.yaml single_slide
+
+    # Monitor progress
+    ./scripts/tools/tmux-orchestrator.sh monitor content-production-society
+    ```
+
+    ## Directory Structure
+
+    - `intake/`: New requests
+    - `in-progress/`: Active work
+    - `review/`: Under review
+    - `completed/`: Finished deliverables
+    - `assets/`: All visual assets
+
+  guides:
+    - name: "Getting Started"
+      file: ".claude/docs/content-production-getting-started.md"
+
+    - name: "Slide Creation Guide"
+      file: ".claude/docs/slide-creation-guide.md"
+
+    - name: "Quality Standards"
+      file: ".claude/docs/quality-standards.md"
