@@ -1,502 +1,420 @@
-# AI Agent Development Framework
+# 🚀 Miyabi AI Agent Framework
 
-**Version**: 2.0.0
-**Last Updated**: 2025-11-07
-**Author**: Claude Code + Shunsuke Hayashi
+<div align="center">
 
-完全な自律型AIエージェント開発フレームワーク。**Orchestrator-Subagent Architecture**を実装し、Director-Workerパターンに基づいて複雑なタスクを並列実行します。Claude Codeを基盤とし、Sub-agents、Hooks、Skills、Slash Commandsの4つのコア機能を統合しています。
+**5分でAIエージェントを作れる革新的テンプレート**
 
-## ⚡ New in v2.0: Orchestrator-Subagent Architecture
+[![GitHub Stars](https://img.shields.io/github/stars/ShunsukeHayashi/Miyabi_AI_Agent?style=social)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent)
+[![Discord](https://img.shields.io/discord/DISCORD_ID?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/ZpY9sxfYNm)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/generate)
 
-並列実行による**3倍のパフォーマンス向上**を実現する、完全に書き直されたアーキテクチャ。
+*物理学的原理に基づいた、完全自律型AIエージェント開発フレームワーク*
 
-```
-User Request → Orchestrator Agent → Isolated Execution (Parallel)
-                                    ├─ Subagent 1
-                                    ├─ Subagent 2
-                                    └─ Subagent n
-                                         ↓
-                                   Final Answer (100-200ms)
-```
+[🎯 5分で開始](#-5分クイックスタート) • [📖 ドキュメント](#-ドキュメント) • [💬 Discord](https://discord.gg/ZpY9sxfYNm) • [🌟 使用例](#-使用例)
+
+</div>
 
 ---
 
-## 🎯 プロジェクト概要
-
-このフレームワークは、Claude Codeのエージェント方程式に基づいて構築されています：
+## 🎉 なぜこのテンプレート？
 
 ```
-Agent(Intent, World₀) = lim_{n→∞} (θ₆_{Learn} ◦ θ₅_{Integrate} ◦ θ₄_{Execute} ◦ θ₃_{Allocate} ◦ θ₂_{Generate} ◦ θ₁_{Understand})ⁿ(Intent, World₀)
+❌ 従来のAI開発
+├─ 専門知識が必須
+├─ 環境構築が複雑
+├─ 学習曲線が急
+└─ 3ヶ月かかる
+
+✅ このテンプレート
+├─ コードゼロで開始
+├─ 5分でカスタマイズ
+├─ Markdownで定義
+└─ すぐに動く
 ```
 
-### コア原則
+### 💡 3つの驚き
 
-1. **θ₁ Understand**: ユーザーの意図を理解し、タスクを分解
-2. **θ₂ Generate**: 実行計画を生成し、適切なツールを選択
-3. **θ₃ Allocate**: リソースを割り当て、Sub-agentsに委譲
-4. **θ₄ Execute**: 計画に基づいて実行
-5. **θ₅ Integrate**: 結果を統合し、一貫性を保つ
-6. **θ₆ Learn**: 実行から学習し、次のイテレーションを改善
+1. **"えっ、コード書かなくていいの？"**
+   - `.claude/agents/`にMarkdownファイルを置くだけ
+   - すぐに動作するエージェント
+
+2. **"うわ、こんなに簡単なの？"**
+   - `Use this template` → 即開始
+   - 5分でカスタマイズ完了
+
+3. **"まじで？これ無料？"**
+   - 完全オープンソース
+   - 61,251行のドキュメント込み
+   - 学術論文まで付属
 
 ---
 
-## 📁 プロジェクト構造
+## ⚡ 5分クイックスタート
 
-```
-AI_Agent/
-├── CLAUDE.md                              # エージェント方程式の定義
-├── README.md                              # このファイル
-├── ORCHESTRATOR_ARCHITECTURE.md           # 🆕 アーキテクチャ詳細ガイド
-├── QUICKSTART.md                          # 🆕 クイックスタートガイド
-│
-├── src/
-│   └── main.rs                            # Orchestratorデモ
-│
-├── crates/
-│   ├── orchestrator-core/                 # 🆕 Orchestrator実装
-│   │   ├── src/
-│   │   │   ├── orchestrator.rs           # Orchestrator Agent
-│   │   │   ├── subagent.rs               # Subagent trait & 実装
-│   │   │   ├── executor.rs               # Isolated Executor
-│   │   │   ├── types.rs                  # コアデータ型
-│   │   │   └── lib.rs                    # エントリポイント
-│   │   └── tests/
-│   │       └── integration_test.rs       # 統合テスト
-│   │
-│   ├── mahjong-core/                      # Mahjong AI (既存)
-│   ├── contract-core/                     # Contract Analysis (既存)
-│   └── ...                                # その他のcrates
-│
-└── .claude/
-    ├── orchestrator-architecture.puml     # 🆕 アーキテクチャ図
-    ├── orchestrator-execution-flow.puml   # 🆕 実行フロー図
-    ├── orchestrator-state-machine.puml    # 🆕 状態機械図
-    ├── subagent-isolation.puml            # 🆕 分離環境図
-    │
-    ├── MCP_INTEGRATION.md                 # MCP統合ガイド
-    ├── agents/                            # Sub-agentsの定義
-    ├── hooks/                             # Hooksの定義
-    ├── skills/                            # Skillsの定義
-    ├── commands/                          # Slash Commandsの定義
-    ├── agent-lifecycle.puml               # メインエージェントライフサイクル
-    ├── agent-state-machine.puml           # エージェント状態機械
-    ├── system-overview.puml               # システム全体図
-    ├── mcp-integration.puml               # MCP統合アーキテクチャ
-    └── mcp-usage-flow.puml                # MCP使用フロー
-```
-
----
-
-## 🚀 クイックスタート
-
-### 前提条件
-
-- **Rust 2021 Edition** (必須)
-- Claude Code CLI (推奨)
-- Node.js 18+ (MCP stdio サーバー用)
-- Git
-
-### インストール & 実行
+### ステップ1: テンプレートを使用（30秒）
 
 ```bash
-# ビルド (Release mode)
-cargo build --release
-
-# テスト実行
-cargo test
-
-# Orchestratorデモ実行
-cargo run --release
+# このリポジトリの "Use this template" をクリック
+# または
+git clone https://github.com/YOUR_USERNAME/YOUR_PROJECT.git
+cd YOUR_PROJECT
 ```
 
-**出力例:**
-```
-Starting Orchestrator-Subagent System
-=====================================
-
-✓ Registered 3 subagents
-
-Processing user request: Analyze the codebase...
-Final Answer for request: ...
-
-Total execution time: 202ms
-```
-
-### 📖 詳しい使い方
-
-**完全なクイックスタートガイド**: [QUICKSTART.md](QUICKSTART.md)
-
-### Claude Code統合
+### ステップ2: プロジェクト名を変更（2分）
 
 ```bash
-# Claude Codeを起動
-claude
-
-# Sub-agents一覧を表示
-/agents
-
-# 利用可能なMCPサーバーを確認
-/mcp
-
-# Slash Commands一覧
-/commands
+# すべての "Miyabi_AI_Agent" をあなたのプロジェクト名に
+find . -type f -name "*.md" -exec sed -i '' 's/Miyabi_AI_Agent/YOUR_PROJECT/g' {} +
 ```
 
----
-
-## 🎭 主要機能
-
-### 1. Sub-agents（サブエージェント）
-
-複雑なタスクを専門的なSub-agentsに委譲して並列実行。
-
-**組み込みSub-agents:**
-- **general-purpose**: 汎用的なマルチステップタスク
-- **Explore**: コードベース探索（quick/medium/very thorough）
-- **Plan**: アーキテクチャ計画とタスク分解
-
-**カスタムSub-agents:**
-- **legal-document-analyzer**: 契約書・法律文書の包括分析
-- **contract-reviewer**: ビジネス契約のレビューと交渉戦略
-- **compliance-gap-analyzer**: 法律と実運用の乖離分析
-- **design-director**: 複数ワーカーの調整（Lovartスタイル）
-
-**詳細**: [.claude/agents/readme.md](.claude/agents/readme.md)
-
-### 2. Hooks（フック）
-
-イベント駆動型の自動化を実現。
-
-**主要Hookタイプ:**
-- **PreToolUse**: ツール実行前（検証・ブロック可能）
-- **PostToolUse**: ツール実行後（フォーマット・通知）
-- **UserPromptSubmit**: プロンプト送信時
-- **Notification**: 通知イベント時
-- **Stop**: エージェント停止時
-
-**使用例:**
-- コミット前のLintチェック
-- ファイル書き込み前のバックアップ
-- Markdown自動フォーマット
-- デスクトップ通知
-
-**詳細**: [.claude/hooks/readme.md](.claude/hooks/readme.md)
-
-### 3. Skills（スキル）
-
-ドメイン特化の専門知識をパッケージ化。
-
-**主要Skills:**
-- **PDF Processing**: PDF読み取り・生成・フォーム入力
-- **Excel Processing**: スプレッドシート分析・ピボットテーブル
-- **API Testing**: REST APIテスト・検証
-- **Code Review**: コード品質・セキュリティレビュー
-
-**Skills構造:**
-```
-skill-name/
-├── SKILL.md           # メイン定義（必須）
-├── reference.md       # 詳細リファレンス
-├── examples.md        # 使用例
-└── scripts/          # ヘルパースクリプト
-```
-
-**詳細**: [.claude/skills/readme.md](.claude/skills/readme.md)
-
-### 4. Slash Commands（スラッシュコマンド）
-
-繰り返し実行される定型タスクをコマンド化。
-
-**主要Commands:**
-- **/review-pr**: GitHub PRのコードレビュー
-- **/test**: テスト実行と失敗修正
-- **/deploy**: 環境へのデプロイ
-- **/refactor**: コードリファクタリング
-- **/docs**: ドキュメント生成
-
-**Command構造:**
-```markdown
----
-description: "コマンドの説明"
----
-
-# プロンプトテンプレート
-コマンド実行時に展開される指示
-```
-
-**詳細**: [.claude/commands/readme.md](.claude/commands/readme.md)
-
----
-
-## 🔌 MCP統合
-
-Model Context Protocol (MCP)により、100以上の外部サービスと統合可能。
-
-### 主要MCPサーバー
-
-**Development & Testing:**
-- Sentry（エラー監視）
-- Socket（セキュリティ分析）
-- Jam（デバッグ録画）
-
-**Project Management:**
-- Asana、Atlassian、Linear、Notion
-
-**Databases & Data:**
-- Airtable、HubSpot、Daloopa
-
-**Payments & Commerce:**
-- Stripe、PayPal、Square
-
-**Design & Media:**
-- Figma、Canva、invideo
-
-**Infrastructure & DevOps:**
-- Cloudflare、Netlify、Vercel
-
-**Automation:**
-- Zapier、Workato
-
-### MCP使用例
+### ステップ3: 最初のエージェントを作成（2分）
 
 ```bash
-# GitHub MCPサーバーを追加
-claude mcp add --transport http github https://api.githubcopilot.com/mcp/
-
-# 認証
-/mcp
-
-# リソース参照
-> @github:issue://123 を分析して修正を提案して
-
-# プロンプト実行
-> /mcp__github__pr_review 456
-```
-
-**詳細**: [.claude/MCP_INTEGRATION.md](.claude/MCP_INTEGRATION.md)
-
----
-
-## 📊 アーキテクチャ図
-
-### システム全体図
-
-![System Overview](.claude/system-overview.puml)
-
-### エージェントライフサイクル
-
-![Agent Lifecycle](.claude/agent-lifecycle.puml)
-
-### 状態機械
-
-![State Machine](.claude/agent-state-machine.puml)
-
-### MCP統合
-
-![MCP Integration](.claude/mcp-integration.puml)
-
-全てのPlantUML図は`.claude/`ディレクトリ内にあります。
-
----
-
-## 🎓 使用例
-
-### 例1: 契約書の包括分析
-
-```
-> 法律文書分析エージェントを使って、contracts/nda.pdf を分析して
-
-[legal-document-analyzer sub-agentが自動起動]
-→ 文書構造分析
-→ 重要条項の特定
-→ リスク評価
-→ レッドフラグ検出
-→ 包括的な分析レポート生成
-```
-
-### 例2: コンプライアンスギャップ分析
-
-```
-> GDPR準拠状況を確認して、実運用との乖離を分析して
-
-[compliance-gap-analyzer sub-agentが自動起動]
-→ GDPR要件のマッピング
-→ コード・システム分析
-→ ギャップの特定（5つのタイプ分類）
-→ ルートコーズ分析
-→ 是正計画の提案
-```
-
-### 例3: デザインプロジェクトの調整
-
-```
-> 新しいダッシュボードUIを設計・実装して
-
-[design-director sub-agentが自動起動]
-→ プロジェクトを4つのワークストリームに分解
-→ Designer Worker: UIモックアップ作成
-→ Frontend Worker: React実装（並列）
-→ UX Researcher: ユーザーテスト（並列）
-→ QA Worker: 品質テスト
-→ 成果物の統合と最終レビュー
-```
-
-### 例4: MCPを活用したワークフロー
-
-```
-> JIRAのENG-123を実装してGitHubにPRを作成
-
-[MCPサーバー連携]
-→ @jira:issue://ENG-123 からissue詳細取得
-→ 仕様に基づいてコード実装
-→ GitHub MCPでPR作成
-→ 実装完了！
-```
-
----
-
-## 🛠️ 開発ガイド
-
-### カスタムSub-agentの作成
-
-```bash
-# プロジェクトレベル
-mkdir -p .claude/agents
+# カスタムエージェントを作成
 cat > .claude/agents/my-agent.md << 'EOF'
 ---
 name: my-agent
-description: 専門的なタスクの説明
+description: My first AI agent
 tools: Read, Write, Bash
-model: opus
 ---
 
 # My Custom Agent
 
-エージェントの動作を定義...
+あなたの専門エージェントの動作を定義...
 EOF
 ```
 
-### カスタムHookの追加
+### ステップ4: 完成！（30秒）
 
 ```bash
-# /hooks コマンドを実行してGUIで追加
-/hooks
-
-# または、設定ファイルを直接編集
-~/.claude/settings.json
+# Claude Codeで動作確認
+claude code
+# → あなたのエージェントが動作します！
 ```
 
-### カスタムSkillの作成
+**🎉 完了！たった5分で独自のAIエージェントプロジェクトが完成しました！**
 
-```bash
-mkdir -p .claude/skills/my-skill
-cat > .claude/skills/my-skill/SKILL.md << 'EOF'
----
-name: my-skill
-description: スキルの説明と使用タイミング
+詳細ガイド: [USE_THIS_TEMPLATE.md](USE_THIS_TEMPLATE.md)
+
 ---
 
-# My Skill
+## 🌟 このテンプレートに含まれるもの
 
-スキルの詳細...
-EOF
+<table>
+<tr>
+<td width="50%">
+
+### ✅ 完成済み
+
+**理論フレームワーク**
+- 📐 統一エージェント方程式
+- 🌊 瞬く景色の法則
+- 🧠 World Model Logic
+- 🎯 Intent Resolution
+- 📦 Command Stack
+
+**Claude Code統合**
+- 🤖 11種類の専門エージェント
+- 🎨 15個のPlantUML図
+- ⚙️ 48設定ファイル
+
+**ビジネス戦略**
+- 💼 完全なビジネス計画
+- 💰 資金調達戦略
+- 📢 マーケティング戦略
+
+</td>
+<td width="50%">
+
+### ⚙️ あなたが追加
+
+**実装コード**
+- 🦀 Rust実装（自由に）
+- 🐍 Python実装（自由に）
+- 📝 TypeScript実装（自由に）
+
+**カスタマイズ**
+- 🎯 ドメイン特化エージェント
+- 🔧 独自の理論追加
+- 🎨 UIカスタマイズ
+
+**ビジネス展開**
+- 🚀 独自のマネタイズ
+- 🌐 グローバル展開
+- 👥 コミュニティ構築
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎯 核心理論: 瞬く景色の法則
+
+### 物理学×AI の革新的アプローチ
+
+```
+𝔸(Input, World₀) = lim_{n→∞} [∫₀ⁿ (Θ ◦ 𝒞 ◦ ℐ)(t) dt] = World_∞
 ```
 
-### カスタムSlash Commandの作成
+**世界は「瞬き」のように離散的に変化する**
 
-```bash
-mkdir -p .claude/commands
-cat > .claude/commands/my-command.md << 'EOF'
----
-description: "コマンドの説明"
----
-
-# コマンドプロンプト
-
-実行内容...
-EOF
 ```
+World₀ → [瞬き] → World₁ → [瞬き] → World₂ → ... → World_∞
+```
+
+#### 3つの核心原理
+
+1. **ℐ (Intent Resolution)**: 曖昧な入力 → 明確な目標
+2. **𝒞 (Command Stack)**: 目標 → 実行可能なタスク
+3. **Θ (World Transformation)**: タスク → 世界の変換
+
+> 速度の積分 = 距離
+> **世界変換の積分 = 目標達成**
+
+詳細: [瞬く景色の法則](。claude/LAW_OF_FLICKERING_SCENERY.md)
+
+---
+
+## 🎨 使用例
+
+### 例1: 超シンプル（5分）
+
+```markdown
+<!-- .claude/agents/hello.md -->
+---
+name: hello-agent
+description: Say hello to the world
+---
+
+# Hello Agent
+Just say hello!
+```
+
+**結果**: 動作するHelloエージェント ✅
+
+---
+
+### 例2: カスタムドメイン（30分）
+
+```markdown
+<!-- .claude/agents/financial-analyst.md -->
+---
+name: financial-analyst
+description: Financial data analysis specialist
+tools: Read, Write, Bash, Grep
+model: opus
+---
+
+# Financial Analyst Agent
+
+## 専門分野
+- 財務諸表分析
+- 市場トレンド予測
+- リスク評価
+
+## 使用タイミング
+- 決算書の分析が必要な時
+- 投資判断のサポートが必要な時
+```
+
+**結果**: 金融分析専門エージェント ✅
+
+---
+
+### 例3: フルカスタム（1週間）
+
+```rust
+// crates/my-core/src/lib.rs
+pub struct MyAgent {
+    intent_resolver: IntentResolver,
+    command_stack: CommandStack,
+    world_transformer: WorldTransformer,
+}
+
+impl MyAgent {
+    pub fn transform(&self, input: Input, world: World) -> World {
+        // 独自のビジネスロジック実装
+    }
+}
+```
+
+**結果**: 完全なオリジナルプロダクト ✅
 
 ---
 
 ## 📚 ドキュメント
 
-### コアドキュメント
+### 🚀 開始ガイド
 
-- [CLAUDE.md](CLAUDE.md) - エージェント方程式の定義
-- [Sub-agents README](.claude/agents/readme.md) - Sub-agents完全ガイド
-- [Hooks README](.claude/hooks/readme.md) - Hooks完全ガイド
-- [Skills README](.claude/skills/readme.md) - Skills完全ガイド
-- [Commands README](.claude/commands/readme.md) - Commands完全ガイド
-- [MCP Integration](.claude/MCP_INTEGRATION.md) - MCP統合ガイド
+| ドキュメント | 内容 | 時間 |
+|------------|------|------|
+| [USE_THIS_TEMPLATE.md](USE_THIS_TEMPLATE.md) | テンプレート使用方法 | 5分 |
+| [QUICKSTART.md](docs/QUICKSTART.md) | 詳細クイックスタート | 15分 |
+| [PROJECT_ORGANIZATION_REPORT.md](PROJECT_ORGANIZATION_REPORT.md) | プロジェクト全体像 | 30分 |
 
-### 🌐 Detail Control Documentation (New!)
+### 📖 理論
 
-**完全ガイド**: [Claude Codeでのディテールレベル制御](docs/index.md)
+| ドキュメント | 内容 |
+|------------|------|
+| [統一エージェント方程式](.claude/UNIFIED_FORMULA.md) | 完全な数学的定義 |
+| [瞬く景色の法則](.claude/LAW_OF_FLICKERING_SCENERY.md) | 核心理論 |
+| [World Model Logic](.claude/WORLD_MODEL_LOGIC.md) | 世界モデル |
+| [Intent Resolution](.claude/INTENT_RESOLUTION.md) | 意図解決 |
+| [Command Stack](.claude/COMMAND_STACK.md) | タスク分解 |
 
-Claude CodeのTask tool（sub-agents）使用時に、詳細度や自律性をどのように制御するかを解説したドキュメントサイト：
+### 🤖 実装
 
-- **[Controlling Detail Levels - 完全ガイド](docs/guides/controlling-detail-levels.md)**
-  - Architecture comparison（Claude Code vs Phil Schmid's approaches）
-  - Control mechanisms（agent types, thoroughness, tools）
-  - Detail level configuration methods
-  - Best practices & advanced patterns
+| ドキュメント | 内容 |
+|------------|------|
+| [エージェント一覧](.claude/agents/readme.md) | 11種類のエージェント |
+| [MCP統合](.claude/MCP_INTEGRATION.md) | 外部サービス連携 |
+| [アーキテクチャ](docs/architecture-docs/) | システム設計 |
 
-- **[Detail Control Examples - 実践例](docs/examples/detail-control-examples.md)**
-  - Real-world scenarios（onboarding, bug hunting, audits）
-  - Code snippets & patterns
-  - CLI usage examples
-  - Configuration files
-  - Troubleshooting guide
+### 💼 ビジネス
 
-**🚀 Deployment**: [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)でVercelへのデプロイ方法を解説
+| ドキュメント | 内容 |
+|------------|------|
+| [バイラル戦略](VIRAL_STRATEGY.md) | 成長戦略 |
+| [ビジネス計画](docs/business_plan/) | 資金調達・収益化 |
+| [マーケティング](docs/marketing/) | プロモーション |
 
-### アーキテクチャ図
+### 🎓 学術
 
-全てのPlantUML図は`.claude/`ディレクトリ内：
-
-**構造図:**
-- `agents/structure.puml` - Sub-agents構造
-- `hooks/structure.puml` - Hooks構造
-- `skills/structure.puml` - Skills構造
-- `commands/structure.puml` - Commands構造
-
-**ライフサイクル図:**
-- `agent-lifecycle.puml` - メインエージェント
-- `agents/lifecycle.puml` - Sub-agent実行
-- `hooks/lifecycle.puml` - Hook実行
-- `skills/lifecycle.puml` - Skill実行
-- `commands/lifecycle.puml` - Command実行
-
-**システム図:**
-- `system-overview.puml` - システム全体
-- `agent-state-machine.puml` - 状態機械
-- `mcp-integration.puml` - MCP統合
-- `mcp-usage-flow.puml` - MCP使用フロー
+| ドキュメント | 内容 |
+|------------|------|
+| [学術論文 (PDF)](docs/paper_law_of_flickering_scenery.pdf) | 完全版論文 |
+| [LaTeXソース](docs/paper_law_of_flickering_scenery.tex) | 論文ソース |
+| [arXiv投稿戦略](docs/arxiv_submission_strategy.md) | 学術発表計画 |
 
 ---
 
-## 🔐 セキュリティ
+## 🎭 専門エージェント（11種類）
 
-### Hooksのセキュリティ
+<details>
+<summary><b>🎮 ゲーム・3D開発</b></summary>
 
-- Hookスクリプトは実行権限が必要: `chmod +x script.sh`
-- 信頼できないコマンドは実行しない
-- 環境変数の検証を実施
-- `failureMode`を適切に設定（error/warn/ignore）
+- **3d-designer** - Three.js専門家
+- **game-creator** - ゲーム開発統括
 
-### MCPのセキュリティ
+</details>
 
-- サードパーティMCPサーバーは自己責任で使用
-- OAuth認証を使用（静的キーを避ける）
-- エンタープライズ環境では`allowedMcpServers`でホワイトリスト化
-- `deniedMcpServers`でブラックリスト化
+<details>
+<summary><b>🀄 麻雀AI</b></summary>
 
-### Sub-agentsのセキュリティ
+- **mahjong-master** - 戦略最適化
+- **opponent-hand-reader** - 捨て牌読み
+- **tile-efficiency-analyzer** - 牌効率計算
 
-- `tools`フィールドで利用可能なツールを制限
-- 機密データへのアクセスが必要なSub-agentsは慎重に設計
-- プロジェクトレベルとユーザーレベルで適切にスコープ分け
+</details>
+
+<details>
+<summary><b>📊 コンテンツ制作</b></summary>
+
+- **slide-generator** - スライド生成
+- **design-director** - プロジェクト統括
+
+</details>
+
+<details>
+<summary><b>⚖️ 法務・コンプライアンス</b></summary>
+
+- **legal-document-analyzer** - 法務文書分析
+- **contract-reviewer** - 契約書レビュー
+- **compliance-gap-analyzer** - ギャップ分析
+
+</details>
+
+<details>
+<summary><b>🎨 UI/UX</b></summary>
+
+- **ui-ux-reviewer** - インターフェース設計
+
+</details>
+
+詳細: [エージェント一覧](.claude/agents/readme.md)
+
+---
+
+## 🚀 バイラル成長戦略
+
+### 7段階成長ロードマップ
+
+```
+Stage 1: 初期衝撃 (24h)
+  → 1,000 フォーク
+
+Stage 2: コミュニティ形成 (Week 1)
+  → 5,000 フォーク, 500 Discord
+
+Stage 3: コンテンツ爆発 (Week 2-4)
+  → 10,000 フォーク, ブログ50本
+
+Stage 4: インフルエンサー (Month 2)
+  → メディア掲載, カンファレンス
+
+Stage 5: エコシステム (Month 3-6)
+  → 100 派生プロジェクト
+
+Stage 6: マネタイゼーション (Month 6-12)
+  → $50K MRR
+
+Stage 7: グローバル展開 (Year 2+)
+  → 100,000 フォーク, 書籍出版
+```
+
+### 成功指標（KPI）
+
+**6ヶ月後:**
+- 🎯 10,000 GitHubフォーク
+- 👥 5,000 Discord参加
+- 💰 $10K MRR
+
+**1年後:**
+- 🎯 50,000 GitHubフォーク
+- 👥 20,000 Discord参加
+- 💰 $50K MRR
+- 🎉 FlickeringConf開催
+
+詳細: [VIRAL_STRATEGY.md](VIRAL_STRATEGY.md)
+
+---
+
+## 💰 マネタイゼーション
+
+### 4 Tier戦略
+
+| Tier | 価格 | 内容 |
+|------|------|------|
+| **Free** | $0 | 全ドキュメント、基本テンプレート |
+| **Pro** | $49/年 | 追加エージェント10種、優先サポート |
+| **Enterprise** | $499/年 | カスタマイズ支援、SLA、オンサイト |
+| **Consulting** | Custom | カスタム開発、導入支援、研修 |
+
+**想定売上: $149.45K/年（1年後）**
+
+---
+
+## 🌐 コミュニティ
+
+<div align="center">
+
+### 💬 Discord - Miyabi
+
+**初心者大歓迎！質問・相談・共有の場**
+
+[![Discord](https://img.shields.io/discord/DISCORD_ID?color=7289da&label=Join%20Discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/ZpY9sxfYNm)
+
+**チャンネル:**
+- 🎉 welcome - ようこそ！
+- 💬 general - 雑談
+- 🆘 help-beginners - 初心者サポート
+- 🚀 showcase - 作品共有
+- 💡 ideas - アイデア
+- 🛠️ dev-chat - 開発議論
+
+</div>
 
 ---
 
@@ -507,32 +425,160 @@ Claude CodeのTask tool（sub-agents）使用時に、詳細度や自律性を�
 ### 貢献方法
 
 1. このリポジトリをフォーク
-2. フィーチャーブランチを作成 (`git checkout -b feature/amazing-agent`)
-3. 変更をコミット (`git commit -m 'Add amazing agent'`)
-4. ブランチにプッシュ (`git push origin feature/amazing-agent`)
+2. フィーチャーブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
 5. Pull Requestを作成
 
-### 貢献できる領域
+### 優先度の高い貢献
 
-- 新しいSub-agentsの追加
-- 業界特化のSkills開発
-- 便利なHooksの共有
-- ドキュメントの改善
-- バグ修正
-
----
-
-## 📝 ライセンス
-
-このプロジェクトは研究・教育目的で公開されています。
+- 🤖 新しい専門エージェントの追加
+- 📖 ドキュメントの改善（翻訳含む）
+- 🎨 使用例の追加
+- 🐛 バグ修正
+- 💡 新機能のアイデア
 
 ---
 
-## 🙏 謝辞
+## 🏆 使用プロジェクト
 
-- **Anthropic**: Claude Code CLIと優れたドキュメント
-- **MCP Community**: 豊富なMCPサーバーエコシステム
-- **Lovart**: ディレクター・ワーカーモデルのインスピレーション
+このテンプレートを使った素晴らしいプロジェクト:
+
+<table>
+<tr>
+<td align="center" width="25%">
+<b>あなたのプロジェクト</b><br>
+<a href="YOUR_REPO">
+<img src="https://via.placeholder.com/150" width="150"><br>
+プロジェクト名
+</a>
+</td>
+<td align="center" width="25%">
+<b>あなたのプロジェクト</b><br>
+<a href="YOUR_REPO">
+<img src="https://via.placeholder.com/150" width="150"><br>
+プロジェクト名
+</a>
+</td>
+<td align="center" width="25%">
+<b>あなたのプロジェクト</b><br>
+<a href="YOUR_REPO">
+<img src="https://via.placeholder.com/150" width="150"><br>
+プロジェクト名
+</a>
+</td>
+<td align="center" width="25%">
+<b>あなたのプロジェクト</b><br>
+<a href="YOUR_REPO">
+<img src="https://via.placeholder.com/150" width="150"><br>
+プロジェクト名
+</a>
+</td>
+</tr>
+</table>
+
+**あなたのプロジェクトを追加！** [Discussionsで共有](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/discussions)
+
+---
+
+## 📊 統計
+
+<div align="center">
+
+**このテンプレートの規模**
+
+| カテゴリ | 数量 |
+|---------|------|
+| 📄 ドキュメント | 100+ ファイル |
+| 📝 総行数 | 61,251 行 |
+| 🤖 専門エージェント | 11 種類 |
+| 🎨 PlantUML図 | 15 個 |
+| 📚 学術論文 | 1 本 (完全版) |
+| 💼 ビジネス計画 | 完全装備 |
+
+</div>
+
+---
+
+## 🎓 学術的価値
+
+### 独自性
+
+1. **物理学的原理の統合**
+   - ニュートン力学 × AI
+   - 量子力学 × エージェント
+   - 熱力学 × 状態遷移
+
+2. **MABATAKU（瞬き）概念**
+   - 離散的世界認識
+   - 映画フレームのメタファー
+   - 実装可能な抽象化
+
+3. **実証済み理論**
+   - 学術論文完成
+   - arXiv投稿準備中
+   - 国際会議投稿予定
+
+### 発表予定
+
+- **NeurIPS** (Neural Information Processing Systems)
+- **ICML** (International Conference on Machine Learning)
+- **ICLR** (International Conference on Learning Representations)
+
+論文: [Law of Flickering Scenery (PDF)](docs/paper_law_of_flickering_scenery.pdf)
+
+---
+
+## 📱 ソーシャルメディア
+
+<div align="center">
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/YOUR_HANDLE?style=social)](https://twitter.com/YOUR_HANDLE)
+[![YouTube Channel](https://img.shields.io/youtube/channel/subscribers/YOUR_CHANNEL?style=social)](https://youtube.com/YOUR_CHANNEL)
+[![Medium](https://img.shields.io/badge/Medium-Follow-black?logo=medium)](https://medium.com/@YOUR_HANDLE)
+
+**最新情報をチェック！**
+
+</div>
+
+---
+
+## ❓ FAQ
+
+<details>
+<summary><b>Q: 実装コードが含まれていないのはなぜ？</b></summary>
+
+A: このテンプレートは**理論・設計・ビジネスモデル**を提供します。実装はあなたのドメインに合わせて自由にカスタマイズできます。
+
+</details>
+
+<details>
+<summary><b>Q: Rust以外の言語でも使える？</b></summary>
+
+A: はい！理論フレームワークは言語非依存です。Python、TypeScript、Go、どんな言語でも実装できます。
+
+</details>
+
+<details>
+<summary><b>Q: 商用利用は可能？</b></summary>
+
+A: はい！MITライセンスで自由に商用利用できます。
+
+</details>
+
+<details>
+<summary><b>Q: サポートはありますか？</b></summary>
+
+A: [Discord - Miyabi](https://discord.gg/ZpY9sxfYNm)で無料サポートを提供しています。Pro版では優先サポートもあります。
+
+</details>
+
+<details>
+<summary><b>Q: フォーク後も元のリポジトリとの同期は必要？</b></summary>
+
+A: いいえ。フォーク後は完全に独立したプロジェクトです。自由にカスタマイズしてください。
+
+</details>
 
 ---
 
@@ -540,32 +586,54 @@ Claude CodeのTask tool（sub-agents）使用時に、詳細度や自律性を�
 
 質問や問題がある場合：
 
-1. [Discord - Miyabi](https://discord.gg/ZpY9sxfYNm) - AIエージェント開発コミュニティ（リアルタイムサポート）
-2. [ドキュメント](.claude/)を確認
-3. [Issue](https://github.com/your-repo/issues)を作成
-4. [Claude Code公式ドキュメント](https://docs.claude.com/en/docs/claude-code)を参照
+1. 🎮 [Discord - Miyabi](https://discord.gg/ZpY9sxfYNm) でリアルタイムサポート
+2. 📖 [ドキュメント](.claude/)を確認
+3. 💬 [Discussions](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/discussions)で質問
+4. 🐛 [Issues](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/issues)でバグ報告
 
 ---
 
-## 🔄 更新履歴
+## 📝 ライセンス
 
-### Version 1.0.0 (2025-11-06)
-
-**追加:**
-- 完全なSub-agentsフレームワーク
-- Hooks統合とサンプル
-- Skills定義テンプレート
-- Slash Commands構造
-- MCP統合ガイド
-- 包括的なPlantUML図
-- 専門的なSub-agents（法律文書分析、コンプライアンス、デザインディレクター）
-
-**ドキュメント:**
-- 全機能の完全ドキュメント
-- アーキテクチャ図（PlantUML）
-- ライフサイクルフロー図
-- 実践的な使用例
+このプロジェクトは[MITライセンス](LICENSE)のもとで公開されています。
 
 ---
 
-**Built with ❤️ using Claude Code**
+## 🙏 謝辞
+
+- **Anthropic**: [Claude Code](https://claude.com/claude-code)の優れたツール
+- **MCP Community**: 豊富なMCPサーバーエコシステム
+- **Lovart**: ディレクター・ワーカーモデルのインスピレーション
+- **コミュニティ**: 全ての貢献者とユーザーの皆様
+
+---
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ShunsukeHayashi/Miyabi_AI_Agent&type=Date)](https://star-history.com/#ShunsukeHayashi/Miyabi_AI_Agent&Date)
+
+---
+
+<div align="center">
+
+## 🚀 今すぐ始めよう！
+
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/generate)
+[![Join Discord](https://img.shields.io/badge/Join%20Discord-7289da?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/ZpY9sxfYNm)
+[![Star Repo](https://img.shields.io/badge/Star%20Repo-ffd700?style=for-the-badge&logo=github)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent)
+
+---
+
+**Built with ❤️ using [Claude Code](https://claude.com/claude-code)**
+
+*"From zero to viral in 5 minutes"*
+*「ゼロからバイラルまで5分で」*
+
+*"Through infinite blinks, the world converges to its ideal."*
+*「無限の瞬きの先に、理想は現実となる」*
+
+---
+
+**© 2025 Miyabi AI Agent Framework • MIT License**
+
+</div>
